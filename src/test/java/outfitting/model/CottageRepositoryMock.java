@@ -1,0 +1,33 @@
+package outfitting.model;
+
+import java.util.Collection;
+
+import outfitting.model.entity.Cottage;
+
+public class CottageRepositoryMock implements CottageRepository{
+
+	public boolean addHasBeenCalled = false;
+	public boolean getListBeenCalled = false;
+	
+	@Override
+	public void add(Cottage cottage) {
+		addHasBeenCalled = true;
+		Cottage.lastId = 0;
+	}
+
+	@Override
+	public Collection<Cottage> getList() {
+		getListBeenCalled = true;
+		return null;
+	}
+
+	@Override
+	public int size() {
+		return 0;
+	}
+
+	@Override
+	public Cottage searchById(int id) {
+		return null;
+	}
+}

@@ -1,9 +1,13 @@
 package outfitting.view;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,12 +15,15 @@ import javax.swing.SwingConstants;
 
 import outfitting.controller.IWelcomeController;
 
-public class WelcomeView extends JFrame implements View {
+
+public class WelcomeView extends JFrame implements View, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_TITLE = "Nos chalets";
 	private static final String WELCOME_MESSAGE = "Bienvenue !";
 	private static final String WELCOME_PICTURE = "Cottage.jpg";
+	private static final String WELCOME_ADD_BTN = "Ajouter un chalet";
+	private static final String WELCOME_LIST_BTN = "Liste des chalets";
 
 	private static final Dimension DEFAULT_SIZE = new Dimension(475, 530);
 
@@ -77,5 +84,30 @@ public class WelcomeView extends JFrame implements View {
 	private void setUpActionPanel() {
 		JPanel actionPanel = new JPanel(); // FlowLayout par défaut pour un JPanel
 		this.add(actionPanel, BorderLayout.SOUTH);
+		addCreateCottageButton(actionPanel);
+		addListCottageButton(actionPanel);
+	}
+	
+	private void addCreateCottageButton(JPanel actionPanel) {
+		JButton addCottageBtn = new JButton(WELCOME_ADD_BTN);
+		addCottageBtn.setActionCommand(WELCOME_ADD_BTN);
+		addCottageBtn.addActionListener(this);
+		actionPanel.add(addCottageBtn);
+	}
+	
+	private void addListCottageButton(JPanel actionPanel) {
+		JButton listCottageBtn = new JButton(WELCOME_LIST_BTN);
+		listCottageBtn.setActionCommand(WELCOME_LIST_BTN);
+		listCottageBtn.addActionListener(this);
+		actionPanel.add(listCottageBtn);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String action = e.getActionCommand();
+		switch(action) {
+			case WELCOME_ADD_BTN -> this.controller.resquestCreateCottage();
+			case WELCOME_LIST_BTN -> this.controller.resquestCottageList();
+		}
 	}
 }

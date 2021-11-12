@@ -2,12 +2,17 @@ package outfitting.model.entity;
 
 public class Cottage { 
 
+	public static final int idAddedValue = 1;
+	
+	public static int lastId = 0;
+	
 	private int id;
 	private String name;
 	private int maxOfGuests; // accommodationCapacity //sleeps
 
 	public Cottage(String name, int maxOfGuest) {
-		//TODO: calculer l'id --> un no unique pour identifier un chien
+		lastId += idAddedValue;
+		this.id = lastId;
 		this.name = name;
 		this.maxOfGuests = maxOfGuest;
 	}

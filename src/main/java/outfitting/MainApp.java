@@ -1,6 +1,7 @@
 package outfitting;
 
 import outfitting.controller.ControllerOrchestrator;
+import outfitting.model.CottageMemoryRepository;
 
 public class MainApp {
 
@@ -13,6 +14,6 @@ public class MainApp {
 	}
 
 	private void createOrchestrator() {
-		new ControllerOrchestrator();
+		new ControllerOrchestrator(new CottageMemoryRepository());
 	}
 }

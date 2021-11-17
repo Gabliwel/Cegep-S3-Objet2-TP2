@@ -12,11 +12,13 @@ public class Cottage {
 	private int nbOfChamber;
 	private int pricePerNight;
 
-	public Cottage(String name, int maxOfGuest) {
+	public Cottage(String name, int maxOfGuest, int nbOfChamber, int pricePerNight) {
 		lastId += idAddedValue;
 		this.id = lastId;
 		this.name = name;
 		this.maxOfGuests = maxOfGuest;
+		this.nbOfChamber = nbOfChamber;
+		this.pricePerNight = pricePerNight;
 	}
 
 	public int getId() {
@@ -29,5 +31,15 @@ public class Cottage {
 
 	public int getNbOfGuests() {
 		return this.maxOfGuests;
+	}
+	
+	public int getNbOfChamber() 
+	{
+		return this.nbOfChamber;
+	}
+
+	public int getPricePerNight()
+	{
+		return this.pricePerNight;
 	}
 }

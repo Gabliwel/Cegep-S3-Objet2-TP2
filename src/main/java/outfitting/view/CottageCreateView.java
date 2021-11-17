@@ -23,11 +23,15 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	private static final String COTTAGE_NAME = "Nom du chalet:";
 	private static final String COTTAGE_NB_PEOPLE = "Nombre de personnes:";
 	private static final String ADD_COTTAGE = "Ajouter";
+	private static final String NB_OF_CHAMBER = "Nombre de chambre";
+	private static final String PRICE_PER_NIGHT = "prix par nuit";
 
 	ICottageCreateController controller;
 
 	private JTextField name = new JTextField(30);
 	private JTextField guests = new JTextField(3);
+	private JTextField nbOfChamber = new JTextField(3);
+	private JTextField pricePerNight = new JTextField(3);
 
 	public CottageCreateView() {
 		super();
@@ -74,7 +78,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
 		
-		inputDataPanel.setLayout(new GridLayout(2, 2));
+		inputDataPanel.setLayout(new GridLayout(4, 4));
 		
 		JLabel cottageName = new JLabel(COTTAGE_NAME);
 		inputDataPanel.add(cottageName);
@@ -85,6 +89,16 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 		inputDataPanel.add(nbPeople);
 		
 		inputDataPanel.add(guests);
+		
+		JLabel nbChamber = new JLabel(NB_OF_CHAMBER);
+		inputDataPanel.add(nbChamber);
+		
+		inputDataPanel.add(nbOfChamber);
+		
+		JLabel priceByNight = new JLabel(PRICE_PER_NIGHT);
+		inputDataPanel.add(priceByNight);
+		
+		inputDataPanel.add(pricePerNight);
 	}
 
 	private void setUpActionPanel() {
@@ -108,21 +122,34 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	}
 	
 	private void sendCreateDTOToController() {
-		int nbGuestInt = 0;
 		boolean isValidNumGuest = true;
+		JDialog dialog = new JDialog();
 		
-		try {
-			nbGuestInt = Integer.parseInt(this.guests.getText());
-		}
-		catch (NumberFormatException e) {
-			isValidNumGuest = false;
-		}
+		if(name.getText() != null && guests.getText() != null) 
+		{
+			try 
+			{
+				Integer.parseInt(this.guests.getText());
+				Integer.parseInt(this.nbOfChamber.getText());
+				Integer.parseInt(this.pricePerNight.getText());
+			}
+			catch (NumberFormatException e) {
+				isValidNumGuest = false;
+				JOptionPane.showInternalMessageDialog(dialog, "Vous devex entrer un nombre dans le nombre d'inviter");
 
-		if(isValidNumGuest) {
-			CottageDtoForCreate cottage = new CottageDtoForCreate(name.getText(), nbGuestInt);	
-			controller.add(cottage);
-			this.dispose();
-			JOptionPane.showInternalMessageDialog(null, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
+			}
+
+			if(isValidNumGuest) {
+				CottageDtoForCreate cottage = new CottageDtoForCreate(name.getText(), Integer.parseInt(guests.getText()), 
+						Integer.parseInt(nbOfChamber.getText()), Integer.parseInt(pricePerNight.getText()));	
+				controller.add(cottage);
+				this.dispose();
+				JOptionPane.showInternalMessageDialog(dialog, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		else 
+		{
+			JOptionPane.showInternalMessageDialog(dialog,"Vous devez entrer des valeurs");
 		}
 	}
 

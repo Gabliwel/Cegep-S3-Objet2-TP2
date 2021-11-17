@@ -24,6 +24,6 @@ public class CottageCreateController implements ICottageCreateController {
 
 	@Override
 	public void add(CottageDtoForCreate cottageDTO) {
-		this.repository.add(new Cottage(cottageDTO.getName(), cottageDTO.getGuest()));
+		this.repository.add(new Cottage(cottageDTO.getName(), cottageDTO.getGuest(), cottageDTO.getNbOfChamber(), cottageDTO.getPricePerNight()));
 	}
 }

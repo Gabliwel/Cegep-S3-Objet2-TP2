@@ -9,6 +9,8 @@ public class Cottage {
 	private int id;
 	private String name;
 	private int maxOfGuests; // accommodationCapacity //sleeps
+	private int nbOfChamber;
+	private int pricePerNight;
 
 	public Cottage(String name, int maxOfGuest) {
 		lastId += idAddedValue;

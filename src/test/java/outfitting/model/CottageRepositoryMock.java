@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import outfitting.model.entity.Cottage;
 
-public class CottageRepositoryMock implements CottageRepository{
+public class CottageRepositoryMock implements GenericRepository<Cottage> {
 
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;

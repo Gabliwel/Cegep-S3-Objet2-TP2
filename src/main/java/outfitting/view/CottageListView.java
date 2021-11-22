@@ -50,7 +50,6 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 	public void display() {
 		this.setUpComponents();
 		this.pack();
-		
 		this.setVisible(true);
 	}
 	

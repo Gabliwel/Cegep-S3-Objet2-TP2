@@ -4,6 +4,7 @@ public class WelcomeControllerMock implements IWelcomeController {
 
 	public boolean resquestCreateCottageHasBeenCalled = false;
 	public boolean resquestCottageListHasBeenCalled = false;
+	public boolean requestOutfittingListHasBeenCalled = false;
 	
 	@Override
 	public void requestWelcome() {
@@ -18,5 +19,10 @@ public class WelcomeControllerMock implements IWelcomeController {
 	@Override
 	public void resquestCottageList() {
 		resquestCottageListHasBeenCalled = true;
+	}
+
+	@Override
+	public void requestOutfittingList() {
+		requestOutfittingListHasBeenCalled = true;
 	}
 }

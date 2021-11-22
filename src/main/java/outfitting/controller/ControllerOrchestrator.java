@@ -1,14 +1,19 @@
 package outfitting.controller;
 
 import outfitting.model.CottageMemoryRepository;
-import outfitting.model.CottageRepository;
+import outfitting.model.GenericRepository;
+import outfitting.model.OutfittingMemoryRepository;
+import outfitting.model.entity.Cottage;
+import outfitting.model.entity.Outfitting;
 import outfitting.view.CottageCreateView;
 import outfitting.view.CottageListView;
+import outfitting.view.OutfittingListView;
 import outfitting.view.WelcomeView;
 
 public class ControllerOrchestrator implements IControllerOrchestrator {
 	
-	private CottageRepository repository;
+	private GenericRepository<Cottage> cottageRepository;
+	private GenericRepository<Outfitting> outfittingRepository;
 
 	private IWelcomeController welcomeController;
 	private WelcomeView welcomeView;
@@ -18,9 +23,13 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private ICottageListController cottageListController;
 	private CottageListView cottageListView;
+	
+	private IOutfittingListController outfittingListController;
+	private OutfittingListView outfittingListView;
 
-	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository) {
-		repository = cottageMemoryRepository;
+	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository, OutfittingMemoryRepository outfittingMemoryRepository) {
+		this.cottageRepository = cottageMemoryRepository;
+		this.outfittingRepository = outfittingMemoryRepository;
 		this.initWelcome();
 		this.goToWelcome();
 	}
@@ -42,7 +51,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private void initCreateCottage() {
 		this.cottageCreateView = new CottageCreateView();
-		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.repository);
+		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository);
 		this.cottageCreateView.setController(createCottageController);
 	}
 	
@@ -53,7 +62,19 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private void initCottageList() {
 		this.cottageListView = new CottageListView();
-		this.cottageListController = new CottageListController(this, cottageListView, this.repository);
+		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository);
 		this.cottageListView.setController(cottageListController);
+	}
+	
+	public void goToOutfittingList()
+	{
+		initOutfittingList();
+		this.outfittingListController.requestOutfittingList();
+	}
+
+	private void initOutfittingList() {
+		this.outfittingListView = new OutfittingListView();
+		this.outfittingListController = new OutfittingListController(this, outfittingListView, outfittingRepository);
+		this.outfittingListView.setController(outfittingListController);
 	}
 }

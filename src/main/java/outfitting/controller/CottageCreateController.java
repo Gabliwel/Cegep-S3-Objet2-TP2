@@ -1,17 +1,17 @@
 package outfitting.controller;
 
 import outfitting.dto.CottageDtoForCreate;
-import outfitting.model.CottageRepository;
+import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.view.View;
 
 public class CottageCreateController implements ICottageCreateController {
 
-	private CottageRepository repository;
+	private GenericRepository<Cottage> repository;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 
-	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, CottageRepository repository) {
+	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
 		this.orchestrator = controllerOrchestrator;
 		this.view = view;
 		this.repository = repository;

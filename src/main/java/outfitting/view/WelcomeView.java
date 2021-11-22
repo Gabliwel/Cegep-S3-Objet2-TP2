@@ -24,6 +24,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 	private static final String WELCOME_PICTURE = "Cottage.jpg";
 	private static final String WELCOME_ADD_BTN = "Ajouter un chalet";
 	private static final String WELCOME_LIST_BTN = "Liste des chalets";
+	private static final String WELCOME_OUTFITTING_LIST_BTN = "Liste des pourvoiries";
 
 	private static final Dimension DEFAULT_SIZE = new Dimension(475, 530);
 
@@ -86,6 +87,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		this.add(actionPanel, BorderLayout.SOUTH);
 		addCreateCottageButton(actionPanel);
 		addListCottageButton(actionPanel);
+		addListOutfittingButton(actionPanel);
 	}
 	
 	private void addCreateCottageButton(JPanel actionPanel) {
@@ -101,6 +103,13 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		listCottageBtn.addActionListener(this);
 		actionPanel.add(listCottageBtn);
 	}
+	
+	private void addListOutfittingButton(JPanel actionPanel) {
+		JButton listCottageBtn = new JButton(WELCOME_OUTFITTING_LIST_BTN);
+		listCottageBtn.setActionCommand(WELCOME_OUTFITTING_LIST_BTN);
+		listCottageBtn.addActionListener(this);
+		actionPanel.add(listCottageBtn);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -108,6 +117,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		switch(action) {
 			case WELCOME_ADD_BTN -> this.controller.resquestCreateCottage();
 			case WELCOME_LIST_BTN -> this.controller.resquestCottageList();
+			case WELCOME_OUTFITTING_LIST_BTN -> this.controller.requestOutfittingList();
 		}
 	}
 }

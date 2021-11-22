@@ -1,10 +1,15 @@
 package outfitting.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import outfitting.model.CottageRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.view.View;
+import outifitting.comparator.CompareByAmountOfGuest;
 
 public class CottageListController implements ICottageListController {
 
@@ -25,6 +30,17 @@ public class CottageListController implements ICottageListController {
 	
 	@Override
 	public Collection<Cottage> getCottageList() {
-		return repository.getList();
+		return listAscendingByNbGuest(repository.getList());
+		//return repository.getList();
+	}
+	
+	public List<Cottage> listAscendingByNbGuest(Collection<Cottage> cottageCollection)
+	{
+		Comparator<Cottage> comparatorType;
+		comparatorType = new CompareByAmountOfGuest();
+		
+		return cottageCollection.stream()
+				.sorted(comparatorType)
+				.collect(Collectors.toList());
 	}
 }

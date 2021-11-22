@@ -11,10 +11,17 @@ public class Outfitting {
 	private String region;
 	private String phoneNumber;
 	private String email;
-	/*
-	public Outfitting(String name, String ) {
+	
+	public Outfitting(String name, String region, String phoneNumber, String email) {
 		lastId += ID_ADDED_VALUE;
 		this.id = lastId;
-		this.name 
-	}*/
+		this.name = name;
+		this.region = region;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
 }

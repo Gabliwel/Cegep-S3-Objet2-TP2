@@ -1,14 +1,15 @@
 package outfitting.controller;
 
 import outfitting.model.CottageMemoryRepository;
-import outfitting.model.CottageRepository;
+import outfitting.model.GenericRepository;
+import outfitting.model.entity.Cottage;
 import outfitting.view.CottageCreateView;
 import outfitting.view.CottageListView;
 import outfitting.view.WelcomeView;
 
 public class ControllerOrchestrator implements IControllerOrchestrator {
 	
-	private CottageRepository repository;
+	private GenericRepository<Cottage> cottageRepository;
 
 	private IWelcomeController welcomeController;
 	private WelcomeView welcomeView;
@@ -20,7 +21,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	private CottageListView cottageListView;
 
 	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository) {
-		repository = cottageMemoryRepository;
+		this.cottageRepository = cottageMemoryRepository;
 		this.initWelcome();
 		this.goToWelcome();
 	}
@@ -42,7 +43,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private void initCreateCottage() {
 		this.cottageCreateView = new CottageCreateView();
-		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.repository);
+		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository);
 		this.cottageCreateView.setController(createCottageController);
 	}
 	
@@ -53,7 +54,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private void initCottageList() {
 		this.cottageListView = new CottageListView();
-		this.cottageListController = new CottageListController(this, cottageListView, this.repository);
+		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository);
 		this.cottageListView.setController(cottageListController);
 	}
 }

@@ -27,4 +27,9 @@ public class WelcomeController implements IWelcomeController {
 	public void resquestCottageList() {
 		orchestrator.goToCottageList();
 	}
+
+	@Override
+	public void requestOutfittingList() {
+		orchestrator.goToOutfittingList();
+	}
 }

@@ -24,4 +24,20 @@ public class Outfitting {
 	public int getId() {
 		return this.id;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
 }

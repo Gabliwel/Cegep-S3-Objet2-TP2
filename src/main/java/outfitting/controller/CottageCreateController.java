@@ -7,11 +7,11 @@ import outfitting.view.View;
 
 public class CottageCreateController implements ICottageCreateController {
 
-	private GenericRepository repository;
+	private GenericRepository<Cottage> repository;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 
-	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository repository) {
+	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
 		this.orchestrator = controllerOrchestrator;
 		this.view = view;
 		this.repository = repository;

@@ -12,20 +12,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import outfitting.controller.ICottageListController;
+import outfitting.controller.IOutfittingListController;
 import outfitting.model.entity.Cottage;
+import outfitting.model.entity.Outfitting;
 
-public class CottageListView extends JDialog implements View, ActionListener {
-
+public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final long serialVersionUID = 1L;
-	private static final String VIEW_TITLE = "Liste des chalets";
+	private static final String VIEW_TITLE = "Liste des pouvoiries";
 	private static final String OK_BTN = "OK";
+	private static final String SORT_BY_NAME_BTN = "TRIER PAR NOM";
 	private static final String ID_TXT = "ID";
 	private static final String NAME_TXT = "NOM";
-	private static final String NB_PERSON_TXT = "NB. PERSONNES";
+	private static final String REGION_TXT = "RÉGION";
+	private static final String PHONE_NUMBER_TXT = "NUMÉRO DE TÉLÉPHONR";
+	private static final String EMAIL_TXT = "ADRESSE COURRIEL";
 	
-	private ICottageListController controller;
+	private IOutfittingListController controller;
 	
-	public CottageListView() {
+	public OutfittingListView() {
 		super();
 		this.initialize();
 	}
@@ -37,8 +41,8 @@ public class CottageListView extends JDialog implements View, ActionListener {
 		this.setModalityType(DEFAULT_MODALITY_TYPE);
 	}
 	
-	public void setController(ICottageListController cottageListController) {
-		this.controller = cottageListController;
+	public void setController(IOutfittingListController outfittingListController) {
+		this.controller = outfittingListController;
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	
 	private void setUpComponents() {
 		this.setUpCottageListInfo();
-		this.setUpButton();
+		this.setUpButtons();
 		this.setUpOtherPanels();
 	}
 	
@@ -62,29 +66,37 @@ public class CottageListView extends JDialog implements View, ActionListener {
 
 	private void setUpCottageListInfo() {
 		
-		Collection<Cottage> cottages = controller.getCottageList();
+		Collection<Outfitting> outfittings = controller.getSortedByNameOutfittingList();
 		
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(cottages.size()+1, 3));
+		inputDataPanel.setLayout(new GridLayout(outfittings.size()+1, 5));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
-		inputDataPanel.add(new JLabel(NB_PERSON_TXT));
+		inputDataPanel.add(new JLabel(REGION_TXT));
+		inputDataPanel.add(new JLabel(PHONE_NUMBER_TXT));
+		inputDataPanel.add(new JLabel(EMAIL_TXT));
 		
-		for(Cottage cottage : cottages) {
-			JLabel id = new JLabel(String.valueOf(cottage.getId()));
+		for(Outfitting outfitting : outfittings) {
+			JLabel id = new JLabel(String.valueOf(outfitting.getId()));
 			inputDataPanel.add(id);
 			
-			JLabel name = new JLabel(cottage.getName());
+			JLabel name = new JLabel(outfitting.getName());
 			inputDataPanel.add(name);
 			
-			JLabel nbGuest = new JLabel(String.valueOf(cottage.getNbOfGuests()));
-			inputDataPanel.add(nbGuest);
+			JLabel region = new JLabel(String.valueOf(outfitting.getRegion()));
+			inputDataPanel.add(region);
+			
+			JLabel phoneNumber = new JLabel(String.valueOf(outfitting.getPhoneNumber()));
+			inputDataPanel.add(phoneNumber);
+			
+			JLabel email = new JLabel(String.valueOf(outfitting.getEmail()));
+			inputDataPanel.add(email);
 		}
 	}
 	
-	private void setUpButton() {
+	private void setUpButtons() {
 		JPanel actionPanel = new JPanel(); 
 		this.add(actionPanel, BorderLayout.SOUTH);
 		
@@ -92,6 +104,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 		okBtn.setActionCommand(OK_BTN);
 		okBtn.addActionListener(this);
 		actionPanel.add(okBtn);
+		
+		JButton sortByName = new JButton(SORT_BY_NAME_BTN);
+		sortByName.setActionCommand(SORT_BY_NAME_BTN);
+		//sortByName.addActionListener(this);
+		actionPanel.add(sortByName);
 	}
 	
 	@Override
@@ -99,6 +116,12 @@ public class CottageListView extends JDialog implements View, ActionListener {
 		String action = e.getActionCommand();
 		switch(action) {
 			case OK_BTN -> dispose();
+			//case SORT_BY_NAME_BTN -> sortByName();
 		}
 	}
+	
+	/*private void sortByName()
+	{
+		
+	}*/
 }

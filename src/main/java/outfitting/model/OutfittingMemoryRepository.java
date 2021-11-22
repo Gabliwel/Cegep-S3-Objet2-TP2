@@ -37,7 +37,7 @@ public class OutfittingMemoryRepository implements GenericRepository<Outfitting>
 	}
 	
 	private void dataSeed() {
-		Outfitting o1 = new Outfitting("La Terre à Roger", RegionName.QUEBEC.name, "911", "terrederoger@chibougamau.qc.ca");
+		Outfitting o1 = new Outfitting("La Terre de Roger", RegionName.QUEBEC.name, "911", "terrederoger@chibougamau.qc.ca");
 		Outfitting o2 = new Outfitting("The Universe", RegionName.ONTARIO.name, "000-000-0000", "42@universe.com");
 		Outfitting o3 = new Outfitting("La Terre des Perdues", RegionName.NUNAVUT.name, "123-456-7890", "jesuisou@help.ca");
 		outfittings.put(o1.getId(), o1);

@@ -2,7 +2,7 @@ package outfitting.model.entity;
 
 public class Cottage { 
 
-	public static final int idAddedValue = 1;
+	public static final int ID_ADDED_VALUE = 1;
 	
 	public static int lastId = 0;
 	

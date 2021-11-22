@@ -6,7 +6,7 @@ import java.util.Map;
 
 import outfitting.model.entity.Cottage;
 
-public class CottageMemoryRepository implements CottageRepository{
+public class CottageMemoryRepository implements GenericRepository<Cottage> {
 
 	private Map<Integer, Cottage> cottages;
 	

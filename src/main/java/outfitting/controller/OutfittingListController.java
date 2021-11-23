@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Outfitting;
 import outfitting.sort.SortOutfittingByName;
+import outfitting.sort.SortOutfittingByRegion;
 import outfitting.view.View;
 
 public class OutfittingListController implements IOutfittingListController{
@@ -35,5 +36,11 @@ public class OutfittingListController implements IOutfittingListController{
 	public Collection<Outfitting> getSortedByNameOutfittingList() {
 		Collection<Outfitting> list = repository.getList();
 		return list.stream().sorted(new SortOutfittingByName()).collect(Collectors.toList());
+	}
+	
+	@Override
+	public Collection<Outfitting> getSortedByRegionOutfittingList() {
+		Collection<Outfitting> list = repository.getList();
+		return list.stream().sorted(new SortOutfittingByRegion()).collect(Collectors.toList());
 	}
 }

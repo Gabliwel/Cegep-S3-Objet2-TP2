@@ -13,7 +13,7 @@ public class Cottage {
 	private int pricePerNight;
 
 	public Cottage(String name, int maxOfGuest, int nbOfChamber, int pricePerNight) {
-		lastId += idAddedValue;
+		lastId += ID_ADDED_VALUE;
 		this.id = lastId;
 		this.name = name;
 		this.maxOfGuests = maxOfGuest;

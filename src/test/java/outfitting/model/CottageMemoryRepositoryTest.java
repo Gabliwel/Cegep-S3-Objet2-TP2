@@ -20,10 +20,10 @@ public class CottageMemoryRepositoryTest {
 	 */
 	
 	public static final int ND_SEEDED_COTTAGE = 4;
-	public static final Cottage SEEDED_COTTAGE_1 = new Cottage("Nar Shaddaa's Cottage", 6666666, 3, 34);
+	public static final Cottage SEEDED_COTTAGE_1 = new Cottage("Nar Shaddaa's Cottage", 2, 3, 34);
 	public static final Cottage SEEDED_COTTAGE_2 = new Cottage("Teepee", 1, 3, 34);
-	public static final Cottage SEEDED_COTTAGE_3 = new Cottage("The Max Int Cottage", 2147483647,3, 34);
-	public static final Cottage SEEDED_COTTAGE_4 = new Cottage("Japan", 125800000, 3, 34);
+	public static final Cottage SEEDED_COTTAGE_3 = new Cottage("The Max Int Cottage", 3, 3, 34);
+	public static final Cottage SEEDED_COTTAGE_4 = new Cottage("Japan", 4, 3, 34);
 	
 	@BeforeEach
 	public void init()

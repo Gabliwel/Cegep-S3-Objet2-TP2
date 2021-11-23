@@ -8,4 +8,5 @@ public interface IOutfittingListController {
 	void requestOutfittingList(); 
 	Collection<Outfitting> getOutfittingList();
 	Collection<Outfitting> getSortedByNameOutfittingList();
+	Collection<Outfitting> getSortedByRegionOutfittingList();
 }

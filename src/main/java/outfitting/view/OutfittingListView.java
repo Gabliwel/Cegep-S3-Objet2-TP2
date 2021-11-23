@@ -1,6 +1,7 @@
 package outfitting.view;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import outfitting.controller.ICottageListController;
 import outfitting.controller.IOutfittingListController;
-import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;
 
 public class OutfittingListView extends JDialog implements View, ActionListener{
@@ -21,10 +20,11 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final String VIEW_TITLE = "Liste des pouvoiries";
 	private static final String OK_BTN = "OK";
 	private static final String SORT_BY_NAME_BTN = "TRIER PAR NOM";
+	private static final String SORT_BY_REGION_BTN = "TRIER PAR RÉGION";
 	private static final String ID_TXT = "ID";
 	private static final String NAME_TXT = "NOM";
 	private static final String REGION_TXT = "RÉGION";
-	private static final String PHONE_NUMBER_TXT = "NUMÉRO DE TÉLÉPHONR";
+	private static final String PHONE_NUMBER_TXT = "NUMÉRO DE TÉLÉPHONE";
 	private static final String EMAIL_TXT = "ADRESSE COURRIEL";
 	
 	private IOutfittingListController controller;
@@ -66,7 +66,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 
 	private void setUpCottageListInfo() {
 		
-		Collection<Outfitting> outfittings = controller.getSortedByNameOutfittingList();
+		Collection<Outfitting> outfittings = controller.getSortedByRegionOutfittingList();
 		
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
@@ -109,6 +109,11 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		sortByName.setActionCommand(SORT_BY_NAME_BTN);
 		//sortByName.addActionListener(this);
 		actionPanel.add(sortByName);
+		
+		JButton sortByRegion = new JButton(SORT_BY_REGION_BTN);
+		sortByRegion.setActionCommand(SORT_BY_REGION_BTN);
+		//sortByRegion.addActionListener(this);
+		actionPanel.add(sortByRegion);
 	}
 	
 	@Override
@@ -117,11 +122,15 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		switch(action) {
 			case OK_BTN -> dispose();
 			//case SORT_BY_NAME_BTN -> sortByName();
+			//case SORT_BY_REGION_BTN -> sortByRegion();
 		}
 	}
+
+	/*private void sortByRegion() {
+		
+	}*/
 	
-	/*private void sortByName()
-	{
+	/*private void sortByName() {
 		
 	}*/
 }

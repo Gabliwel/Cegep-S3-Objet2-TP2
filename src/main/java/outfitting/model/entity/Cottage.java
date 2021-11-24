@@ -1,6 +1,6 @@
 package outfitting.model.entity;
 
-public class Cottage { 
+public class Cottage implements ICottage{ 
 
 	public static final int idAddedValue = 1;
 	
@@ -8,7 +8,7 @@ public class Cottage {
 	
 	private int id;
 	private String name;
-	private int maxOfGuests; // accommodationCapacity //sleeps
+	private int maxOfGuests;
 	private int nbOfChamber;
 	private int pricePerNight;
 

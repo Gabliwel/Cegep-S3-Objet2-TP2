@@ -4,10 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,7 +11,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import outfitting.controller.ICottageListController;
-import outfitting.model.entity.Cottage;
+import outfitting.dto.CottageDTOForList;
+import outifitting.button.IButtonID;
+import outifitting.button.IDButtonForListOfCottage;
 
 public class CottageListView extends JDialog implements View, ActionListener {
 
@@ -27,6 +25,7 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	private static final String NB_PERSON_TXT = "NB. PERSONNES";
 	private static final String NB_OF_CHAMBER_TXT = "NB. CHAMBRES";
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
+	private static final String CONSULT_BUTTON = "Consulter le chalet";
 	
 	private ICottageListController controller;
 	
@@ -70,16 +69,17 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	{
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 5));
+		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 6));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
 		inputDataPanel.add(new JLabel(NB_PERSON_TXT));
 		inputDataPanel.add(new JLabel(NB_OF_CHAMBER_TXT));
 		inputDataPanel.add(new JLabel(PRICE_PER_NIGHT_TXT));
+		inputDataPanel.add(new JLabel(""));
 		
-		for(Cottage cottage : this.controller.getCottageList()) {
-			JLabel id = new JLabel(String.valueOf(cottage.getId()));
+		for(CottageDTOForList cottage : this.controller.getCottageList()) {
+			JLabel id = new JLabel(String.valueOf(cottage.getID()));
 			inputDataPanel.add(id);
 			
 			JLabel name = new JLabel(cottage.getName());
@@ -93,6 +93,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			
 			JLabel pricePerNight = new JLabel(Integer.toString(cottage.getPricePerNight()));
 			inputDataPanel.add(pricePerNight);
+			
+			IDButtonForListOfCottage idButton = new IDButtonForListOfCottage(CONSULT_BUTTON, cottage.getID());
+			idButton.setActionCommand(CONSULT_BUTTON);
+			idButton.addActionListener(this);
+			inputDataPanel.add(idButton);
 		}
 	}
 	
@@ -109,8 +114,15 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		switch(action) {
-			case OK_BTN -> dispose();
+		switch(action) 
+		{
+			case OK_BTN : dispose();
+							break;
+			case CONSULT_BUTTON : 
+				IButtonID cottageButton = (IDButtonForListOfCottage) e.getSource();
+				int idCottage = cottageButton.getId();
+				this.controller.requestSpecificCottageView(idCottage);
+				break;
 		}
 	}
 }

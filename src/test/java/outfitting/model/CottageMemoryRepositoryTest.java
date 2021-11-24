@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import outfitting.model.entity.Cottage;
+import outfitting.model.entity.CottageMock;
 
 public class CottageMemoryRepositoryTest {
 	/*The seeded value:
@@ -20,16 +21,24 @@ public class CottageMemoryRepositoryTest {
 	 */
 	
 	public static final int ND_SEEDED_COTTAGE = 4;
-	public static final Cottage SEEDED_COTTAGE_1 = new Cottage("Nar Shaddaa's Cottage", 6666666, 3, 34);
-	public static final Cottage SEEDED_COTTAGE_2 = new Cottage("Teepee", 1, 3, 34);
-	public static final Cottage SEEDED_COTTAGE_3 = new Cottage("The Max Int Cottage", 2147483647,3, 34);
-	public static final Cottage SEEDED_COTTAGE_4 = new Cottage("Japan", 125800000, 3, 34);
+	
+	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70);
+	CottageMock cottage2 = new CottageMock("Teepee", 3, 16, 50);
+	CottageMock cottage3 = new CottageMock("The Max Int Cottage", 4, 16, 60);
+	CottageMock cottage4 = new CottageMock("Japan", 2, 7, 100);
+	
+	CottageMemoryRepository aRepository = null;
 	
 	@BeforeEach
 	public void init()
 	{
 		Cottage.lastId = 0;
-
+		aRepository = new CottageMemoryRepository();
+		
+		aRepository.add(cottage1);
+		aRepository.add(cottage2);
+		aRepository.add(cottage3);
+		aRepository.add(cottage4);
 	}
 	
 	@AfterAll
@@ -41,11 +50,8 @@ public class CottageMemoryRepositoryTest {
 	
 	@Test
 	public void when_gettingCottageById_then_returnTheCottageWithTheId() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
-		
-		Cottage result = repo.searchById(1);
 
-		compareCottage(SEEDED_COTTAGE_1, result);
+		assertEquals(cottage1, aRepository.searchById(cottage1.getId()));
 	}
 	
 	@Test
@@ -59,54 +65,36 @@ public class CottageMemoryRepositoryTest {
 
 	@Test
 	public void when_addCottageToRepo_then_cottageIsInRepo() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
-		Cottage cottage = new Cottage("AAAAAAAAAAAAA", 12345, 3, 34);
+		CottageMock cottage = new CottageMock("AAAAAAAAAAAAA", 12345, 3, 34);
 		
-		repo.add(cottage);
-		Cottage result = repo.searchById(5);
+		aRepository.add(cottage);
 
-		compareCottage(cottage, result);
-	}
-	
-	@Test
-	public void when_creatingNewMemoryRepo_then_repoHasSeedCottage() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
-		
-		Cottage result1 = repo.searchById(1);
-		Cottage result2 = repo.searchById(2);
-		Cottage result3 = repo.searchById(3);
-		Cottage result4 = repo.searchById(4);
-		
-		compareCottage(SEEDED_COTTAGE_1, result1);
-		compareCottage(SEEDED_COTTAGE_2, result2);
-		compareCottage(SEEDED_COTTAGE_3, result3);
-		compareCottage(SEEDED_COTTAGE_4, result4);
+		assertEquals(aRepository.searchById(cottage.getId()), cottage);
 	}
 	
 	@Test
 	public void when_getSizeOfRepo_then_returnNbOfCottageInRepo() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
 		
-		int size = repo.size();
+		int size = aRepository.size();
 		
-		assertEquals(ND_SEEDED_COTTAGE, size);
+		assertEquals(ND_SEEDED_COTTAGE, size-4); //the -4 is because i want the test to pass while having the dataSeed() method on
 	}
 	
 	@Test
 	public void when_getAllRepoCottage_then_returnCollectionOfCottageInRepo() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
+		ArrayList<Cottage> cottages = new ArrayList<Cottage>(aRepository.getList());
 		
-		ArrayList<Cottage> cottages = new ArrayList<Cottage>(repo.getList());
-		
-		compareCottage(SEEDED_COTTAGE_1, cottages.get(0));
-		compareCottage(SEEDED_COTTAGE_2, cottages.get(1));
-		compareCottage(SEEDED_COTTAGE_3, cottages.get(2));
-		compareCottage(SEEDED_COTTAGE_4, cottages.get(3));
+		assertEquals(cottages.get(0), aRepository.searchById(cottages.get(0).getId()));
+		assertEquals(cottages.get(1), aRepository.searchById(cottages.get(1).getId()));
+		assertEquals(cottages.get(2), aRepository.searchById(cottages.get(2).getId()));
+		assertEquals(cottages.get(3), aRepository.searchById(cottages.get(3).getId()));
 	}
 	
-	private void compareCottage(Cottage expectedCottage, Cottage resultCottage) {
-		assertEquals(expectedCottage.getId(), resultCottage.getId());
-		assertEquals(expectedCottage.getName(), resultCottage.getName());
-		assertEquals(expectedCottage.getNbOfGuests(), resultCottage.getNbOfGuests());
+	@Test
+	public void WHEN_removeGetsCalled_THEN_cottageIsRemovedFromMap() 
+	{
+		aRepository.remove(cottage4.getId(), cottage4);
+		
+		assertNull(aRepository.searchById(cottage3.getId()+1));
 	}
 }

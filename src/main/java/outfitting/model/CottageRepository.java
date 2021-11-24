@@ -9,4 +9,5 @@ public interface CottageRepository {
 	Collection<Cottage> getList();
 	int size();
 	Cottage searchById(int id);
+	void remove(int id,Cottage cottage);
 }

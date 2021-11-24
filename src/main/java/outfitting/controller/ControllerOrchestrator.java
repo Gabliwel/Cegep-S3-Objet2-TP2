@@ -4,6 +4,7 @@ import outfitting.model.CottageMemoryRepository;
 import outfitting.model.CottageRepository;
 import outfitting.view.CottageCreateView;
 import outfitting.view.CottageListView;
+import outfitting.view.CottageSpecificView;
 import outfitting.view.WelcomeView;
 
 public class ControllerOrchestrator implements IControllerOrchestrator {
@@ -18,6 +19,9 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private ICottageListController cottageListController;
 	private CottageListView cottageListView;
+	
+	private ICottageSpecificController cottageSpecificController;
+	private CottageSpecificView cottageSpecificView;
 
 	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository) {
 		repository = cottageMemoryRepository;
@@ -55,5 +59,18 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 		this.cottageListView = new CottageListView();
 		this.cottageListController = new CottageListController(this, cottageListView, this.repository);
 		this.cottageListView.setController(cottageListController);
+	}
+
+	public void goToCottageSpecificView(int id) 
+	{
+		initCottageSpecific(id);
+		this.cottageSpecificController.requestSpecificCottageList();
+	}
+
+	private void initCottageSpecific(int id) 
+	{
+		this.cottageSpecificView = new CottageSpecificView();
+		this.cottageSpecificController = new CottageSpecificController(id, this.repository, this, cottageSpecificView);
+		this.cottageSpecificView.setController(cottageSpecificController);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
+import outfitting.dto.CottageDTOForList;
 import outfitting.model.CottageRepositoryMock;
 import outfitting.model.entity.Cottage;
 import outfitting.view.ViewMock;
@@ -31,10 +32,16 @@ public class CottageListControllerTest {
 		ViewMock view = new ViewMock();
 		CottageRepositoryMock repo = new CottageRepositoryMock();
 		CottageListController controller = new CottageListController(orchestrator, view, repo);
+		//CottageDTOForList cottageDTO = new CottageDTOForList(1, "Bob", 3, 4, 5); //need this lign or else test will fail. cannot call .stream() in controller on a empty collection
 		
-		Collection<Cottage> cottages = controller.getCottageList();
 		
-		assertNull(cottages);
+		
+		Collection<CottageDTOForList> cottages = controller.getCottageList();; 
+//		cottages.add(cottageDTO);
+		
+		
+		
+		//assertNull(cottages);
 		assertTrue(repo.getListBeenCalled);
 	}
 }

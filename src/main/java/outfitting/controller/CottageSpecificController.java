@@ -34,9 +34,9 @@ public class CottageSpecificController implements ICottageSpecificController
 	}
 
 	@Override
-	public void deleteChalet(int id, CottageDTOForList cottageDTOForView)
+	public void deleteChalet(int id)
 	{
-		this.repository.remove(id, cottageConvertor.DTOToCottage(cottageDTOForView));
+		this.repository.remove(id);
 	}
 	
 }

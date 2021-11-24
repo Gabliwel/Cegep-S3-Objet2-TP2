@@ -6,5 +6,5 @@ public interface ICottageSpecificController
 {
 	void requestSpecificCottageList();
 	CottageDTOForList getCottageDTOForView();
-	void deleteChalet(int id, CottageDTOForList cottageDTOForView);
+	void deleteChalet(int id);
 }

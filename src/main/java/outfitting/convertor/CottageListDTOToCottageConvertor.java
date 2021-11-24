@@ -10,7 +10,9 @@ public class CottageListDTOToCottageConvertor {
 	
 	public Cottage DTOToCottage(CottageDTOForList cottageDTO) 
 	{
-		return new Cottage(cottageDTO.getName(), cottageDTO.getNbOfGuests(), cottageDTO.getNbOfChamber(), cottageDTO.getPricePerNight());
+		Cottage c = new Cottage(cottageDTO.getName(), cottageDTO.getNbOfGuests(), cottageDTO.getNbOfChamber(), cottageDTO.getPricePerNight());
+		c.setId(cottageDTO.getID());
+		return c;
 	}
 	
 	public List<CottageDTOForList> listOfCottageToDTO(List<Cottage> list) 

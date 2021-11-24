@@ -46,7 +46,7 @@ public class OutfittingMemoryRepository implements GenericRepository<Outfitting>
 	}
 
 	@Override
-	public void remove(int id, Outfitting o) {
+	public void remove(int id) {
 		// TODO Auto-generated method stub
 		
 	}

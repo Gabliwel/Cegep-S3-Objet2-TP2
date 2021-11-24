@@ -1,6 +1,6 @@
 package outfitting.model.entity;
 
-public class Cottage implements ICottage{ 
+public class Cottage { 
 
 	public static final int idAddedValue = 1;
 	

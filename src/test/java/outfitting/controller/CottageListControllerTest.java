@@ -37,7 +37,7 @@ public class CottageListControllerTest {
 		
 		
 		Collection<CottageDTOForList> cottages = controller.getCottageList();; 
-//		cottages.add(cottageDTO);
+		//cottages.add(cottageDTO);
 		
 		
 		

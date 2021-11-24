@@ -5,6 +5,7 @@ public class ControllerOrchestratorMock implements IControllerOrchestrator {
 	public boolean goToCreateCottageHasBeenCalled = false;
 	public boolean goToCottageListHasBeenCalled = false;
 	public boolean goToCottageSpecificHasBeenCalled = false;
+	public boolean goToOutfittingListHasBeenCalled = false;
 	
 	@Override
 	public void goToCreateCottage() {
@@ -21,4 +22,10 @@ public class ControllerOrchestratorMock implements IControllerOrchestrator {
 	{
 		goToCottageSpecificHasBeenCalled = true;
 	}
+
+
+	public void goToOutfittingList() {
+		goToOutfittingListHasBeenCalled = true;
+	}
 }
+

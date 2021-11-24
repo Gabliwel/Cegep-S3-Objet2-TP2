@@ -1,6 +1,7 @@
 package outfitting.view;
 
 import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,7 +50,6 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	public void display() {
 		this.setUpComponents();
 		this.pack();
-		
 		this.setVisible(true);
 	}
 	

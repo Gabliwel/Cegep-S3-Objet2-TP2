@@ -6,7 +6,7 @@ import java.util.Map;
 
 import outfitting.model.entity.Cottage;
 
-public class CottageMemoryRepositoryMockWithAdd implements CottageRepository {
+public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
 	
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;

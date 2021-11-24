@@ -41,4 +41,15 @@ public class WelcomeControllerTest {
 		
 		assertTrue(orchestrator.goToCottageListHasBeenCalled);
 	}
+	
+	@Test
+	public void when_requestOutfittingList_then_shouldAskToGoToCottageListToOrchestrator() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		WelcomeController controller = new WelcomeController(orchestrator, view);
+		
+		controller.requestOutfittingList();
+		
+		assertTrue(orchestrator.goToOutfittingListHasBeenCalled);
+	}
 }

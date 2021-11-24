@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
-import outfitting.model.CottageRepository;
+import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.view.View;
 import outifitting.comparator.CompareByAmountOfGuest;
 
 public class CottageListController implements ICottageListController {
 
-	private CottageRepository repository;
+	private GenericRepository<Cottage> repository;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageListDTOToCottageConvertor cottageConvertor;
 	
 
-	public CottageListController(IControllerOrchestrator controllerOrchestrator, View view, CottageRepository repository) {
+	public CottageListController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
 		this.orchestrator = controllerOrchestrator;
 		this.repository = repository;
 		this.view = view;

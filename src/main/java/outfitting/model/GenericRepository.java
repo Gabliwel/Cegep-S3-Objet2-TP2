@@ -9,4 +9,5 @@ public interface GenericRepository<T> {
 	Collection<T> getList();
 	int size();
 	T searchById(int id);
+	void remove(int id, T o);
 }

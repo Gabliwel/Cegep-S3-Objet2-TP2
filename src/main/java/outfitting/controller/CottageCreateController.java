@@ -1,5 +1,6 @@
 package outfitting.controller;
 
+import outfitting.convertor.CottageCreateDTOToCottageConvertor;
 import outfitting.dto.CottageDtoForCreate;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
@@ -10,11 +11,13 @@ public class CottageCreateController implements ICottageCreateController {
 	private GenericRepository<Cottage> repository;
 	private IControllerOrchestrator orchestrator;
 	private View view;
+	private CottageCreateDTOToCottageConvertor cottageConvertor;
 
 	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
 		this.orchestrator = controllerOrchestrator;
 		this.view = view;
 		this.repository = repository;
+		this.cottageConvertor = new CottageCreateDTOToCottageConvertor();
 	}
 
 	@Override
@@ -24,6 +27,6 @@ public class CottageCreateController implements ICottageCreateController {
 
 	@Override
 	public void add(CottageDtoForCreate cottageDTO) {
-		this.repository.add(new Cottage(cottageDTO.getName(), cottageDTO.getGuest(), cottageDTO.getNbOfChamber(), cottageDTO.getPricePerNight()));
+		this.repository.add(cottageConvertor.DTOToCottage(cottageDTO));
 	}
 }

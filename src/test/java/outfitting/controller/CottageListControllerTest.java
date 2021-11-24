@@ -1,14 +1,15 @@
 package outfitting.controller;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 
+import outfitting.dto.CottageDTOForList;
+import outfitting.model.CottageMemoryRepositoryMockWithAdd;
 import outfitting.model.CottageRepositoryMock;
-import outfitting.model.entity.Cottage;
+import outfitting.model.entity.CottageMock;
 import outfitting.view.ViewMock;
 
 public class CottageListControllerTest {
@@ -26,15 +27,17 @@ public class CottageListControllerTest {
 	}
 	
 	@Test
-	public void when_requestCottage_then_shouldAskCottageListToRepo() {
+	public void WHEN_getListIsCalled_THEN_assuredThatGetListHasBeenCalled() 
+	{
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
 		ViewMock view = new ViewMock();
-		CottageRepositoryMock repo = new CottageRepositoryMock();
+		CottageMemoryRepositoryMockWithAdd repo = new CottageMemoryRepositoryMockWithAdd();
 		CottageListController controller = new CottageListController(orchestrator, view, repo);
+		CottageMock cottage = new CottageMock("bob", 1, 2, 3);
 		
-		Collection<Cottage> cottages = controller.getCottageList();
+		repo.add(cottage);
+		Collection<CottageDTOForList> cottageCollection = controller.getCottageList();
 		
-		assertNull(cottages);
 		assertTrue(repo.getListBeenCalled);
 	}
 }

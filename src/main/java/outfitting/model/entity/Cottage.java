@@ -8,7 +8,7 @@ public class Cottage {
 	
 	private int id;
 	private String name;
-	private int maxOfGuests; // accommodationCapacity //sleeps
+	private int maxOfGuests;
 	private int nbOfChamber;
 	private int pricePerNight;
 

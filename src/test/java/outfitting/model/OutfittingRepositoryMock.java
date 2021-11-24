@@ -32,4 +32,10 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		return null;
 	}
 
+	@Override
+	public void remove(int id, Outfitting o) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

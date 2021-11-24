@@ -123,7 +123,6 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	
 	private void sendCreateDTOToController() {
 		boolean isValidNumGuest = true;
-		JDialog dialog = new JDialog();
 		
 		if(name.getText() != null && guests.getText() != null) 
 		{
@@ -135,8 +134,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 			}
 			catch (NumberFormatException e) {
 				isValidNumGuest = false;
-				JOptionPane.showInternalMessageDialog(dialog, "Vous devex entrer un nombre dans le nombre d'inviter");
-
+				JOptionPane.showInternalMessageDialog(null, "Vous devez entrer un nombre dans le nombre d'inviter");
 			}
 
 			if(isValidNumGuest) {
@@ -144,12 +142,12 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 						Integer.parseInt(nbOfChamber.getText()), Integer.parseInt(pricePerNight.getText()));	
 				controller.add(cottage);
 				this.dispose();
-				JOptionPane.showInternalMessageDialog(dialog, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showInternalMessageDialog(null, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else 
 		{
-			JOptionPane.showInternalMessageDialog(dialog,"Vous devez entrer des valeurs");
+			JOptionPane.showInternalMessageDialog(null,"Vous devez entrer des valeurs");
 		}
 	}
 

@@ -20,4 +20,6 @@ public class IDButtonForListOfCottage extends JButton implements IButtonID
 	{
 		return this.id;
 	}
+	
+	//allo
 }

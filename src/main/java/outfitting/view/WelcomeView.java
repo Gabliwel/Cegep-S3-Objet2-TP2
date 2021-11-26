@@ -120,4 +120,10 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 			case WELCOME_OUTFITTING_LIST_BTN -> this.controller.requestOutfittingList();
 		}
 	}
+
+	@Override
+	public void displayError(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 }

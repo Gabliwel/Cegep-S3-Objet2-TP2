@@ -135,4 +135,10 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 	         								break;
 	      }
 	}
+
+	@Override
+	public void displayError(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 }

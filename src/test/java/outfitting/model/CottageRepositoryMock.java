@@ -33,7 +33,7 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 	}
 
 	@Override
-	public void remove(int id, Cottage cottage) {
+	public void remove(int id) {
 		removeHasBeenCalled = true;
 	}
 }

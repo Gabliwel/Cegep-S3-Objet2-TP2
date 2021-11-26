@@ -1,5 +1,6 @@
 package outfitting.model.entity;
 
+
 public class Outfitting {
 
 	public static final int ID_ADDED_VALUE = 1;
@@ -11,14 +12,16 @@ public class Outfitting {
 	private String region;
 	private String phoneNumber;
 	private String email;
+	private Contact contact;
 	
-	public Outfitting(String name, String region, String phoneNumber, String email) {
+	public Outfitting(String name, String region, String phoneNumber, String email, Contact contact) {
 		lastId += ID_ADDED_VALUE;
 		this.id = lastId;
 		this.name = name;
 		this.region = region;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
+		this.contact = contact;
 	}
 	
 	public int getId() {
@@ -39,5 +42,9 @@ public class Outfitting {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public Contact getContact() {
+		return contact;
 	}
 }

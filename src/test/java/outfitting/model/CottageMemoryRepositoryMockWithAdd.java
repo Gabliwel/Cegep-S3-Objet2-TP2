@@ -1,25 +1,33 @@
 package outfitting.model;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import outfitting.model.entity.Cottage;
 
-public class CottageRepositoryMock implements GenericRepository<Cottage> {
-
+public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
+	
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;
 	public boolean removeHasBeenCalled = false;
 	
+	private Map<Integer, Cottage> cottages;
+	
+	public CottageMemoryRepositoryMockWithAdd()
+	{
+		cottages = new HashMap<>();
+	}
+	
 	@Override
 	public void add(Cottage cottage) {
-		addHasBeenCalled = true;
-		Cottage.lastId = 0;
+		cottages.put(cottage.getId(), cottage);
 	}
 
 	@Override
 	public Collection<Cottage> getList() {
 		getListBeenCalled = true;
-		return null;
+		return cottages.values();
 	}
 
 	@Override

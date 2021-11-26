@@ -5,10 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,9 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import outfitting.controller.ICottageListController;
-import outfitting.model.entity.Cottage;
+import outfitting.dto.CottageDTOForList;
+import outifitting.button.IButtonID;
+import outifitting.button.IDButtonForListOfCottage;
 
-public class CottageListView extends JDialog implements Comparator<Cottage>,View, ActionListener {
+public class CottageListView extends JDialog implements View, ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_TITLE = "Liste des chalets";
@@ -28,6 +26,7 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 	private static final String NB_PERSON_TXT = "NB. PERSONNES";
 	private static final String NB_OF_CHAMBER_TXT = "NB. CHAMBRES";
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
+	private static final String CONSULT_BUTTON = "Consulter le chalet";
 	
 	private ICottageListController controller;
 	
@@ -70,16 +69,17 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 	{
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 5));
+		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 6));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
 		inputDataPanel.add(new JLabel(NB_PERSON_TXT));
 		inputDataPanel.add(new JLabel(NB_OF_CHAMBER_TXT));
 		inputDataPanel.add(new JLabel(PRICE_PER_NIGHT_TXT));
+		inputDataPanel.add(new JLabel(""));
 		
-		for(Cottage cottage : listAscendingByNbGuest(this.controller.getCottageList())) {
-			JLabel id = new JLabel(String.valueOf(cottage.getId()));
+		for(CottageDTOForList cottage : this.controller.getCottageList()) {
+			JLabel id = new JLabel(String.valueOf(cottage.getID()));
 			inputDataPanel.add(id);
 			
 			JLabel name = new JLabel(cottage.getName());
@@ -93,26 +93,12 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 			
 			JLabel pricePerNight = new JLabel(Integer.toString(cottage.getPricePerNight()));
 			inputDataPanel.add(pricePerNight);
+			
+			IDButtonForListOfCottage idButton = new IDButtonForListOfCottage(CONSULT_BUTTON, cottage.getID());
+			idButton.setActionCommand(CONSULT_BUTTON);
+			idButton.addActionListener(this);
+			inputDataPanel.add(idButton);
 		}
-	}
-	
-	private List<Cottage> listAscendingByNbGuest(Collection<Cottage> cottageCollection)
-	{		
-		Collection<Cottage> cottageNewList = cottageCollection;
-		ArrayList<Cottage> cottageList = new ArrayList<Cottage>();
-		 
-		for (Cottage cottage : cottageCollection) 
-		{
-			cottageList.add(cottage);
-		}
-		
-		for (int i = 0; i < cottageList.size()-1; i++)
-		{
-			compare(cottageList.get(i), cottageList.get(i+1));
-			cottageList.sort(this);
-		}
-		
-		return cottageList;
 	}
 	
 	private void setUpButton() {
@@ -128,18 +114,16 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		switch(action) {
-			case OK_BTN -> dispose();
+		switch(action) 
+		{
+			case OK_BTN : dispose();
+							break;
+			case CONSULT_BUTTON : 
+				IButtonID cottageButton = (IDButtonForListOfCottage) e.getSource();
+				int idCottage = cottageButton.getId();
+				this.controller.requestSpecificCottageView(idCottage);
+				break;
 		}
-	}
-
-	@Override
-	public int compare(Cottage o1, Cottage o2) 
-	{
-		Integer cottageNbOfChamber = o1.getNbOfGuests();
-		Integer cottageNbOfChamber2 = o2.getNbOfGuests();
-		
-		return cottageNbOfChamber.compareTo(cottageNbOfChamber2);
 	}
 
 	@Override
@@ -147,4 +131,5 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 		// TODO Auto-generated method stub
 		
 	}
+
 }

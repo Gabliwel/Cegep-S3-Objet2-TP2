@@ -134,8 +134,8 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 			}
 			catch (NumberFormatException e) {
 				isValidNumGuest = false;
-				JOptionPane.showInternalMessageDialog(null, "Vous devex entrer un nombre dans le nombre d'inviter");
 
+				JOptionPane.showInternalMessageDialog(null, "Vous devex entrer un nombre dans le nombre d'inviter");
 			}
 
 			if(isValidNumGuest) {

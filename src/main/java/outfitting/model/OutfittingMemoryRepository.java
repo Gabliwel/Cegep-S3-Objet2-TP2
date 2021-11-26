@@ -51,4 +51,10 @@ public class OutfittingMemoryRepository implements GenericRepository<Outfitting>
 		outfittings.put(o2.getId(), o2);
 		outfittings.put(o3.getId(), o3);
 	}
+
+	@Override
+	public void remove(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

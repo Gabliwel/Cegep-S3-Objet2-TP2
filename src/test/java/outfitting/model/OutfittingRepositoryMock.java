@@ -39,4 +39,9 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		}
 		return new OutfittingMock(-1, "", "");
 	}
+
+	@Override
+	public void remove(int id) {
+
+	}
 }

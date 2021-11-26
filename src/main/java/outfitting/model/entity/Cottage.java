@@ -8,7 +8,7 @@ public class Cottage {
 	
 	private int id;
 	private String name;
-	private int maxOfGuests; // accommodationCapacity //sleeps
+	private int maxOfGuests;
 	private int nbOfChamber;
 	private int pricePerNight;
 
@@ -41,5 +41,11 @@ public class Cottage {
 	public int getPricePerNight()
 	{
 		return this.pricePerNight;
+	}
+
+	public void setId(int id) 
+	{
+		this.id = id;
+		
 	}
 }

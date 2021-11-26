@@ -24,7 +24,7 @@ public static final int FIRST_ID_VALUE = 1;
 
 	@Test
 	public void when_creatingNewOutfitting_then_firstNewOutfittingHasIdOf1() {
-		Outfitting o1 = new Outfitting(null, null, null, null);
+		Outfitting o1 = new Outfitting(null, null, null, null, null);
 		
 		int id = o1.getId();
 		
@@ -33,8 +33,8 @@ public static final int FIRST_ID_VALUE = 1;
 	
 	@Test
 	public void when_creatingSecondNewOutfitting_then_newOutfittingIdIsFirstIdValuePlus1() {
-		new Outfitting(null, null, null, null);
-		Outfitting o2 = new Outfitting(null, null, null, null);
+		new Outfitting(null, null, null, null, null);
+		Outfitting o2 = new Outfitting(null, null, null, null, null);
 		
 		int id = o2.getId();
 		

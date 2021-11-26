@@ -1,10 +1,16 @@
 package outfitting.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.model.OutfittingRepositoryMock;
+import outfitting.model.entity.Contact;
+import outfitting.sort.SortOutfittingType;
 import outfitting.view.ViewMock;
 
 public class OutfittingListControllerTest {
@@ -19,5 +25,67 @@ public class OutfittingListControllerTest {
 		controller.requestOutfittingList();
 		
 		assertTrue(view.displayMethodHasBeenCalled);
+	}
+	
+	@Test
+	public void when_getOutfittingById_then_shouldAskRepoToSearchById() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
+		OutfittingListController controller = new OutfittingListController(orchestrator, view, repo);
+		int anyId = 0;
+		
+		controller.getOutfittingById(anyId);
+		
+		assertTrue(repo.searchByIdBeenCalled);
+	}
+	
+	@Test
+	public void when_getOutfittingByIdWithInvalidId_then_shouldAskViewToShowError() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
+		OutfittingListController controller = new OutfittingListController(orchestrator, view, repo);
+		int errorId = 10;
+		
+		controller.getOutfittingById(errorId);
+		
+		assertTrue(view.displayErrorMethodHasBeenCalled);
+	}
+	
+	@Test
+	public void when_getOutfittingList_then_shouldReturnDtoOutfittingList() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
+		OutfittingListController controller = new OutfittingListController(orchestrator, view, repo);
+		
+		List<OutfittingDtoForGet> list = controller.getSortedList(SortOutfittingType.NON_SORTED);
+		
+		assertEquals(list.get(0).getClass(), new OutfittingDtoForGet(0, null, null, null, null, new Contact(null, null, null)).getClass());
+	}
+	
+	@Test
+	public void when_getOutfittingListByName_then_shouldReturnDtoOutfittingList() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
+		OutfittingListController controller = new OutfittingListController(orchestrator, view, repo);
+		
+		List<OutfittingDtoForGet> list = controller.getSortedList(SortOutfittingType.BY_NAME);
+		
+		assertEquals(list.get(0).getClass(), new OutfittingDtoForGet(0, null, null, null, null, new Contact(null, null, null)).getClass());
+	}
+	
+	@Test
+	public void when_getOutfittingListByRegion_then_shouldReturnDtoOutfittingList() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
+		OutfittingListController controller = new OutfittingListController(orchestrator, view, repo);
+		
+		List<OutfittingDtoForGet> list = controller.getSortedList(SortOutfittingType.BY_NAME);
+		
+		assertEquals(list.get(0).getClass(), new OutfittingDtoForGet(0, null, null, null, null, new Contact(null, null, null)).getClass());
 	}
 }

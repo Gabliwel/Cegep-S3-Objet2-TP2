@@ -7,9 +7,7 @@ public class WelcomeControllerMock implements IWelcomeController {
 	public boolean requestOutfittingListHasBeenCalled = false;
 	
 	@Override
-	public void requestWelcome() {
-		
-	}
+	public void requestWelcome() {}
 
 	@Override
 	public void resquestCreateCottage() {

@@ -13,13 +13,7 @@ import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
 
 public class CottageMemoryRepositoryTest {
-	/*The seeded value:
-	 *  #1: Cottage("Nar Shaddaa's Cottage", 6666666);
-	 *	#2: Cottage("Teepee", 1);
-	 *	#3: Cottage("The Max Int Cottage", 2147483647);
-	 *	#4: Cottage("Japan", 125800000);
-	 */
-	
+	//The seeded value:
 	public static final int ND_SEEDED_COTTAGE = 4;
 	
 	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70);
@@ -93,7 +87,7 @@ public class CottageMemoryRepositoryTest {
 	@Test
 	public void WHEN_removeGetsCalled_THEN_cottageIsRemovedFromMap() 
 	{
-		aRepository.remove(cottage4.getId(), cottage4);
+		aRepository.remove(cottage4.getId());
 		
 		assertNull(aRepository.searchById(cottage3.getId()+1));
 	}

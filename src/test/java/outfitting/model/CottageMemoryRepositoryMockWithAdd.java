@@ -41,7 +41,7 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 	}
 
 	@Override
-	public void remove(int id, Cottage cottage) {
+	public void remove(int id) {
 		removeHasBeenCalled = true;
 	}
 }

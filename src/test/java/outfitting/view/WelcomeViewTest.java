@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import outfitting.controller.WelcomeControllerMock;
 
 public class WelcomeViewTest {
-	
+
 	@Test
 	public void when_clickAddCottageJButton_then_resquestCreateCottageToController()
 	{
@@ -34,5 +34,17 @@ public class WelcomeViewTest {
 		view.actionPerformed(new ActionEvent(JButton.class, 0, "Liste des chalets"));
 		
 		assertTrue(controller.resquestCottageListHasBeenCalled);
+	}
+	
+	@Test
+	public void when_clickOutlierListJButton_then_resquestOutlierListToController()
+	{
+		WelcomeView view = new WelcomeView();
+		WelcomeControllerMock controller = new WelcomeControllerMock();
+		view.setController(controller);
+		
+		view.actionPerformed(new ActionEvent(JButton.class, 0, "Liste des pourvoiries"));
+		
+		assertTrue(controller.requestOutfittingListHasBeenCalled);
 	}
 }

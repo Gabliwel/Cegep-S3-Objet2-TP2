@@ -141,4 +141,10 @@ public class CottageListView extends JDialog implements Comparator<Cottage>,View
 		
 		return cottageNbOfChamber.compareTo(cottageNbOfChamber2);
 	}
+
+	@Override
+	public void displayError(String message) {
+		// TODO Auto-generated method stub
+		
+	}
 }

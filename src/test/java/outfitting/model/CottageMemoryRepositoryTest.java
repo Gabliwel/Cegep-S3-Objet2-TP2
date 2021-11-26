@@ -12,13 +12,7 @@ import org.junit.jupiter.api.Test;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepositoryTest {
-	/*The seeded value:
-	 *  #1: Cottage("Nar Shaddaa's Cottage", 6666666);
-	 *	#2: Cottage("Teepee", 1);
-	 *	#3: Cottage("The Max Int Cottage", 2147483647);
-	 *	#4: Cottage("Japan", 125800000);
-	 */
-	
+	//The seeded value:
 	public static final int ND_SEEDED_COTTAGE = 4;
 	public static final Cottage SEEDED_COTTAGE_1 = new Cottage("Nar Shaddaa's Cottage", 2, 3, 34);
 	public static final Cottage SEEDED_COTTAGE_2 = new Cottage("Teepee", 1, 3, 34);

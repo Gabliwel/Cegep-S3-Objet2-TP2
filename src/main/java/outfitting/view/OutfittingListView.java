@@ -2,6 +2,8 @@ package outfitting.view;
 
 import java.awt.BorderLayout;
 
+
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,17 +12,21 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import outfitting.controller.IOutfittingListController;
-import outfitting.model.entity.Outfitting;
+import outfitting.dto.OutfittingDtoForGet;
+import outfitting.sort.SortOutfittingType;
 
 public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_TITLE = "Liste des pouvoiries";
 	private static final String OK_BTN = "OK";
+	private static final String SORT_BY_ID_BTN = "TRIER PAR ID";
 	private static final String SORT_BY_NAME_BTN = "TRIER PAR NOM";
 	private static final String SORT_BY_REGION_BTN = "TRIER PAR RÉGION";
+	private static final String DETAIL_BTN = "Plus d'info";
 	private static final String ID_TXT = "ID";
 	private static final String NAME_TXT = "NOM";
 	private static final String REGION_TXT = "RÉGION";
@@ -28,6 +34,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final String EMAIL_TXT = "ADRESSE COURRIEL";
 	
 	private IOutfittingListController controller;
+	private JPanel inputDataPanel;
 	
 	public OutfittingListView() {
 		super();
@@ -60,25 +67,25 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	
 	private void setUpOtherPanels() {
 		this.add(new JPanel(), BorderLayout.NORTH);
-		this.add(new JPanel(), BorderLayout.EAST);
 		this.add(new JPanel(), BorderLayout.WEST);
 	}
 
 	private void setUpCottageListInfo() {
 		
-		Collection<Outfitting> outfittings = controller.getSortedByRegionOutfittingList();
+		Collection<OutfittingDtoForGet> outfittings = controller.getSortedList(SortOutfittingType.NON_SORTED);
 		
-		JPanel inputDataPanel = new JPanel();
+		inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(outfittings.size()+1, 5));
+		inputDataPanel.setLayout(new GridLayout(outfittings.size()+1, 6));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
 		inputDataPanel.add(new JLabel(REGION_TXT));
 		inputDataPanel.add(new JLabel(PHONE_NUMBER_TXT));
 		inputDataPanel.add(new JLabel(EMAIL_TXT));
+		inputDataPanel.add(new JLabel());
 		
-		for(Outfitting outfitting : outfittings) {
+		for(OutfittingDtoForGet outfitting : outfittings) {
 			JLabel id = new JLabel(String.valueOf(outfitting.getId()));
 			inputDataPanel.add(id);
 			
@@ -93,6 +100,11 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 			
 			JLabel email = new JLabel(String.valueOf(outfitting.getEmail()));
 			inputDataPanel.add(email);
+			
+			IdButton btn = new IdButton(DETAIL_BTN, outfitting.getId());
+			btn.setActionCommand(DETAIL_BTN);
+			btn.addActionListener(this);
+			inputDataPanel.add(btn);
 		}
 	}
 	
@@ -104,6 +116,11 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		okBtn.setActionCommand(OK_BTN);
 		okBtn.addActionListener(this);
 		actionPanel.add(okBtn);
+		
+		JButton sortById = new JButton(SORT_BY_ID_BTN);
+		sortById.setActionCommand(SORT_BY_ID_BTN);
+		//sortById.addActionListener(this);
+		actionPanel.add(sortById);
 		
 		JButton sortByName = new JButton(SORT_BY_NAME_BTN);
 		sortByName.setActionCommand(SORT_BY_NAME_BTN);
@@ -121,16 +138,28 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		String action = e.getActionCommand();
 		switch(action) {
 			case OK_BTN -> dispose();
-			//case SORT_BY_NAME_BTN -> sortByName();
-			//case SORT_BY_REGION_BTN -> sortByRegion();
+			case SORT_BY_ID_BTN -> changeList(SortOutfittingType.NON_SORTED);
+			case SORT_BY_NAME_BTN -> changeList(SortOutfittingType.BY_NAME);
+			case SORT_BY_REGION_BTN -> changeList(SortOutfittingType.BY_REGION);
+			case DETAIL_BTN -> detailBtnAction((IdButton) e.getSource());
 		}
 	}
 
-	/*private void sortByRegion() {
-		
-	}*/
-	
-	/*private void sortByName() {
-		
-	}*/
+	private void changeList(SortOutfittingType type) {
+		Collection<OutfittingDtoForGet> outfittings = controller.getSortedList(type);
+	}
+
+	private void detailBtnAction(IdButton srcBtn) {
+		int id = srcBtn.getIdEntity();
+		OutfittingDtoForGet o = controller.getOutfittingById(id);
+		if(o!=null) {
+			JOptionPane.showInternalMessageDialog(null, "Nom: "+o.getContactName() + "\nTéléphone: "+o.getContactPhoneNumber() + "\nEmail: "+o.getContactEmail(),
+					"Information du contact de la pourvoirie #"+String.valueOf(o.getId()), JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+
+	@Override
+	public void displayError(String message) {
+		JOptionPane.showInternalMessageDialog(null, message, "Erreur", JOptionPane.ERROR_MESSAGE);
+	}
 }

@@ -2,11 +2,11 @@ package outfitting.controller;
 
 import java.util.Collection;
 
-import outfitting.model.entity.Outfitting;
+import outfitting.dto.OutfittingDtoForGet;
+import outfitting.sort.SortOutfittingType;
 
 public interface IOutfittingListController {
 	void requestOutfittingList(); 
-	Collection<Outfitting> getOutfittingList();
-	Collection<Outfitting> getSortedByNameOutfittingList();
-	Collection<Outfitting> getSortedByRegionOutfittingList();
+	OutfittingDtoForGet getOutfittingById(int id);
+	Collection<OutfittingDtoForGet> getSortedList(SortOutfittingType type);
 }

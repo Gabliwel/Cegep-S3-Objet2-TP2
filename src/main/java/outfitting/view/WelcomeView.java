@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -119,5 +120,11 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 			case WELCOME_LIST_BTN -> this.controller.resquestCottageList();
 			case WELCOME_OUTFITTING_LIST_BTN -> this.controller.requestOutfittingList();
 		}
+	}
+
+	@Override
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
 	}
 }

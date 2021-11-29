@@ -11,6 +11,7 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;
 	public boolean removeHasBeenCalled = false;
+	public boolean searchByIdHasBeenCalled = false;
 	
 	private Map<Integer, Cottage> cottages;
 	
@@ -37,11 +38,12 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 
 	@Override
 	public Cottage searchById(int id) {
-		return null;
+		searchByIdHasBeenCalled = true;
+		return cottages.get(id);
 	}
 
 	@Override
-	public void remove(int id, Cottage cottage) {
+	public void remove(int id) {
 		removeHasBeenCalled = true;
 	}
 }

@@ -151,4 +151,10 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 		}
 	}
 
+	@Override
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);		
+	}
+
 }

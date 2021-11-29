@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import outfitting.controller.IOutfittingListController;
@@ -124,6 +125,12 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 			//case SORT_BY_NAME_BTN -> sortByName();
 			//case SORT_BY_REGION_BTN -> sortByRegion();
 		}
+	}
+
+	@Override
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
 	}
 
 	/*private void sortByRegion() {

@@ -5,6 +5,6 @@ import outfitting.dto.CottageDTOForList;
 public interface ICottageSpecificController 
 {
 	void requestSpecificCottageList();
-	CottageDTOForList getCottageDTOForView();
+	CottageDTOForList getCottageDTOForList();
 	void deleteChalet(int id);
 }

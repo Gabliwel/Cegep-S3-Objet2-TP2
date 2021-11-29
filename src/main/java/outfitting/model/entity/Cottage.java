@@ -42,10 +42,4 @@ public class Cottage {
 	{
 		return this.pricePerNight;
 	}
-
-	public void setId(int id) 
-	{
-		this.id = id;
-		
-	}
 }

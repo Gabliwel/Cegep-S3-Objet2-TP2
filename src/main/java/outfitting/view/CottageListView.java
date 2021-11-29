@@ -9,12 +9,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import outfitting.button.IButtonID;
+import outfitting.button.IDButtonForListOfCottage;
 import outfitting.controller.ICottageListController;
 import outfitting.dto.CottageDTOForList;
-import outifitting.button.IButtonID;
-import outifitting.button.IDButtonForListOfCottage;
 
 public class CottageListView extends JDialog implements View, ActionListener {
 
@@ -124,5 +125,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 				this.controller.requestSpecificCottageView(idCottage);
 				break;
 		}
+	}
+
+	@Override
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
 	}
 }

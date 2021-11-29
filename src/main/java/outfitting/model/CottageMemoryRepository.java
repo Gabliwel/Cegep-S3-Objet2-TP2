@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import outfitting.exception.IDAlreadyExistException;
+import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepository implements GenericRepository<Cottage> {
@@ -18,7 +20,14 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	
 	@Override
 	public void add(Cottage cottage) {
-		cottages.put(cottage.getId(), cottage);
+		if(cottages.containsKey(cottage.getId())) 
+		{
+			cottages.put(cottage.getId(), cottage);
+		}
+		else 
+		{
+			throw new IDAlreadyExistException("Le ID" + cottage.getId()+ " n'existe pas");
+		}
 	}
 
 	@Override
@@ -32,15 +41,30 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	}
 
 	@Override
-	public Cottage searchById(int id) {
-		return cottages.get(id);
+	public Cottage searchById(int id) 
+	{
+		
+		if(cottages.containsKey(id)) 
+		{
+			return cottages.get(id);
+		}
+		else 
+		{
+			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+		}
 	}
 	
 	@Override
 	public void remove(int id) 
 	{
-		this.cottages.remove(id);
-		//System.out.println("remove");
+		if(cottages.containsKey(id)) 
+		{
+			this.cottages.remove(id);
+		}
+		else 
+		{
+			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+		}
 	}
 
 	private void dataSeed() {

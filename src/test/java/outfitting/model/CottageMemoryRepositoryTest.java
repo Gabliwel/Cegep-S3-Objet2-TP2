@@ -93,7 +93,7 @@ public class CottageMemoryRepositoryTest {
 	@Test
 	public void WHEN_removeGetsCalled_THEN_cottageIsRemovedFromMap() 
 	{
-		aRepository.remove(cottage4.getId(), cottage4);
+		aRepository.remove(cottage4.getId());
 		
 		assertNull(aRepository.searchById(cottage3.getId()+1));
 	}

@@ -64,27 +64,27 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 		
 		JLabel idLabel = new JLabel("Identifiant du Chalet : ");
 		cottagePanel.add(idLabel);
-		JLabel id = new JLabel(Integer.toString(this.controller.getCottageDTOForView().getID()));
+		JLabel id = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getID()));
 		cottagePanel.add(id);
 		
 		JLabel nameLabel = new JLabel("Nom du Chalet : ");
 		cottagePanel.add(nameLabel);
-		JLabel name = new JLabel(this.controller.getCottageDTOForView().getName());
+		JLabel name = new JLabel(this.controller.getCottageDTOForList().getName());
 		cottagePanel.add(name);
 		
 		JLabel nbOfGuestsLabel = new JLabel("Nombre d'inviter possible du Chalet : ");
 		cottagePanel.add(nbOfGuestsLabel);
-		JLabel nbOfGuests = new JLabel(Integer.toString(this.controller.getCottageDTOForView().getNbOfGuests()));
+		JLabel nbOfGuests = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getNbOfGuests()));
 		cottagePanel.add(nbOfGuests);
 		
 		JLabel nbOfChamberLabel = new JLabel("Nombre de chambre disponible du Chalet : ");
 		cottagePanel.add(nbOfChamberLabel);
-		JLabel nbOfChamber = new JLabel(Integer.toString(this.controller.getCottageDTOForView().getNbOfChamber()));
+		JLabel nbOfChamber = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getNbOfChamber()));
 		cottagePanel.add(nbOfChamber);
 		
 		JLabel pricePerNightLabel = new JLabel("Prix par nuit du Chalet : ");
 		cottagePanel.add(pricePerNightLabel);
-		JLabel pricePerNight = new JLabel(Integer.toString(this.controller.getCottageDTOForView().getPricePerNight()));
+		JLabel pricePerNight = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getPricePerNight()));
 		cottagePanel.add(pricePerNight);
 		
 		addExitButton(cottagePanel);
@@ -129,10 +129,16 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 		 int result = JOptionPane.showConfirmDialog(null, "Etre vous sure de vouloir oter ce Chalet ?", "Confirmation", 0);
 	      switch (result) 
 	      {
-	         case JOptionPane.YES_OPTION : this.controller.deleteChalet(this.controller.getCottageDTOForView().getID());
+	         case JOptionPane.YES_OPTION : this.controller.deleteChalet(this.controller.getCottageDTOForList().getID());
 	         								break;
 	         case JOptionPane.NO_OPTION : dispose();
 	         								break;
 	      }
+	}
+
+	@Override
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
 	}
 }

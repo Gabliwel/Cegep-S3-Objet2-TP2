@@ -2,6 +2,7 @@ package outfitting.controller;
 
 import outfitting.convertor.CottageCreateDTOToCottageConvertor;
 import outfitting.dto.CottageDtoForCreate;
+import outfitting.exception.IDAlreadyExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.view.View;
@@ -27,6 +28,13 @@ public class CottageCreateController implements ICottageCreateController {
 
 	@Override
 	public void add(CottageDtoForCreate cottageDTO) {
-		this.repository.add(cottageConvertor.DTOToCottage(cottageDTO));
+		try 
+		{
+			this.repository.add(cottageConvertor.DTOToCottage(cottageDTO));
+		}
+		catch(IDAlreadyExistException e)
+		{
+			this.view.displayError(e.getMessage());
+		}
 	}
 }

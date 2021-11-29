@@ -2,6 +2,7 @@ package outfitting.controller;
 
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
+import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.view.View;
@@ -28,7 +29,7 @@ public class CottageSpecificController implements ICottageSpecificController
 		this.view.display();
 	}
 	
-	public CottageDTOForList getCottageDTOForView() 
+	public CottageDTOForList getCottageDTOForList() 
 	{
 		return cottageConvertor.cottageToDTO(this.repository.searchById(id));
 	}
@@ -36,7 +37,14 @@ public class CottageSpecificController implements ICottageSpecificController
 	@Override
 	public void deleteChalet(int id)
 	{
-		this.repository.remove(id);
+		try 
+		{
+			this.repository.remove(id);
+		}
+		catch(IDDoesNotExistException e)
+		{
+			this.view.displayError(e.getMessage());
+		}
 	}
 	
 }

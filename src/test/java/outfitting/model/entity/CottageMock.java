@@ -6,5 +6,4 @@ public class CottageMock extends Cottage {
 	{
 		super(name, maxOfGuest, nbOfChamber, pricePerNight);
 	}
-
 }

@@ -20,7 +20,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	
 	@Override
 	public void add(Cottage cottage) {
-		if(cottages.containsKey(cottage.getId())) 
+		if(!cottages.containsKey(cottage.getId())) 
 		{
 			cottages.put(cottage.getId(), cottage);
 		}

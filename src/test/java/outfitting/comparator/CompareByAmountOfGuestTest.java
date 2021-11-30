@@ -48,5 +48,4 @@ public class CompareByAmountOfGuestTest {
 		
 		assertTrue(0 == resultOfCompare);
 	}
-	
 }

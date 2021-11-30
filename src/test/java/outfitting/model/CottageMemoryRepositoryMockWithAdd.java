@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
@@ -43,7 +44,15 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 	}
 
 	@Override
-	public void remove(int id) {
-		removeHasBeenCalled = true;
+	public void remove(int id) 
+	{
+		if(cottages.containsKey(id)) 
+		{
+			this.cottages.remove(id);
+		}
+		else 
+		{
+			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+		}
 	}
 }

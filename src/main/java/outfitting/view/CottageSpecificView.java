@@ -129,7 +129,7 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 		 int result = JOptionPane.showConfirmDialog(null, "Etre vous sure de vouloir oter ce Chalet ?", "Confirmation", 0);
 	      switch (result) 
 	      {
-	         case JOptionPane.YES_OPTION : this.controller.deleteChalet(this.controller.getCottageDTOForList().getID());
+	         case JOptionPane.YES_OPTION : this.controller.deleteCottage(this.controller.getCottageDTOForList().getID());
 	         								break;
 	         case JOptionPane.NO_OPTION : dispose();
 	         								break;

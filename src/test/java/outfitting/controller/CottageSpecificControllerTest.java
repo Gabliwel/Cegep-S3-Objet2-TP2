@@ -56,7 +56,7 @@ public class CottageSpecificControllerTest {
 		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
 		
 		repo.add(cottageMock);
-		controller.deleteChalet(cottageMock.getId());
+		controller.deleteCottage(cottageMock.getId());
 		
 		assertTrue(repo.removeHasBeenCalled);
 	}
@@ -64,7 +64,7 @@ public class CottageSpecificControllerTest {
 	@Test
 	public void WHEN_requestSpecifiViewisCalledWithWrongValue_THEN_displayErrorIsTrue() 
 	{		
-		controller.deleteChalet(WRONG_ID);
+		controller.deleteCottage(WRONG_ID);
 		
 		assertTrue(view.displayErrorHasBeenCalled);
 	}

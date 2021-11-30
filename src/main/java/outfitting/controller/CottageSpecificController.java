@@ -35,8 +35,7 @@ public class CottageSpecificController implements ICottageSpecificController
 	}
 
 	@Override
-	public void deleteChalet(int id)
-	{
+	public void deleteCottage(int id) {
 		try 
 		{
 			this.repository.remove(id);
@@ -45,6 +44,5 @@ public class CottageSpecificController implements ICottageSpecificController
 		{
 			this.view.displayError(e.getMessage());
 		}
-	}
-	
+	}	
 }

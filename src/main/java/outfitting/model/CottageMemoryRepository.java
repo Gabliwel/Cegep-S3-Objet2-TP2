@@ -26,7 +26,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		}
 		else 
 		{
-			throw new IDAlreadyExistException("Le ID" + cottage.getId()+ " n'existe pas");
+			throw new IDAlreadyExistException("Le ID" + cottage.getId()+ " existe deja");
 		}
 	}
 
@@ -43,7 +43,6 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	@Override
 	public Cottage searchById(int id) 
 	{
-		
 		if(cottages.containsKey(id)) 
 		{
 			return cottages.get(id);

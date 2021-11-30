@@ -2,6 +2,7 @@ package outfitting.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
 
@@ -32,7 +34,6 @@ public class CottageMemoryRepositoryTest {
 	@BeforeEach
 	public void init()
 	{
-		Cottage.lastId = 0;
 		aRepository = new CottageMemoryRepository();
 		
 		aRepository.add(cottage1);
@@ -55,21 +56,23 @@ public class CottageMemoryRepositoryTest {
 	}
 	
 	@Test
-	public void when_gettingCottageByNonExistentId_then_returnNull() {
+	public void when_gettingCottageByNonExistentId_then_execptionIsThrown() {
 		CottageMemoryRepository repo = new CottageMemoryRepository();
-		
-		Cottage result = repo.searchById(9999);
 
-		assertNull(result);
+		assertThrows(IDDoesNotExistException.class, () ->
+		{
+			Cottage result = repo.searchById(9999);
+		});
 	}
-
+	
 	@Test
-	public void when_addCottageToRepo_then_cottageIsInRepo() {
-		CottageMock cottage = new CottageMock("AAAAAAAAAAAAA", 12345, 3, 34);
+	public void WHEN_addIsCalledWithCorrectValue_THEN_cottageIsCorrectlyAddedInRepo() 
+	{
+		CottageMock cottageMock = new CottageMock("Te Disleexic Cotaggess",2,3,4);
 		
-		aRepository.add(cottage);
-
-		assertEquals(aRepository.searchById(cottage.getId()), cottage);
+		aRepository.add(cottageMock);
+		
+		assertEquals(cottageMock,aRepository.searchById(cottageMock.getId()));
 	}
 	
 	@Test
@@ -95,6 +98,9 @@ public class CottageMemoryRepositoryTest {
 	{
 		aRepository.remove(cottage4.getId());
 		
-		assertNull(aRepository.searchById(cottage3.getId()+1));
+		assertThrows(IDDoesNotExistException.class, () ->
+		{
+			aRepository.searchById(cottage3.getId()+1);
+		});
 	}
 }

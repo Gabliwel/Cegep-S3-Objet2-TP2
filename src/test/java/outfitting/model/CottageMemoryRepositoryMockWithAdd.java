@@ -49,6 +49,7 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 		if(cottages.containsKey(id)) 
 		{
 			this.cottages.remove(id);
+			this.removeHasBeenCalled = true;
 		}
 		else 
 		{

@@ -1,5 +1,6 @@
 package outfitting.controller;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -70,5 +71,12 @@ public class CottageSpecificControllerTest {
 		controller.deleteCottage(WRONG_ID);
 		
 		assertTrue(view.displayErrorHasBeenCalled);
+	}
+	
+	@Test
+	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
+	{
+		assertNull(controller.getOutfittingObject(ANY_ID));
+		assertTrue(repo2.searchByIdHasBeenCalled);
 	}
 }

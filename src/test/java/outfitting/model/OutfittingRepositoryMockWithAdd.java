@@ -1,24 +1,29 @@
 package outfitting.model;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import outfitting.model.entity.Outfitting;
 
-public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
+public class OutfittingRepositoryMockWithAdd implements GenericRepository<Outfitting>{
 
 	public boolean getListBeenCalled = false;
-	public boolean searchByIdHasBeenCalled = false;
+	private Map<Integer, Outfitting> outfittings;
+	
+	public OutfittingRepositoryMockWithAdd() {
+		outfittings = new HashMap<>();
+	} 
 	
 	@Override
 	public void add(Outfitting o) {
-		Outfitting.lastId = 0;
+		outfittings.put(o.getId(), o);
 	}
 
-	@Override 
+	@Override
 	public Collection<Outfitting> getList() {
-		// TODO Auto-generated method stub
 		getListBeenCalled = true;
-		return null;
+		return outfittings.values();
 	}
 
 	@Override
@@ -29,7 +34,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 
 	@Override
 	public Outfitting searchById(int id) {
-		searchByIdHasBeenCalled = true;
+		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -1,6 +1,10 @@
 package outfitting.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +12,10 @@ import org.junit.jupiter.api.Test;
 import outfitting.dto.CottageDtoForCreateMock;
 import outfitting.model.CottageRepositoryMock;
 import outfitting.model.OutfittingRepositoryMock;
+import outfitting.model.OutfittingRepositoryMockWithAdd;
 import outfitting.model.entity.Cottage;
+import outfitting.model.entity.Outfitting;
+import outfitting.model.entity.OutfittingMock;
 import outfitting.view.ViewMock;
 
 public class CottageCreateControllerTest {
@@ -61,5 +68,25 @@ public class CottageCreateControllerTest {
 		controller.add(c);
 		
 		assertTrue(view.displayErrorHasBeenCalled);
+	}
+	
+	@Test
+	public void WHEN_getOutfittingCollectionIsCalled_THEN_aListIsReturnedAndGetListIsTrue() 
+	{
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		CottageRepositoryMock repo = new CottageRepositoryMock();
+		OutfittingRepositoryMockWithAdd repo2 = new OutfittingRepositoryMockWithAdd();
+		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
+		OutfittingMock outfittingMock = new OutfittingMock("name", "name");
+		OutfittingMock outfittingMock2 = new OutfittingMock("name", "name");
+
+		repo2.add(outfittingMock);
+		repo2.add(outfittingMock2);
+		ArrayList<Outfitting> outfittings = new ArrayList<Outfitting>(controller.getOutfittingCollection());
+		
+		assertEquals(outfittingMock, outfittings.get(0));
+		assertEquals(outfittingMock2, outfittings.get(1));
+		assertTrue(repo2.getListBeenCalled);
 	}
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
 import outfitting.model.CottageRepositoryMock;
+import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.CottageMock;
 import outfitting.view.ViewMock;
 
@@ -20,6 +21,7 @@ public class CottageSpecificControllerTest {
 	ControllerOrchestratorMock orchestrator = null;
 	ViewMock view = null;
 	CottageMemoryRepositoryMockWithAdd repo = null;
+	OutfittingRepositoryMock repo2 = null;
 	CottageSpecificController controller = null;
 	
 	@BeforeEach
@@ -28,7 +30,8 @@ public class CottageSpecificControllerTest {
 		orchestrator = new ControllerOrchestratorMock();
 		view = new ViewMock();
 		repo = new CottageMemoryRepositoryMockWithAdd();
-		controller = new CottageSpecificController(ANY_ID, repo, orchestrator, view);
+		repo2 = new OutfittingRepositoryMock();
+		controller = new CottageSpecificController(ANY_ID, repo, repo2, orchestrator, view);
 	}
 	
 	@Test

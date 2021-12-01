@@ -80,7 +80,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	private void initCottageSpecific(int id) 
 	{
 		this.cottageSpecificView = new CottageSpecificView();
-		this.cottageSpecificController = new CottageSpecificController(id, cottageRepository, this, cottageSpecificView);
+		this.cottageSpecificController = new CottageSpecificController(id, cottageRepository,outfittingRepository, this, cottageSpecificView);
 		this.cottageSpecificView.setController(cottageSpecificController);
 	}
 	

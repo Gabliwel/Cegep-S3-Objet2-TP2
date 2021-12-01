@@ -99,28 +99,28 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 		
 		JLabel idLabel = new JLabel("Identifiant de la pourvoirie : ");
 		outfittingPanel.add(idLabel);
-		JLabel id = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getID()));
+		JLabel id = new JLabel(Integer.toString(this.controller.getOutfittingObject(this.controller.getCottageDTOForList().getIdOfOutfitting()).getId()));
 		outfittingPanel.add(id);
 		
-		JLabel nameLabel = new JLabel("Nom du Chalet : ");
+		JLabel nameLabel = new JLabel("Nom de la pourvoirie : ");
 		outfittingPanel.add(nameLabel);
-		JLabel name = new JLabel(this.controller.getCottageDTOForList().getName());
+		JLabel name = new JLabel(this.controller.getOutfittingObject(this.controller.getCottageDTOForList().getIdOfOutfitting()).getName());
 		outfittingPanel.add(name);
 		
-		JLabel nbOfGuestsLabel = new JLabel("Nombre d'inviter possible du Chalet : ");
-		outfittingPanel.add(nbOfGuestsLabel);
-		JLabel nbOfGuests = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getNbOfGuests()));
-		outfittingPanel.add(nbOfGuests);
+		JLabel regionLabel = new JLabel("Region de la pourvoirie : ");
+		outfittingPanel.add(regionLabel);
+		JLabel region = new JLabel(this.controller.getOutfittingObject(this.controller.getCottageDTOForList().getIdOfOutfitting()).getRegion());
+		outfittingPanel.add(region);
 		
-		JLabel nbOfChamberLabel = new JLabel("Nombre de chambre disponible du Chalet : ");
-		outfittingPanel.add(nbOfChamberLabel);
-		JLabel nbOfChamber = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getNbOfChamber()));
-		outfittingPanel.add(nbOfChamber);
+		JLabel phoneLabel = new JLabel("Numero de telephone de la pourvoirie : ");
+		outfittingPanel.add(phoneLabel);
+		JLabel phone = new JLabel(this.controller.getOutfittingObject(this.controller.getCottageDTOForList().getIdOfOutfitting()).getPhoneNumber());
+		outfittingPanel.add(phone);
 		
-		JLabel pricePerNightLabel = new JLabel("Prix par nuit du Chalet : ");
-		outfittingPanel.add(pricePerNightLabel);
-		JLabel pricePerNight = new JLabel(Integer.toString(this.controller.getCottageDTOForList().getPricePerNight()));
-		outfittingPanel.add(pricePerNight);
+		JLabel emailLabel = new JLabel("Courriel de la pourvoirie : ");
+		outfittingPanel.add(emailLabel);
+		JLabel email = new JLabel(this.controller.getOutfittingObject(this.controller.getCottageDTOForList().getIdOfOutfitting()).getEmail());
+		outfittingPanel.add(email);
 		
 		deleteButton(outfittingPanel);
 	}

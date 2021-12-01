@@ -16,10 +16,10 @@ public class CompareByAmountOfGuestTest {
 	@Test
 	public void WHEN_compareMethodIsCalledWithO1HigherThenO2_THEN_resultIsEqualsToOne() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT);
-		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST2,ANY_INT,ANY_INT);
+		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT,ANY_INT);
+		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST2,ANY_INT,ANY_INT,ANY_INT);
 		CompareByAmountOfGuest comparator = new CompareByAmountOfGuest();
-		
+		 
 		int resultOfCompare = comparator.compare(cottageMock, cottageMock2);
 		
 		assertTrue(1 == resultOfCompare);
@@ -28,8 +28,8 @@ public class CompareByAmountOfGuestTest {
 	@Test
 	public void WHEN_compareMethodIsCalledWithO2HigherThenO1_THEN_resultIsEqualsToMinusOne() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST2,ANY_INT,ANY_INT);
-		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT);
+		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST2,ANY_INT,ANY_INT,ANY_INT);
+		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT,ANY_INT);
 		CompareByAmountOfGuest comparator = new CompareByAmountOfGuest();
 		
 		int resultOfCompare = comparator.compare(cottageMock, cottageMock2);
@@ -40,8 +40,8 @@ public class CompareByAmountOfGuestTest {
 	@Test
 	public void WHEN_compareMethodIsCalledWithO1EqualsToO2_THEN_resultIsEqualsToZero() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT);
-		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT);
+		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT,ANY_INT);
+		CottageMock cottageMock2 = new CottageMock(ANY_NAME,ANY_AMOUNT_OF_GUEST,ANY_INT,ANY_INT,ANY_INT);
 		CompareByAmountOfGuest comparator = new CompareByAmountOfGuest();
 		
 		int resultOfCompare = comparator.compare(cottageMock, cottageMock2);

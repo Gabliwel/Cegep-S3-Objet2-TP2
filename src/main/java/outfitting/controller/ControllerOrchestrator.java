@@ -30,7 +30,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private IOutfittingListController outfittingListController;
 	private OutfittingListView outfittingListView;
-
+ 
 
 	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository, OutfittingMemoryRepository outfittingMemoryRepository) {
 		this.cottageRepository = cottageMemoryRepository;
@@ -56,7 +56,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private void initCreateCottage() {
 		this.cottageCreateView = new CottageCreateView();
-		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository);
+		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository, this.outfittingRepository);
 		this.cottageCreateView.setController(createCottageController);
 	}
 	
@@ -67,7 +67,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private void initCottageList() {
 		this.cottageListView = new CottageListView();
-		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository);
+		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository, this.outfittingRepository);
 		this.cottageListView.setController(cottageListController);
 	}
 

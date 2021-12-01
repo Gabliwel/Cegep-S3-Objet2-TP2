@@ -13,7 +13,7 @@ import outfitting.view.ViewMock;
 public class CottageSpecificControllerTest {
 
 	private static final String ANY_NAME = "Bob";
-	private static final int ANY_NUMBER = 4;
+	private static final int ANY_NUMBER = 2;
 	private static final int ANY_ID = 1;
 	private static final int WRONG_ID = 9;
 	
@@ -42,10 +42,10 @@ public class CottageSpecificControllerTest {
 	@Test
 	public void WHEN_getCottageDTOForListIsCalled_THEN_correctCottageIsCalled() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
+		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
 		
 		repo.add(cottageMock);
-		controller.getCottageDTOForList();
+		controller.getCottageDTOForList(); 
 		
 		assertTrue(repo.searchByIdHasBeenCalled);
 	}
@@ -53,7 +53,7 @@ public class CottageSpecificControllerTest {
 	@Test
 	public void WHEN_remove_THEN_deleteIsCalled() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
+		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
 		
 		repo.add(cottageMock);
 		controller.deleteCottage(cottageMock.getId());

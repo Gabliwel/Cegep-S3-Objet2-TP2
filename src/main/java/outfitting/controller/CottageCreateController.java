@@ -1,23 +1,30 @@
 package outfitting.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import outfitting.convertor.CottageCreateDTOToCottageConvertor;
 import outfitting.dto.CottageDtoForCreate;
 import outfitting.exception.IDAlreadyExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
+import outfitting.model.entity.Outfitting;
 import outfitting.view.View;
 
 public class CottageCreateController implements ICottageCreateController {
 
 	private GenericRepository<Cottage> repository;
+	private GenericRepository<Outfitting> repositoryOfOutfitting;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageCreateDTOToCottageConvertor cottageConvertor;
 
-	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
+	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, 
+				GenericRepository<Cottage> repository, GenericRepository<Outfitting> repositoryOfOutfitting) {
 		this.orchestrator = controllerOrchestrator;
 		this.view = view;
 		this.repository = repository;
+		this.repositoryOfOutfitting = repositoryOfOutfitting;
 		this.cottageConvertor = new CottageCreateDTOToCottageConvertor();
 	}
 
@@ -37,4 +44,12 @@ public class CottageCreateController implements ICottageCreateController {
 			this.view.displayError(e.getMessage());
 		}
 	}
+	
+	@Override
+	public List<Outfitting> getOutfittingCollection()
+	{
+		return this.repositoryOfOutfitting.getList().stream()
+				.collect(Collectors.toList());
+	}
+	
 }

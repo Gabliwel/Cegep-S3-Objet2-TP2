@@ -13,7 +13,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		Outfitting.lastId = 0;
 	}
 
-	@Override
+	@Override 
 	public Collection<Outfitting> getList() {
 		// TODO Auto-generated method stub
 		getListBeenCalled = true;

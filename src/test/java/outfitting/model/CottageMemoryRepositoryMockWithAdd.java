@@ -10,7 +10,7 @@ import outfitting.model.entity.Cottage;
 public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
 	
 	public boolean addHasBeenCalled = false;
-	public boolean getListBeenCalled = false;
+	public boolean getListBeenCalled = false; 
 	public boolean removeHasBeenCalled = false;
 	public boolean searchByIdHasBeenCalled = false;
 	

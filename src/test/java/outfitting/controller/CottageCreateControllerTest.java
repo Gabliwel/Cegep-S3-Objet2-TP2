@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import outfitting.dto.CottageDtoForCreateMock;
 import outfitting.model.CottageRepositoryMock;
+import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.Cottage;
 import outfitting.view.ViewMock;
 
@@ -21,9 +22,10 @@ public class CottageCreateControllerTest {
 	@Test
 	public void when_requestCreateCottage_then_shouldAskCreateCottageViewToDisplay() {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
-		ViewMock view = new ViewMock();
+		ViewMock view = new ViewMock(); 
 		CottageRepositoryMock repo = new CottageRepositoryMock();
-		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo);
+		OutfittingRepositoryMock repo2 = new OutfittingRepositoryMock();
+		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
 		
 		controller.requestCottageCreate();
 		
@@ -35,7 +37,8 @@ public class CottageCreateControllerTest {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
 		ViewMock view = new ViewMock();
 		CottageRepositoryMock repo = new CottageRepositoryMock();
-		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo);
+		OutfittingRepositoryMock repo2 = new OutfittingRepositoryMock();
+		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
 		
 		controller.add(new CottageDtoForCreateMock());
 		
@@ -48,8 +51,9 @@ public class CottageCreateControllerTest {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
 		ViewMock view = new ViewMock();
 		CottageRepositoryMock repo = new CottageRepositoryMock();
-		
-		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo);
+		OutfittingRepositoryMock repo2 = new OutfittingRepositoryMock();
+
+		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
 		CottageDtoForCreateMock c = new CottageDtoForCreateMock();
 		
 		controller.add(c);

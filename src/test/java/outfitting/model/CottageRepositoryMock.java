@@ -10,7 +10,7 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;
 	public boolean removeHasBeenCalled = false;
-	public boolean searchByIdHasBeenCalled = false;
+	public boolean searchByIdHasBeenCalled = false; 
 	
 	@Override
 	public void add(Cottage cottage) {

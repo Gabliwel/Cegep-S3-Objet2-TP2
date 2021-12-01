@@ -11,19 +11,22 @@ import outfitting.dto.CottageDTOForList;
 import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
+import outfitting.model.entity.Outfitting;
 import outfitting.view.View;
 
 public class CottageListController implements ICottageListController {
 
 	private GenericRepository<Cottage> repository;
+	private GenericRepository<Outfitting> repositoryOutfitting;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageListDTOToCottageConvertor cottageConvertor;
 	
 
-	public CottageListController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository) {
+	public CottageListController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository, GenericRepository<Outfitting> repositoryOutfitting) {
 		this.orchestrator = controllerOrchestrator;
 		this.repository = repository;
+		this.repositoryOutfitting = repositoryOutfitting;
 		this.view = view;
 		this.cottageConvertor = new CottageListDTOToCottageConvertor();
 	}
@@ -31,7 +34,7 @@ public class CottageListController implements ICottageListController {
 	@Override
 	public void requestCottageList() {
 		this.view.display();
-	}
+	} 
 	
 	@Override
 	public List<CottageDTOForList> getCottageList() {
@@ -49,6 +52,12 @@ public class CottageListController implements ICottageListController {
 		return cottageCollection.stream()
 				.sorted(comparatorType)
 				.collect(Collectors.toList());
+	}
+	
+	@Override
+	public Outfitting getOutfittingObject(int id) 
+	{
+		return this.repositoryOutfitting.searchById(id);
 	}
 	
 	public void requestSpecificCottageView(int id) 

@@ -24,10 +24,10 @@ public class CottageMemoryRepositoryTest {
 	
 	public static final int ND_SEEDED_COTTAGE = 4;
 	
-	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70);
-	CottageMock cottage2 = new CottageMock("Teepee", 3, 16, 50);
-	CottageMock cottage3 = new CottageMock("The Max Int Cottage", 4, 16, 60);
-	CottageMock cottage4 = new CottageMock("Japan", 2, 7, 100);
+	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70,0);
+	CottageMock cottage2 = new CottageMock("Teepee", 3, 16, 50,0);
+	CottageMock cottage3 = new CottageMock("The Max Int Cottage", 4, 16, 60,0);
+	CottageMock cottage4 = new CottageMock("Japan", 2, 7, 100,0); 
 	
 	CottageMemoryRepository aRepository = null;
 	
@@ -68,7 +68,7 @@ public class CottageMemoryRepositoryTest {
 	@Test
 	public void WHEN_addIsCalledWithCorrectValue_THEN_cottageIsCorrectlyAddedInRepo() 
 	{
-		CottageMock cottageMock = new CottageMock("Te Disleexic Cotaggess",2,3,4);
+		CottageMock cottageMock = new CottageMock("Te Disleexic Cotaggess",2,3,4,0);
 		
 		aRepository.add(cottageMock);
 		

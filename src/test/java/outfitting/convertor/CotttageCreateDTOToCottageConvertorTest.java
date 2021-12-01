@@ -13,7 +13,7 @@ import outfitting.dto.CottageDtoForCreate;
 public class CotttageCreateDTOToCottageConvertorTest {
 	
 	private static final String ANY_STRING = "name";
-	private static final int ANY_INT = 3;
+	private static final int ANY_INT = 2;
 	
 	CottageCreateDTOToCottageConvertor aConvertor = null;
 	
@@ -28,13 +28,13 @@ public class CotttageCreateDTOToCottageConvertorTest {
 	{
 		CottageDtoForCreateMock cottageDtoForCreateMock = new CottageDtoForCreateMock();
 		
-		assertTrue(aConvertor.DTOToCottage(cottageDtoForCreateMock) instanceof Cottage);
+		assertTrue(aConvertor.DTOToCottage(cottageDtoForCreateMock) instanceof Cottage); 
 	}
 	
 	@Test
 	public void WHEN_cottageToDTOIsCalled_THEN_instanceofDTOFotCreateIsTrue() 
 	{
-		CottageMock cottageMock = new CottageMock(ANY_STRING, ANY_INT, ANY_INT, ANY_INT);
+		CottageMock cottageMock = new CottageMock(ANY_STRING, ANY_INT, ANY_INT, ANY_INT,ANY_INT);
 		
 		assertTrue(aConvertor.cottageToDTO(cottageMock) instanceof CottageDtoForCreate);
 	}

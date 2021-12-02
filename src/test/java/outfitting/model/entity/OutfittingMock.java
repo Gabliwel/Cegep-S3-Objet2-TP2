@@ -15,7 +15,7 @@ public class OutfittingMock extends Outfitting {
 		Outfitting.lastId = 0;
 		this.id = id;
 	}
-	
+
 	public int getId() {
 		return this.id;
 	}

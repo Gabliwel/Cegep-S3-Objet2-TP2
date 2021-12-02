@@ -8,4 +8,15 @@ public enum RegionName {
 	RegionName(String name) {
 		this.name = name;
 	}
+	
+	public static String[] getAllRegionNames()
+	{
+		String[] names = new String[RegionName.values().length];
+
+	    for (int i = 0; i < RegionName.values().length; i++) {
+	        names[i] = RegionName.values()[i].name;
+	    }
+
+	    return names;
+	}
 }

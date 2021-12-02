@@ -153,9 +153,9 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	}
 
 	@Override
-	public void displayError(String message) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void displayError(String message) { }
+
+	@Override
+	public void displaySuccess(String message) { }
 
 }

@@ -42,6 +42,7 @@ public class OutfittingListController implements IOutfittingListController{
 		catch(IdDoesNotExistException e) {
 			view.displayError(e.getMessage());
 		}
+		
 		return dto;
 	}
 

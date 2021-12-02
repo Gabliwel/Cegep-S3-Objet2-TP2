@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Contact;
 import outfitting.model.entity.Outfitting;
@@ -19,9 +20,9 @@ public class OutfittingRepositoryTest
 {
 	//The seeded value:
 	public static final int ND_SEEDED_OUTFITTING = 3;
-	public static final OutfittingMock SEEDED_OUTFITTING_1 = new OutfittingMock(1, "La Terre de Roger", RegionName.QUEBEC.name, "911", "terrederoger@chibougamau.qc.ca", new Contact("Bob", "444-444-4444", "a@b.com"));
-	public static final OutfittingMock SEEDED_OUTFITTING_2 = new OutfittingMock(2, "The Universe", RegionName.ONTARIO.name, "000-000-0000", "42@universe.com", new Contact("Bob", "444-444-4444", "a@b.com"));
-	public static final OutfittingMock SEEDED_OUTFITTING_3 = new OutfittingMock(3, "La Terre des Perdues", RegionName.NUNAVUT.name, "123-456-7890", "jesuisou@help.ca", new Contact("Robert", "123-456-7890", "z@y.com"));
+	public static final OutfittingMock SEEDED_OUTFITTING_1 = new OutfittingMock(1, "La Terre de Roger", RegionName.QUEBEC.name, "911", "terrederoger@chibougamau.qc.ca", new Contact("Bob1", "444-444-4444", "a@b.com"));
+	public static final OutfittingMock SEEDED_OUTFITTING_2 = new OutfittingMock(2, "The Universe", RegionName.ONTARIO.name, "000-000-0000", "42@universe.com", new Contact("Bob2", "444-444-4444", "a@b.com"));
+	public static final OutfittingMock SEEDED_OUTFITTING_3 = new OutfittingMock(3, "La Terre des Perdues", RegionName.NUNAVUT.name, "123-456-7890", "jesuisou@help.ca", new Contact("Robert3", "123-456-7890", "z@y.com"));
 		
 	@BeforeEach
 	public void init()
@@ -36,7 +37,7 @@ public class OutfittingRepositoryTest
 	}
 		
 	@Test
-	public void when_gettingCottageById_then_returnTheCottageWithTheId() {
+	public void when_gettingOutfittingById_then_returnTheOutfittingWithTheId() {
 		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
 		
 		Outfitting result = repo.searchById(1);
@@ -45,14 +46,14 @@ public class OutfittingRepositoryTest
 	}
 		
 	@Test
-	public void when_gettingCottageByNonExistentId_then_throwIdDoesNotExistException() {
+	public void when_gettingOutfittingByNonExistentId_then_throwIdDoesNotExistException() {
 		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
 
-		assertThrows(IdDoesNotExistException.class, () -> repo.searchById(9999));
+		assertThrows(IdDoesNotExistException.class, () -> repo.searchById(-1));
 	}
 
 	@Test
-	public void when_addCottageToRepo_then_cottageIsInRepo() {
+	public void when_addOutfittingToRepo_then_cottageIsInRepo() {
 		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
 		Outfitting outfittings = new Outfitting("A", "B", "C", "D", new Contact("E", "F", "G"));
 			
@@ -60,6 +61,14 @@ public class OutfittingRepositoryTest
 		Outfitting result = repo.searchById(ND_SEEDED_OUTFITTING+1);
 
 		assertEquals(outfittings.getId(), result.getId());
+	}
+	
+	@Test
+	public void when_addOutfittingThatAlradyExistToRepo_then_exceptionIsThrown() {
+		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
+		OutfittingMock outfitting = new OutfittingMock(1, "a", "b");
+		
+		assertThrows(IdAlreadyExistException.class, () -> repo.add(outfitting));
 	}
 		
 	@Test
@@ -76,7 +85,7 @@ public class OutfittingRepositoryTest
 	}
 		
 	@Test
-	public void when_getSizeOfRepo_then_returnNbOfCottageInRepo() {
+	public void when_getSizeOfRepo_then_returnNbOfOutfittingInRepo() {
 		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
 			
 		int size = repo.size();
@@ -85,7 +94,7 @@ public class OutfittingRepositoryTest
 	}
 		
 	@Test
-	public void when_getAllRepoCottage_then_returnCollectionOfCottageInRepo() {
+	public void when_getAllRepoOutfitting_then_returnCollectionOfOutfittingInRepo() {
 		OutfittingMemoryRepository repo = new OutfittingMemoryRepository();
 			
 		ArrayList<Outfitting> outfittings = new ArrayList<Outfitting>(repo.getList());

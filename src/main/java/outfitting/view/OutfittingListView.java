@@ -34,7 +34,8 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final String EMAIL_TXT = "ADRESSE COURRIEL";
 	
 	private IOutfittingListController controller;
-	private JPanel inputDataPanel;
+	private JPanel inputDataPanel = new JPanel();
+	private JPanel actionPanel = new JPanel(); 
 	
 	public OutfittingListView() {
 		super();
@@ -54,13 +55,13 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 
 	@Override
 	public void display() {
-		this.setUpComponents();
+		this.setUpComponents(SortOutfittingType.NON_SORTED);
 		this.pack();
 		this.setVisible(true);
 	}
 	
-	private void setUpComponents() {
-		this.setUpCottageListInfo();
+	private void setUpComponents(SortOutfittingType type) {
+		this.setUpListInfo(type);
 		this.setUpButtons();
 		this.setUpOtherPanels();
 	}
@@ -70,11 +71,11 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		this.add(new JPanel(), BorderLayout.WEST);
 	}
 
-	private void setUpCottageListInfo() {
+	private void setUpListInfo(SortOutfittingType type) {
 		
-		Collection<OutfittingDtoForGet> outfittings = controller.getSortedList(SortOutfittingType.NON_SORTED);
-		
-		inputDataPanel = new JPanel();
+		Collection<OutfittingDtoForGet> outfittings = controller.getSortedList(type);
+
+		inputDataPanel.removeAll();
 		this.add(inputDataPanel);
 		inputDataPanel.setLayout(new GridLayout(outfittings.size()+1, 6));
 		
@@ -109,7 +110,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	}
 	
 	private void setUpButtons() {
-		JPanel actionPanel = new JPanel(); 
+		actionPanel.removeAll();
 		this.add(actionPanel, BorderLayout.SOUTH);
 		
 		JButton okBtn = new JButton(OK_BTN);
@@ -119,17 +120,17 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		
 		JButton sortById = new JButton(SORT_BY_ID_BTN);
 		sortById.setActionCommand(SORT_BY_ID_BTN);
-		//sortById.addActionListener(this);
+		sortById.addActionListener(this);
 		actionPanel.add(sortById);
 		
 		JButton sortByName = new JButton(SORT_BY_NAME_BTN);
 		sortByName.setActionCommand(SORT_BY_NAME_BTN);
-		//sortByName.addActionListener(this);
+		sortByName.addActionListener(this);
 		actionPanel.add(sortByName);
 		
 		JButton sortByRegion = new JButton(SORT_BY_REGION_BTN);
 		sortByRegion.setActionCommand(SORT_BY_REGION_BTN);
-		//sortByRegion.addActionListener(this);
+		sortByRegion.addActionListener(this);
 		actionPanel.add(sortByRegion);
 	}
 	
@@ -138,23 +139,26 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		String action = e.getActionCommand();
 		switch(action) {
 			case OK_BTN -> dispose();
-			case SORT_BY_ID_BTN -> changeList(SortOutfittingType.NON_SORTED);
-			case SORT_BY_NAME_BTN -> changeList(SortOutfittingType.BY_NAME);
-			case SORT_BY_REGION_BTN -> changeList(SortOutfittingType.BY_REGION);
+			case SORT_BY_ID_BTN -> displayOnType(SortOutfittingType.NON_SORTED);
+			case SORT_BY_NAME_BTN -> displayOnType(SortOutfittingType.BY_NAME);
+			case SORT_BY_REGION_BTN -> displayOnType(SortOutfittingType.BY_REGION);
 			case DETAIL_BTN -> detailBtnAction((IdButton) e.getSource());
 		}
 	}
 
-	private void changeList(SortOutfittingType type) {
-		Collection<OutfittingDtoForGet> outfittings = controller.getSortedList(type);
+	private void displayOnType(SortOutfittingType type) {
+		this.setUpComponents(type);
+		this.pack();
+		this.setVisible(true);
 	}
 
 	private void detailBtnAction(IdButton srcBtn) {
 		int id = srcBtn.getIdEntity();
 		OutfittingDtoForGet o = controller.getOutfittingById(id);
 		if(o!=null) {
-			JOptionPane.showInternalMessageDialog(null, "Nom: "+o.getContactName() + "\nTéléphone: "+o.getContactPhoneNumber() + "\nEmail: "+o.getContactEmail(),
-					"Information du contact de la pourvoirie #"+String.valueOf(o.getId()), JOptionPane.INFORMATION_MESSAGE);
+			String message = "Id: " + o.getId() + "\nNom: " + o.getName() + "\nRégion: "+ o.getRegion() +"\nTéléphone: " + o.getPhoneNumber() + "\nEmail: " + o.getEmail()
+					+"\nNom du contact: "+o.getContactName() + "\nTéléphone du contact: "+o.getContactPhoneNumber() + "\nEmail du contact: "+o.getContactEmail();
+			JOptionPane.showInternalMessageDialog(null, message, "Information du contact de la pourvoirie #"+String.valueOf(o.getId()), JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -162,4 +166,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	public void displayError(String message) {
 		JOptionPane.showInternalMessageDialog(null, message, "Erreur", JOptionPane.ERROR_MESSAGE);
 	}
+
+	@Override
+	public void displaySuccess(String message) { }
 }

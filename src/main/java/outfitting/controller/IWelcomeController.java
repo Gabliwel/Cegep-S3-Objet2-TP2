@@ -9,4 +9,6 @@ public interface IWelcomeController {
 	void resquestCottageList();
 	
 	void requestOutfittingList();
+
+	void resquestAddOutfitting();
 }

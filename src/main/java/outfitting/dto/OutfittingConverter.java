@@ -16,4 +16,8 @@ public class OutfittingConverter {
 	public OutfittingDtoForGet getConvertTo(Outfitting outfitting) {
 		return new OutfittingDtoForGet(outfitting.getId(), outfitting.getName(), outfitting.getRegion(), outfitting.getPhoneNumber(), outfitting.getEmail(), outfitting.getContact());
 	}
+	
+	public Outfitting addConvertTo(OutfittingDtoForAdd outfitting) {
+		return new Outfitting(outfitting.getName(), outfitting.getRegion(), outfitting.getPhoneNumber(), outfitting.getEmail(), outfitting.getContact());
+	}
 }

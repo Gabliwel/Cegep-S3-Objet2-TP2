@@ -8,6 +8,7 @@ import outfitting.model.entity.Outfitting;
 import outfitting.view.CottageCreateView;
 import outfitting.view.CottageListView;
 import outfitting.view.CottageSpecificView;
+import outfitting.view.OutfittingAddView;
 import outfitting.view.OutfittingListView;
 import outfitting.view.WelcomeView;
 
@@ -30,7 +31,9 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private IOutfittingListController outfittingListController;
 	private OutfittingListView outfittingListView;
-
+	
+	private IOutfittingAddController outfittingAddController;
+	private OutfittingAddView outfittingAddView;
 
 	public ControllerOrchestrator(CottageMemoryRepository cottageMemoryRepository, OutfittingMemoryRepository outfittingMemoryRepository) {
 		this.cottageRepository = cottageMemoryRepository;
@@ -94,5 +97,17 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 		this.outfittingListView = new OutfittingListView();
 		this.outfittingListController = new OutfittingListController(this, outfittingListView, outfittingRepository);
 		this.outfittingListView.setController(outfittingListController);
+	}
+
+	@Override
+	public void goToOutfittingAdd() {
+		initGoToOutfittingAdd();
+		this.outfittingAddController.requestOutfittingAdd();
+	}
+
+	private void initGoToOutfittingAdd() {
+		this.outfittingAddView = new OutfittingAddView();
+		this.outfittingAddController = new OutfittingAddController(this, outfittingAddView, outfittingRepository);
+		this.outfittingAddView.setController(outfittingAddController);
 	}
 }

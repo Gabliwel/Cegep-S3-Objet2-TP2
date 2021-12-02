@@ -37,7 +37,7 @@ public class WelcomeViewTest {
 	}
 	
 	@Test
-	public void when_clickOutlierListJButton_then_resquestOutlierListToController()
+	public void when_clickOutfittingListJButton_then_resquestOutfittingListToController()
 	{
 		WelcomeView view = new WelcomeView();
 		WelcomeControllerMock controller = new WelcomeControllerMock();
@@ -46,5 +46,17 @@ public class WelcomeViewTest {
 		view.actionPerformed(new ActionEvent(JButton.class, 0, "Liste des pourvoiries"));
 		
 		assertTrue(controller.requestOutfittingListHasBeenCalled);
+	}
+	
+	@Test
+	public void when_clickOutfittingAddJButton_then_resquestOutfittingAddToController()
+	{
+		WelcomeView view = new WelcomeView();
+		WelcomeControllerMock controller = new WelcomeControllerMock();
+		view.setController(controller);
+		
+		view.actionPerformed(new ActionEvent(JButton.class, 0, "Ajouter une pourvoirie"));
+		
+		assertTrue(controller.requestOutfittingAddHasBeenCalled);
 	}
 }

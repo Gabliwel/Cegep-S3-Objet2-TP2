@@ -16,7 +16,7 @@ import outfitting.view.ViewMock;
 public class OutfittingListControllerTest {
 	
 	@Test
-	public void when_requestCreateCottage_then_shouldAskCreateCottageViewToDisplay() {
+	public void when_requestOutfittingList_then_shouldAskOutfittingListViewToDisplay() {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
 		ViewMock view = new ViewMock();
 		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();

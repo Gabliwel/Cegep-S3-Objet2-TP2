@@ -7,6 +7,6 @@ public class SortOutfittingByRegion implements Comparator<Outfitting> {
 	
 	@Override
 	public int compare(Outfitting o1, Outfitting o2) {
-		return o1.getRegion().compareTo(o2.getRegion());
+		return o1.getRegion().toLowerCase().compareTo(o2.getRegion().toLowerCase());
 	}
 }

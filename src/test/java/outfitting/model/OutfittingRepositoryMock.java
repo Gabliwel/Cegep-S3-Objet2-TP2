@@ -1,11 +1,9 @@
 package outfitting.model;
 
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-
+import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.OutfittingMock;
@@ -18,6 +16,10 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 	@Override
 	public void add(Outfitting o) {
 		Outfitting.lastId = 0;
+		if(o.getName()=="id already exist exception name")
+		{
+			throw new IdAlreadyExistException("");
+		}
 	}
 
 	@Override

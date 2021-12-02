@@ -43,7 +43,7 @@ public class WelcomeControllerTest {
 	}
 	
 	@Test
-	public void when_requestOutfittingList_then_shouldAskToGoToCottageListToOrchestrator() {
+	public void when_requestOutfittingList_then_shouldAskToGoToOutfittingListToOrchestrator() {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
 		ViewMock view = new ViewMock();
 		WelcomeController controller = new WelcomeController(orchestrator, view);
@@ -51,5 +51,16 @@ public class WelcomeControllerTest {
 		controller.requestOutfittingList();
 		
 		assertTrue(orchestrator.goToOutfittingListHasBeenCalled);
+	}
+	
+	@Test
+	public void when_requestOutfittingAdd_then_shouldAskToGoToOutfittingAddToOrchestrator() {
+		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
+		ViewMock view = new ViewMock();
+		WelcomeController controller = new WelcomeController(orchestrator, view);
+		
+		controller.resquestAddOutfitting();
+		
+		assertTrue(orchestrator.goToOutfittingAddHasBeenCalled);
 	}
 }

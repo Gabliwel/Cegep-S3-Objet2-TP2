@@ -1,4 +1,4 @@
-package outifitting.comparator;
+package outfitting.comparator;
 
 import java.util.Comparator;
 
@@ -8,7 +8,7 @@ public class CompareByAmountOfGuest implements Comparator<Cottage>{
 	
 	@Override
 	public int compare(Cottage o1, Cottage o2) {
-		Integer cottageNbOfChamber = o1.getNbOfGuests();
+		Integer cottageNbOfChamber = o1.getNbOfGuests(); 
 		Integer cottageNbOfChamber2 = o2.getNbOfGuests();
 		
 		return cottageNbOfChamber.compareTo(cottageNbOfChamber2);

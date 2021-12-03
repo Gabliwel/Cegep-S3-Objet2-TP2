@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import outfitting.exception.IdAlreadyExistException;
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepository implements GenericRepository<Cottage> {
@@ -18,7 +20,14 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	
 	@Override
 	public void add(Cottage cottage) {
-		cottages.put(cottage.getId(), cottage);
+		if(!cottages.containsKey(cottage.getId())) 
+		{
+			cottages.put(cottage.getId(), cottage);
+		}
+		else 
+		{
+			throw new IdAlreadyExistException("Le ID" + cottage.getId()+ " existe deja");
+		}
 	}
 
 	@Override
@@ -32,22 +41,36 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	}
 
 	@Override
-	public Cottage searchById(int id) {
-		return cottages.get(id);
+	public Cottage searchById(int id) 
+	{
+		if(cottages.containsKey(id)) 
+		{
+			return cottages.get(id);
+		}
+		else 
+		{
+			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
+		}
 	}
 	
 	@Override
 	public void remove(int id) 
 	{
-		this.cottages.remove(id);
-		//System.out.println("remove");
+		if(cottages.containsKey(id)) 
+		{
+			this.cottages.remove(id);
+		}
+		else 
+		{
+			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
+		}
 	}
 
 	private void dataSeed() {
-		Cottage cottage1 = new Cottage("Nar Shaddaa's Cottage", 5, 20, 70);
-		Cottage cottage2 = new Cottage("Teepee", 3, 16, 50);
-		Cottage cottage3 = new Cottage("The Max Int Cottage", 4, 16, 60);
-		Cottage cottage4 = new Cottage("Japan", 2, 7, 100);
+		Cottage cottage1 = new Cottage("Nar Shaddaa's Cottage", 5, 20, 70,1);
+		Cottage cottage2 = new Cottage("Teepee", 3, 16, 50, 2);
+		Cottage cottage3 = new Cottage("The Max Int Cottage", 4, 16, 60, 3);
+		Cottage cottage4 = new Cottage("Japan", 2, 7, 100, 1);
 
 		cottages.put(cottage1.getId(), cottage1);
 		cottages.put(cottage2.getId(), cottage2);

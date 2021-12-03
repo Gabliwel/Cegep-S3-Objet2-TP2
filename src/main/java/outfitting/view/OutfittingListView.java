@@ -146,6 +146,14 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		}
 	}
 
+	/*private void sortByRegion() {
+		
+	}*/
+	
+	/*private void sortByName() {
+		
+	}*/
+
 	private void displayOnType(SortOutfittingType type) {
 		this.setUpComponents(type);
 		this.pack();

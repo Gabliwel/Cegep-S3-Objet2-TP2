@@ -137,4 +137,9 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	{
 		JOptionPane.showInternalMessageDialog(null, message);
 	}
+
+
+	@Override
+	public void displaySuccess(String message) { }
+
 }

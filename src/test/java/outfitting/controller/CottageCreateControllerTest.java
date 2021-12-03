@@ -1,7 +1,6 @@
 package outfitting.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -67,7 +66,7 @@ public class CottageCreateControllerTest {
 		Cottage.lastId = 0;
 		controller.add(c);
 		
-		assertTrue(view.displayErrorHasBeenCalled);
+		assertTrue(view.displayErrorMethodHasBeenCalled);
 	}
 	
 	@Test
@@ -78,8 +77,8 @@ public class CottageCreateControllerTest {
 		CottageRepositoryMock repo = new CottageRepositoryMock();
 		OutfittingRepositoryMockWithAdd repo2 = new OutfittingRepositoryMockWithAdd();
 		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
-		OutfittingMock outfittingMock = new OutfittingMock("name", "name");
-		OutfittingMock outfittingMock2 = new OutfittingMock("name", "name");
+		OutfittingMock outfittingMock = new OutfittingMock(1,"name", "name");
+		OutfittingMock outfittingMock2 = new OutfittingMock(1,"name", "name");
 
 		repo2.add(outfittingMock);
 		repo2.add(outfittingMock2);
@@ -90,3 +89,4 @@ public class CottageCreateControllerTest {
 		assertTrue(repo2.getListBeenCalled);
 	}
 }
+

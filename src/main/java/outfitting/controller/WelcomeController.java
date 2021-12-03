@@ -32,4 +32,9 @@ public class WelcomeController implements IWelcomeController {
 	public void requestOutfittingList() {
 		orchestrator.goToOutfittingList();
 	}
+
+	@Override
+	public void resquestAddOutfitting() {
+		orchestrator.goToOutfittingAdd();
+	}
 }

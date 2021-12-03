@@ -2,7 +2,7 @@ package outfitting.model;
 
 import java.util.Collection;
 
-import outfitting.exception.IDAlreadyExistException;
+import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageRepositoryMock implements GenericRepository<Cottage> {
@@ -16,7 +16,7 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 	public void add(Cottage cottage) {
 		if(addHasBeenCalled) 
 		{
-			throw new IDAlreadyExistException("it either work or it didnt");
+			throw new IdAlreadyExistException("it either work or it didnt");
 		}
 		addHasBeenCalled = true;
 		Cottage.lastId = 0;

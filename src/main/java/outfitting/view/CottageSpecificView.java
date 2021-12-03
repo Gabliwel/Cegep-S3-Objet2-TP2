@@ -160,7 +160,7 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 
 	private void confirmMessage() 
 	{		
-		 int result = JOptionPane.showConfirmDialog(null, "Etre vous sure de vouloir oter ce Chalet ?", "Confirmation", 0);
+		 int result = JOptionPane.showConfirmDialog(null, "Êtes vous certain de vouloir supprimer ce Chalet ?", "Confirmation", 0);
 	      switch (result) 
 	      {
 	         case JOptionPane.YES_OPTION : this.controller.deleteCottage(this.controller.getCottageDTOForList().getID());
@@ -175,4 +175,8 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 	{
 		JOptionPane.showInternalMessageDialog(null, message);
 	}
+
+
+	@Override
+	public void displaySuccess(String message) { }
 }

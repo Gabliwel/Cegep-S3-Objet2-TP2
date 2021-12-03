@@ -70,13 +70,13 @@ public class CottageSpecificControllerTest {
 	{		
 		controller.deleteCottage(WRONG_ID);
 		
-		assertTrue(view.displayErrorHasBeenCalled);
+		assertTrue(view.displayErrorMethodHasBeenCalled);
 	}
 	
 	@Test
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
 		assertNull(controller.getOutfittingObject(ANY_ID));
-		assertTrue(repo2.searchByIdHasBeenCalled);
+		assertTrue(repo2.searchByIdBeenCalled);
 	}
 }

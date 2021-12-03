@@ -25,11 +25,12 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 	private static final String WELCOME_PICTURE = "Cottage.jpg";
 	private static final String WELCOME_ADD_BTN = "Ajouter un chalet";
 	private static final String WELCOME_LIST_BTN = "Liste des chalets";
+	private static final String WELCOME_OUTFITTING_ADD_BTN = "Ajouter une pourvoirie";
 	private static final String WELCOME_OUTFITTING_LIST_BTN = "Liste des pourvoiries";
 
 	private static final Dimension DEFAULT_SIZE = new Dimension(475, 530);
 
-	private IWelcomeController controller; // FIXME utiliser cette propriété pour réaliser le récit R2
+	private IWelcomeController controller;
 
 	public WelcomeView() {
 		super();
@@ -55,6 +56,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 	@Override
 	public void display() {
 		this.setUpComponents();
+		this.pack();
 		this.setVisible(true);
 	}
 
@@ -88,6 +90,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		this.add(actionPanel, BorderLayout.SOUTH);
 		addCreateCottageButton(actionPanel);
 		addListCottageButton(actionPanel);
+		addAddOutfittingButton(actionPanel);
 		addListOutfittingButton(actionPanel);
 	}
 	
@@ -105,11 +108,18 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		actionPanel.add(listCottageBtn);
 	}
 	
+	private void addAddOutfittingButton(JPanel actionPanel) {
+		JButton addOutfittingBtn = new JButton(WELCOME_OUTFITTING_ADD_BTN);
+		addOutfittingBtn.setActionCommand(WELCOME_OUTFITTING_ADD_BTN);
+		addOutfittingBtn.addActionListener(this);
+		actionPanel.add(addOutfittingBtn);
+	}
+	
 	private void addListOutfittingButton(JPanel actionPanel) {
-		JButton listCottageBtn = new JButton(WELCOME_OUTFITTING_LIST_BTN);
-		listCottageBtn.setActionCommand(WELCOME_OUTFITTING_LIST_BTN);
-		listCottageBtn.addActionListener(this);
-		actionPanel.add(listCottageBtn);
+		JButton listOutfittingBtn = new JButton(WELCOME_OUTFITTING_LIST_BTN);
+		listOutfittingBtn.setActionCommand(WELCOME_OUTFITTING_LIST_BTN);
+		listOutfittingBtn.addActionListener(this);
+		actionPanel.add(listOutfittingBtn);
 	}
 
 	@Override
@@ -118,6 +128,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 		switch(action) {
 			case WELCOME_ADD_BTN -> this.controller.resquestCreateCottage();
 			case WELCOME_LIST_BTN -> this.controller.resquestCottageList();
+			case WELCOME_OUTFITTING_ADD_BTN -> this.controller.resquestAddOutfitting();
 			case WELCOME_OUTFITTING_LIST_BTN -> this.controller.requestOutfittingList();
 		}
 	}
@@ -127,4 +138,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 	{
 		JOptionPane.showInternalMessageDialog(null, message);
 	}
+
+	@Override
+	public void displaySuccess(String message) { }
 }

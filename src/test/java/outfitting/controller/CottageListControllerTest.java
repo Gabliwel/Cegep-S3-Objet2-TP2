@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import outfitting.dto.CottageDTOForList;
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
-import outfitting.model.CottageRepositoryMock;
 import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.CottageMock;
 import outfitting.view.ViewMock;
@@ -57,7 +56,7 @@ public class CottageListControllerTest {
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
 		assertNull(controller.getOutfittingObject(ANY_ID));
-		assertTrue(repo2.searchByIdHasBeenCalled);
+		assertTrue(repo2.searchByIdBeenCalled);
 	}
 	
 	@Test

@@ -18,5 +18,11 @@ public class CottageSpecificViewMock implements View{
 		displayErrorHasBeenCalled = true;
 	}
 
+	@Override
+	public void displaySuccess(String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

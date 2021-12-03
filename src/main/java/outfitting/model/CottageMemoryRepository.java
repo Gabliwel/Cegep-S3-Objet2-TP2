@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import outfitting.exception.IDAlreadyExistException;
-import outfitting.exception.IDDoesNotExistException;
+import outfitting.exception.IdAlreadyExistException;
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepository implements GenericRepository<Cottage> {
@@ -26,7 +26,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		}
 		else 
 		{
-			throw new IDAlreadyExistException("Le ID" + cottage.getId()+ " existe deja");
+			throw new IdAlreadyExistException("Le ID" + cottage.getId()+ " existe deja");
 		}
 	}
 
@@ -49,7 +49,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		}
 		else 
 		{
-			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		}
 		else 
 		{
-			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
 		}
 	}
 

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import outfitting.comparator.CompareByAmountOfGuest;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
-import outfitting.exception.IDDoesNotExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;

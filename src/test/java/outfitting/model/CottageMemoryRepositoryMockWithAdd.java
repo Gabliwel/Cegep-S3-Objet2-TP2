@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import outfitting.exception.IDDoesNotExistException;
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
@@ -53,7 +53,7 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 		}
 		else 
 		{
-			throw new IDDoesNotExistException("Le ID" + id+ " n'existe pas");
+			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
 		}
 	}
 }

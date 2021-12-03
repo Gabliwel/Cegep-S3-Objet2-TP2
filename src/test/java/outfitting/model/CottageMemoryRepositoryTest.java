@@ -1,7 +1,6 @@
 package outfitting.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -10,18 +9,12 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import outfitting.exception.IDDoesNotExistException;
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
 
 public class CottageMemoryRepositoryTest {
-	/*The seeded value:
-	 *  #1: Cottage("Nar Shaddaa's Cottage", 6666666);
-	 *	#2: Cottage("Teepee", 1);
-	 *	#3: Cottage("The Max Int Cottage", 2147483647);
-	 *	#4: Cottage("Japan", 125800000);
-	 */
-	
+	//The seeded value:
 	public static final int ND_SEEDED_COTTAGE = 4;
 	
 	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70,0);
@@ -59,7 +52,7 @@ public class CottageMemoryRepositoryTest {
 	public void when_gettingCottageByNonExistentId_then_execptionIsThrown() {
 		CottageMemoryRepository repo = new CottageMemoryRepository();
 
-		assertThrows(IDDoesNotExistException.class, () ->
+		assertThrows(IdDoesNotExistException.class, () ->
 		{
 			Cottage result = repo.searchById(9999);
 		});
@@ -98,7 +91,7 @@ public class CottageMemoryRepositoryTest {
 	{
 		aRepository.remove(cottage4.getId());
 		
-		assertThrows(IDDoesNotExistException.class, () ->
+		assertThrows(IdDoesNotExistException.class, () ->
 		{
 			aRepository.searchById(cottage3.getId()+1);
 		});

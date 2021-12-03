@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import outfitting.convertor.CottageCreateDTOToCottageConvertor;
 import outfitting.dto.CottageDtoForCreate;
-import outfitting.exception.IDAlreadyExistException;
+import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;
@@ -39,7 +39,7 @@ public class CottageCreateController implements ICottageCreateController {
 		{
 			this.repository.add(cottageConvertor.DTOToCottage(cottageDTO));
 		}
-		catch(IDAlreadyExistException e)
+		catch(IdAlreadyExistException e)
 		{
 			this.view.displayError(e.getMessage());
 		}

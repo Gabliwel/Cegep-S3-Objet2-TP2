@@ -1,36 +1,45 @@
 package outfitting.model;
 
+import java.util.Arrays;
 import java.util.Collection;
 
+import outfitting.exception.IdAlreadyExistException;
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Outfitting;
+import outfitting.model.entity.OutfittingMock;
 
 public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 
 	public boolean getListBeenCalled = false;
-	public boolean searchByIdHasBeenCalled = false;
+	public boolean searchByIdBeenCalled = false;
 	
 	@Override
 	public void add(Outfitting o) {
 		Outfitting.lastId = 0;
+		if(o.getName()=="id already exist exception name")
+		{
+			throw new IdAlreadyExistException("");
+		}
 	}
 
 	@Override 
 	public Collection<Outfitting> getList() {
-		// TODO Auto-generated method stub
 		getListBeenCalled = true;
-		return null;
+		return Arrays.asList(new OutfittingMock(-1, null, null));
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Outfitting searchById(int id) {
-		searchByIdHasBeenCalled = true;
-		return null;
+		searchByIdBeenCalled = true;
+		if(id == 10) {
+			throw new IdDoesNotExistException("");
+		}
+		return new OutfittingMock(-1, "", "");
 	}
 
 	@Override
@@ -38,5 +47,4 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

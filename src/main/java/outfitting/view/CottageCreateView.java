@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import outfitting.controller.ICottageCreateController;
 import outfitting.dto.CottageDtoForCreate;
 import outfitting.model.entity.Outfitting;
-import outfitting.model.entity.RegionName;
 
 public class CottageCreateView extends JDialog implements View, ActionListener {
 

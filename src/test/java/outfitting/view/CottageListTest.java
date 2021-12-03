@@ -4,14 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class CottageCreateViewTest {
-	
+public class CottageListTest {
+
+
 	private static final String ANY_STRING = "allo";
 	
 	@Test
 	public void WHEN_displayIsCalled_THEN_displayHasBeenCalledIsTrue() 
 	{
-		CottageCreateViewMock mock = new CottageCreateViewMock();
+		CottageListMock mock = new CottageListMock();
 		
 		mock.display();
 		
@@ -21,7 +22,7 @@ public class CottageCreateViewTest {
 	@Test
 	public void WHEN_displayErrorIsCalled_THEN_displayErrorHasBeenCalledIsTrue() 
 	{
-		CottageCreateViewMock mock = new CottageCreateViewMock();
+		CottageListMock mock = new CottageListMock();
 		
 		mock.displayError(ANY_STRING);
 		

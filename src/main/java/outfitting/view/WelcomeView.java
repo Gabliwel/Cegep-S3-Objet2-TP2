@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -133,7 +134,10 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 	}
 
 	@Override
-	public void displayError(String message) { }
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
+	}
 
 	@Override
 	public void displaySuccess(String message) { }

@@ -1,4 +1,4 @@
-package outifitting.button;
+package outfitting.button;
 
 import javax.swing.JButton;
 
@@ -20,6 +20,4 @@ public class IDButtonForListOfCottage extends JButton implements IButtonID
 	{
 		return this.id;
 	}
-	
-	//allo
 }

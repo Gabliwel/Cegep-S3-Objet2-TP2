@@ -22,7 +22,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		}
 	}
 
-	@Override
+	@Override 
 	public Collection<Outfitting> getList() {
 		getListBeenCalled = true;
 		return Arrays.asList(new OutfittingMock(-1, null, null));
@@ -44,6 +44,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 
 	@Override
 	public void remove(int id) {
-
+		// TODO Auto-generated method stub
+		
 	}
 }

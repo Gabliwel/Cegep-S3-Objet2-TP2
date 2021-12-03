@@ -1,4 +1,4 @@
-package outifitting.button;
+package outfitting.button;
 
 public interface IButtonID 
 {

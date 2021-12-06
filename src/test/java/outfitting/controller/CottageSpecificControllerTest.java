@@ -1,22 +1,23 @@
 package outfitting.controller;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
-import outfitting.model.CottageRepositoryMock;
 import outfitting.model.OutfittingRepositoryMock;
+import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
+import outfitting.model.entity.OutfittingMock;
 import outfitting.view.ViewMock;
 
 public class CottageSpecificControllerTest {
 
 	private static final String ANY_NAME = "Bob";
 	private static final int ANY_NUMBER = 2;
-	private static final int ANY_ID = 1;
+	private final int ANY_ID = 1;
 	private static final int WRONG_ID = 9;
 	
 	ControllerOrchestratorMock orchestrator = null;
@@ -28,6 +29,7 @@ public class CottageSpecificControllerTest {
 	@BeforeEach
 	public void setUp() 
 	{
+		Cottage.lastId = 0;
 		orchestrator = new ControllerOrchestratorMock();
 		view = new ViewMock();
 		repo = new CottageMemoryRepositoryMockWithAdd();
@@ -49,8 +51,8 @@ public class CottageSpecificControllerTest {
 		CottageMock cottageMock = new CottageMock(ANY_NAME,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER,ANY_NUMBER);
 		
 		repo.add(cottageMock);
-		controller.getCottageDTOForList(); 
 		
+		assertEquals(controller.getCottageDTOForList().getID(), cottageMock.getId());
 		assertTrue(repo.searchByIdHasBeenCalled);
 	}
 	
@@ -76,7 +78,7 @@ public class CottageSpecificControllerTest {
 	@Test
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
-		assertNull(controller.getOutfittingObject(ANY_ID));
+		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingMock);
 		assertTrue(repo2.searchByIdBeenCalled);
 	}
 }

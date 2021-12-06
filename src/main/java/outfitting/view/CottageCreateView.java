@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import outfitting.controller.ICottageCreateController;
 import outfitting.dto.CottageDtoForCreate;
+import outfitting.dto.OutfittingDtoForAdd;
 import outfitting.model.entity.Outfitting;
 
 public class CottageCreateView extends JDialog implements View, ActionListener {
@@ -35,7 +36,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	private JTextField guests = new JTextField(3);
 	private JTextField nbOfChamber = new JTextField(3);
 	private JTextField pricePerNight = new JTextField(3);
-	private JComboBox<Outfitting> comboBox = new JComboBox();
+	private JComboBox<OutfittingDtoForAdd> comboBox = new JComboBox();
 
 	public CottageCreateView() {
 		super();
@@ -102,7 +103,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 		JLabel outfittingLabel = new JLabel(OUTFITTING_CHOIX);
 		inputDataPanel.add(outfittingLabel);
 		
-		controller.getOutfittingCollection().forEach(o -> comboBox.addItem(o)); 
+		controller.getOutfittingDtoForCreateCollection().forEach(o -> comboBox.addItem(o)); 
 		inputDataPanel.add(comboBox);
 	}
 
@@ -142,13 +143,11 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 			}
 
 			if(isValidNumGuest) {
-				//FIXME TODO change outfitting to outfitting DTO when merge completed
-				Outfitting outfitting = (Outfitting) comboBox.getSelectedItem();
+				OutfittingDtoForAdd outfitting = (OutfittingDtoForAdd) comboBox.getSelectedItem();
 				CottageDtoForCreate cottage = new CottageDtoForCreate(name.getText(), Integer.parseInt(guests.getText()), 
 						Integer.parseInt(nbOfChamber.getText()), Integer.parseInt(pricePerNight.getText()),outfitting.getId());	
 				controller.add(cottage);
 				this.dispose();
-				JOptionPane.showInternalMessageDialog(null, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 		else 
@@ -165,6 +164,8 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 
 
 	@Override
-	public void displaySuccess(String message) { }
-
+	public void displaySuccess(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message, "Succès", JOptionPane.INFORMATION_MESSAGE);
+	}
 }

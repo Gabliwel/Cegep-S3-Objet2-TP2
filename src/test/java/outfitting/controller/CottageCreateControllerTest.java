@@ -78,7 +78,7 @@ public class CottageCreateControllerTest {
 		OutfittingRepositoryMockWithAdd repo2 = new OutfittingRepositoryMockWithAdd();
 		CottageCreateController controller = new CottageCreateController(orchestrator, view, repo, repo2);
 		OutfittingMock outfittingMock = new OutfittingMock(1,"name", "name");
-		OutfittingMock outfittingMock2 = new OutfittingMock(1,"name", "name");
+		OutfittingMock outfittingMock2 = new OutfittingMock(2,"name", "name");
 
 		repo2.add(outfittingMock);
 		repo2.add(outfittingMock2);

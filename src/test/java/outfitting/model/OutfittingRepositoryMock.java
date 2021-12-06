@@ -40,6 +40,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 			throw new IdDoesNotExistException("");
 		}
 		return new OutfittingMock(-1, "", "");
+		//return null;
 	}
 
 	@Override

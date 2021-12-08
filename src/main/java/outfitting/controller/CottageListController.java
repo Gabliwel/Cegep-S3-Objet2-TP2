@@ -1,11 +1,12 @@
 package outfitting.controller;
 
 import java.util.Collection;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import outfitting.comparator.CompareByAmountOfGuest;
+import outfitting.sort.CompareByAmountOfGuest;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
 import outfitting.model.GenericRepository;

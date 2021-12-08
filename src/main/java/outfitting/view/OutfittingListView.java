@@ -1,9 +1,6 @@
 package outfitting.view;
 
 import java.awt.BorderLayout;
-
-
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +33,6 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final String SEARCH_BTN = "CHERCHER UNE POURVOIRIE";
 	
 	private IOutfittingListController controller;
-	private JPanel searchPanel = new JPanel();
 	private JPanel inputDataPanel = new JPanel();
 	private JPanel actionPanel = new JPanel(); 
 	private JTextField searchInput = new JTextField(30);

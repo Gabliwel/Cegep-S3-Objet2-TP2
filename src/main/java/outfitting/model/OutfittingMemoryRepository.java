@@ -17,7 +17,7 @@ public class OutfittingMemoryRepository implements GenericRepository<Outfitting>
 	public OutfittingMemoryRepository() {
 		outfittings = new HashMap<>();
 		dataSeed();
-	}
+	} 
 	
 	@Override
 	public void add(Outfitting o) {

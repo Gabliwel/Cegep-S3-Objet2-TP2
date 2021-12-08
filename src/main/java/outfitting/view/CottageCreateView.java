@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,6 +16,7 @@ import javax.swing.JTextField;
 
 import outfitting.controller.ICottageCreateController;
 import outfitting.dto.CottageDtoForCreate;
+import outfitting.model.entity.Outfitting;
 
 public class CottageCreateView extends JDialog implements View, ActionListener {
 
@@ -25,19 +27,19 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	private static final String ADD_COTTAGE = "Ajouter";
 	private static final String NB_OF_CHAMBER = "Nombre de chambre";
 	private static final String PRICE_PER_NIGHT = "prix par nuit";
-
+	private static final String OUTFITTING_CHOIX = "Pourvoirie";
+	
 	ICottageCreateController controller;
 
 	private JTextField name = new JTextField(30);
 	private JTextField guests = new JTextField(3);
 	private JTextField nbOfChamber = new JTextField(3);
 	private JTextField pricePerNight = new JTextField(3);
+	private JComboBox<Outfitting> comboBox = new JComboBox();
 
 	public CottageCreateView() {
 		super();
 		this.initialize();
-		this.setUpComponents();
-		this.pack(); // Pour forcer le calcul de la taille de la fenêtre
 	}
 
 	private void initialize() {
@@ -48,14 +50,15 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	}
 
 	public void setController(ICottageCreateController cottageCreateController) {
-		// FIXME TODO
 		this.controller = cottageCreateController;
 	}
 
 	@Override
 	public void display() {
-		// FIXME TODO
-		this.setVisible(true);
+		this.setUpComponents();
+		this.pack();
+		this.setVisible(true);	
+		
 	}
 
 	private void setUpComponents() {
@@ -71,14 +74,10 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	}
 
 	private void setUpInputDataPanel() {
-		// FIXME TODO
-		// Conteneur intermédiaire JPanel qui contient les étiquettes (JLabel) et les
-		// zones de textes (JTextField)
-		// Utiliser un GridLayout comme LayoutManager (2 colonnes)
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
 		
-		inputDataPanel.setLayout(new GridLayout(4, 4));
+		inputDataPanel.setLayout(new GridLayout(5, 5));
 		
 		JLabel cottageName = new JLabel(COTTAGE_NAME);
 		inputDataPanel.add(cottageName);
@@ -99,11 +98,16 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 		inputDataPanel.add(priceByNight);
 		
 		inputDataPanel.add(pricePerNight);
+		
+		JLabel outfittingLabel = new JLabel(OUTFITTING_CHOIX);
+		inputDataPanel.add(outfittingLabel);
+		
+		controller.getOutfittingCollection().forEach(o -> comboBox.addItem(o)); 
+		inputDataPanel.add(comboBox);
 	}
 
 	private void setUpActionPanel() {
-		// FIXME TODO
-		// Conteneur intermédiaire JPanel qui contient le bouton pour ajouter un chalet
+
 		JPanel actionPanel = new JPanel(); 
 		this.add(actionPanel, BorderLayout.SOUTH);
 		
@@ -124,7 +128,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	private void sendCreateDTOToController() {
 		boolean isValidNumGuest = true;
 		
-		if(name.getText() != null && guests.getText() != null) 
+		if(!name.getText().isEmpty() && !guests.getText().isEmpty() && !nbOfChamber.getText().isEmpty() && !pricePerNight.getText().isEmpty())
 		{
 			try 
 			{
@@ -134,13 +138,13 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 			}
 			catch (NumberFormatException e) {
 				isValidNumGuest = false;
-
-				JOptionPane.showInternalMessageDialog(null, "Vous devez entrer un nombre dans le nombre d'inviter");
 			}
 
 			if(isValidNumGuest) {
+				//FIXME TODO change outfitting to outfitting DTO when merge completed
+				Outfitting outfitting = (Outfitting) comboBox.getSelectedItem();
 				CottageDtoForCreate cottage = new CottageDtoForCreate(name.getText(), Integer.parseInt(guests.getText()), 
-						Integer.parseInt(nbOfChamber.getText()), Integer.parseInt(pricePerNight.getText()));	
+						Integer.parseInt(nbOfChamber.getText()), Integer.parseInt(pricePerNight.getText()),outfitting.getId());	
 				controller.add(cottage);
 				this.dispose();
 				JOptionPane.showInternalMessageDialog(null, name.getText() + " à bien été ajouté", "Confirmation d'un nouveau chalet", JOptionPane.INFORMATION_MESSAGE);
@@ -153,7 +157,11 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	}
 
 	@Override
-	public void displayError(String message) { }
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);		
+	}
+
 
 	@Override
 	public void displaySuccess(String message) { }

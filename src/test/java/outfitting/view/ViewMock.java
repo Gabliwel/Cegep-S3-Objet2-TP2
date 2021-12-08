@@ -2,7 +2,7 @@ package outfitting.view;
 
 public class ViewMock implements View {  //ViewSpy
 
-	public boolean displayMethodHasBeenCalled = false;
+	public boolean displayMethodHasBeenCalled = false;	
 	public boolean displayErrorMethodHasBeenCalled = false;
 	public boolean displaySuccessMethodHasBeenCalled = false;
 
@@ -21,3 +21,4 @@ public class ViewMock implements View {  //ViewSpy
 		displaySuccessMethodHasBeenCalled = true;
 	}
 }
+

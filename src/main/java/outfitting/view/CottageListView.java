@@ -11,10 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import outfitting.controller.ICottageListController;
+import outfitting.controller.iController.ICottageListController;
 import outfitting.dto.CottageDTOForList;
-import outifitting.button.IButtonID;
-import outifitting.button.IDButtonForListOfCottage;
 
 public class CottageListView extends JDialog implements View, ActionListener {
 
@@ -94,7 +92,7 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			JLabel pricePerNight = new JLabel(Integer.toString(cottage.getPricePerNight()));
 			inputDataPanel.add(pricePerNight);
 			
-			IDButtonForListOfCottage idButton = new IDButtonForListOfCottage(CONSULT_BUTTON, cottage.getID());
+			IdButton idButton = new IdButton(CONSULT_BUTTON, cottage.getID());
 			idButton.setActionCommand(CONSULT_BUTTON);
 			idButton.addActionListener(this);
 			inputDataPanel.add(idButton);
@@ -119,8 +117,8 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			case OK_BTN : dispose();
 							break;
 			case CONSULT_BUTTON : 
-				IButtonID cottageButton = (IDButtonForListOfCottage) e.getSource();
-				int idCottage = cottageButton.getId();
+				IdButton cottageButton = (IdButton) e.getSource();
+				int idCottage = cottageButton.getIdEntity();
 				this.controller.requestSpecificCottageView(idCottage);
 				break;
 		}

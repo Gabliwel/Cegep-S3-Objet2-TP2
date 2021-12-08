@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import outfitting.controller.IOutfittingAddController;
+import outfitting.controller.iController.IOutfittingAddController;
 import outfitting.dto.OutfittingDtoForAdd;
 import outfitting.model.entity.Contact;
 import outfitting.model.entity.RegionName;

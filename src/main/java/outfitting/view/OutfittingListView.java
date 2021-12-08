@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import outfitting.controller.IOutfittingListController;
+import outfitting.controller.iController.IOutfittingListController;
 import outfitting.dto.OutfittingDtoForGet;
 import outfitting.sort.SortOutfittingType;
 

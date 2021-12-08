@@ -5,12 +5,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.ICottageListController;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
+import outfitting.sort.CompareByAmountOfGuest;
 import outfitting.view.View;
-import outifitting.comparator.CompareByAmountOfGuest;
 
 public class CottageListController implements ICottageListController {
 

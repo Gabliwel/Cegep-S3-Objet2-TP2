@@ -40,7 +40,6 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 	public void remove(int id) 
 	{
 		this.cottages.remove(id);
-		//System.out.println("remove");
 	}
 
 	private void dataSeed() {

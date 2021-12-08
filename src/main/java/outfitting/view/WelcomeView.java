@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import outfitting.controller.IWelcomeController;
+import outfitting.controller.iController.IWelcomeController;
 
 
 public class WelcomeView extends JFrame implements View, ActionListener {

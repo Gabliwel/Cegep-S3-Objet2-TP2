@@ -1,5 +1,7 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+
 public class ControllerOrchestratorMock implements IControllerOrchestrator {
 
 	public boolean goToCreateCottageHasBeenCalled = false;

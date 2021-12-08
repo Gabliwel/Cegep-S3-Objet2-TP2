@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import outfitting.controller.ICottageCreateController;
+import outfitting.controller.iController.ICottageCreateController;
 import outfitting.dto.CottageDtoForCreate;
 
 public class CottageCreateView extends JDialog implements View, ActionListener {

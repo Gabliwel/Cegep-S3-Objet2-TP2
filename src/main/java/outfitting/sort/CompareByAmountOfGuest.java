@@ -1,4 +1,4 @@
-package outifitting.comparator;
+package outfitting.sort;
 
 import java.util.Comparator;
 

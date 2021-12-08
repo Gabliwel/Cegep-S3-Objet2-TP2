@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import outfitting.controller.ICottageSpecificController;
+import outfitting.controller.iController.ICottageSpecificController;
 
 public class CottageSpecificView extends JDialog implements View, ActionListener
 {

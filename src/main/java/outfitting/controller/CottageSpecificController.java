@@ -1,5 +1,7 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.ICottageSpecificController;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
 import outfitting.dto.CottageDTOForList;
 import outfitting.model.GenericRepository;

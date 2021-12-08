@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import outfitting.dto.OutfittingConverter;
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.IOutfittingListController;
+import outfitting.convertor.OutfittingConverter;
 import outfitting.dto.OutfittingDtoForGet;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.GenericRepository;

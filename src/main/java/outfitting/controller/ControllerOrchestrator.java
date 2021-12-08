@@ -1,5 +1,12 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.ICottageCreateController;
+import outfitting.controller.iController.ICottageListController;
+import outfitting.controller.iController.ICottageSpecificController;
+import outfitting.controller.iController.IOutfittingAddController;
+import outfitting.controller.iController.IOutfittingListController;
+import outfitting.controller.iController.IWelcomeController;
 import outfitting.model.CottageMemoryRepository;
 import outfitting.model.GenericRepository;
 import outfitting.model.OutfittingMemoryRepository;

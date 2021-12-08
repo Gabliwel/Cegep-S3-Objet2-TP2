@@ -1,5 +1,7 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.IWelcomeController;
 import outfitting.view.View;
 
 public class WelcomeController implements IWelcomeController {

@@ -17,7 +17,6 @@ import javax.swing.JTextField;
 import outfitting.controller.iController.ICottageCreateController;
 import outfitting.dto.CottageDtoForCreate;
 import outfitting.dto.OutfittingDtoForAdd;
-import outfitting.model.entity.Outfitting;
 
 public class CottageCreateView extends JDialog implements View, ActionListener {
 
@@ -36,7 +35,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	private JTextField guests = new JTextField(3);
 	private JTextField nbOfChamber = new JTextField(3);
 	private JTextField pricePerNight = new JTextField(3);
-	private JComboBox<OutfittingDtoForAdd> comboBox = new JComboBox();
+	private JComboBox<OutfittingDtoForAdd> comboBox = new JComboBox<OutfittingDtoForAdd>();
 
 	public CottageCreateView() {
 		super();

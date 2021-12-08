@@ -19,7 +19,7 @@ public class CottageRepositoryMock implements GenericRepository<Cottage>, Subjec
 	public boolean removeObserverHasBeenCalled = false;
 	public boolean notifyHasBeenCalled = false;
 	
-	public List<Observer> observers = new ArrayList();
+	public List<Observer> observers = new ArrayList<Observer>();
 	
 	@Override
 	public void add(Cottage cottage) {

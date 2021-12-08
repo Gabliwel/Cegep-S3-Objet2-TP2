@@ -7,7 +7,5 @@ public class ObserverMock implements Observer{
 	@Override
 	public void react() {
 		reactHasBeenCalled = true;
-		
 	}
-
 }

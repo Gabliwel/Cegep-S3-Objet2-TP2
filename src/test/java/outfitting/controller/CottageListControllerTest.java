@@ -1,17 +1,16 @@
 package outfitting.controller;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.Collection;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import outfitting.dto.CottageDTOForList;
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
 import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.CottageMock;
-import outfitting.model.entity.OutfittingMock;
 import outfitting.view.ViewMock;
 
 public class CottageListControllerTest {
@@ -47,7 +46,7 @@ public class CottageListControllerTest {
 		CottageMock cottage = new CottageMock("bob", 1, 2, 3,0);
 		
 		repo.add(cottage);
-		Collection<CottageDTOForList> cottageCollection = controller.getCottageList();
+		controller.getCottageList();
 		
 		assertTrue(repo.getListBeenCalled);
 	}
@@ -55,7 +54,7 @@ public class CottageListControllerTest {
 	@Test
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
-		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingMock);
+		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingDtoForGet);
 		assertTrue(repo2.searchByIdBeenCalled);
 	}
 	
@@ -69,12 +68,11 @@ public class CottageListControllerTest {
 	}
 	
 	@Test
-	public void WHEN_reactHasBeenCalled_THEN_reactHasBeenCalledIsTrue() 
+	public void when_searchByNullType_then_throwError() 
 	{
-		CottageListControllerMock controllerMock = new CottageListControllerMock();		
-		
-		controllerMock.react();
-		
-		assertTrue(controllerMock.reactHasBeenCalled);
+		assertThrows(IllegalArgumentException.class, () ->
+		{
+			controller.searchInList(null, null);
+		});
 	}
 }

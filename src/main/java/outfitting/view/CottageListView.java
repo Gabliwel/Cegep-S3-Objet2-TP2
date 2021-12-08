@@ -2,20 +2,24 @@ package outfitting.view;
 
 import java.awt.BorderLayout;
 
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextField;
 
 import outfitting.controller.iController.ICottageListController;
+import outfitting.controller.search.CottageSearchType;
 import outfitting.dto.CottageDTOForList;
+import outfitting.dto.OutfittingDtoForGet;
+import outfitting.model.entity.RegionName;
 
 public class CottageListView extends JDialog implements View, ActionListener {
 
@@ -29,9 +33,12 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
 	private static final String CONSULT_BUTTON = "Consulter le chalet";
 	private static final String OUTFITTING_NAME = "Nom de la pourvoirie";
-	private JPanel inputDataPanel = new JPanel();
+	private static final String SEARCH_BTN = "CHERCHER UNE POURVOIRIE";
 	
+	private JPanel inputDataPanel = new JPanel();
 	private ICottageListController controller;
+	private JTextField searchInput = new JTextField(30);
+	private JComboBox<String> searchOption = new JComboBox<String>(CottageSearchType.getAllTypeInString());
 	
 	public CottageListView() {
 		super();
@@ -120,6 +127,15 @@ public class CottageListView extends JDialog implements View, ActionListener {
 		okBtn.setActionCommand(OK_BTN);
 		okBtn.addActionListener(this);
 		actionPanel.add(okBtn);
+		
+		actionPanel.add(searchInput);
+		
+		actionPanel.add(searchOption);
+		
+		JButton searchBtn = new JButton(SEARCH_BTN);
+		searchBtn.setActionCommand(SEARCH_BTN);
+		searchBtn.addActionListener(this);
+		actionPanel.add(searchBtn);
 	}
 	
 	@Override
@@ -134,8 +150,42 @@ public class CottageListView extends JDialog implements View, ActionListener {
 				int idCottage = cottageButton.getIdEntity();
 				this.controller.requestSpecificCottageView(idCottage);
 				break;
+			case SEARCH_BTN : 
+				searchAction();
+				break;
 		}
 	}
+	
+	private void searchAction() {
+		//pourrait être mieux fait, mais simplifié comme bonus
+		if(searchInput != null && !searchInput.getText().isBlank()) {
+			CottageSearchType type = null;
+			if(searchOption.getSelectedItem() == CottageSearchType.BY_NB_OF_ROOM.string) {
+				type = CottageSearchType.BY_NB_OF_ROOM;
+			}
+			else if(searchOption.getSelectedItem() == CottageSearchType.BY_REGION_NAME.string)
+			{
+				type = CottageSearchType.BY_REGION_NAME;
+			}
+			Collection<CottageDTOForList> cottages = controller.searchInList(searchInput.getText(), type);
+			String globalMessage = "";
+			if(!cottages.isEmpty()) {
+				for(CottageDTOForList c : cottages) {
+					OutfittingDtoForGet o = controller.getOutfittingObject(c.getIdOfOutfitting());
+					String message = "\nId: " + c.getID() + "\nNom: " + c.getName() + "\nNombre d'invités maximun: "+ c.getNbOfGuests() +"\nNom de la pourvoirie: "+ o.getName() + "\nRégion de la pourvoirie: " + o.getRegion() + "\n";
+					globalMessage = globalMessage + message;
+				}
+			}
+			else {
+				globalMessage = "Auncun résultat de recherche trouvé";
+			}
+			JOptionPane.showInternalMessageDialog(null, globalMessage, "Resultat de recherche pour: "+searchInput.getText(), JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			displayError("Cant search with empty search info");
+		}
+	}
+		
 
 	@Override
 	public void displayError(String message) 
@@ -152,5 +202,4 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	{
 		setUpCottageListInfo();
 	}
-
 }

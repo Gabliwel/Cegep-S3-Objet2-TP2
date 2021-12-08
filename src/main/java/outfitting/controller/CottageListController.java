@@ -8,10 +8,13 @@ import java.util.stream.Collectors;
 
 import outfitting.controller.iController.IControllerOrchestrator;
 import outfitting.controller.iController.ICottageListController;
-
+import outfitting.controller.search.CottageSearchFactory;
+import outfitting.controller.search.CottageSearchType;
 import outfitting.sort.CompareByAmountOfGuest;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
+import outfitting.convertor.OutfittingConverter;
 import outfitting.dto.CottageDTOForList;
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;
@@ -26,6 +29,8 @@ public class CottageListController implements ICottageListController, Observer{
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageListDTOToCottageConvertor cottageConvertor;
+	private OutfittingConverter outftittingConverter;
+	private CottageSearchFactory searchFactory;
 	private Subject subject;
 	
 
@@ -36,6 +41,8 @@ public class CottageListController implements ICottageListController, Observer{
 		this.repositoryOutfitting = repositoryOutfitting;
 		this.view = view;
 		this.cottageConvertor = new CottageListDTOToCottageConvertor();
+		this.outftittingConverter = new OutfittingConverter();
+		this.searchFactory = new CottageSearchFactory();
 		
 		subject.addObserver(this);
 	}
@@ -52,7 +59,6 @@ public class CottageListController implements ICottageListController, Observer{
 		return cottageConvertor.listOfCottageToDTO(list);
 	}
 	
-	@Override
 	public List<Cottage> listAscendingByNbGuest(Collection<Cottage> cottageCollection)
 	{
 		Comparator<Cottage> comparatorType;
@@ -64,9 +70,9 @@ public class CottageListController implements ICottageListController, Observer{
 	}
 	
 	@Override
-	public Outfitting getOutfittingObject(int id) 
+	public OutfittingDtoForGet getOutfittingObject(int id) 
 	{
-		return this.repositoryOutfitting.searchById(id);
+		return outftittingConverter.getConvertTo(this.repositoryOutfitting.searchById(id));
 	}
 	
 	public void requestSpecificCottageView(int id) 
@@ -77,6 +83,11 @@ public class CottageListController implements ICottageListController, Observer{
 	@Override
 	public void react() {
 		this.view.refresh();
-		
+	}
+
+	@Override
+	public Collection<CottageDTOForList> searchInList(String researchTerm, CottageSearchType type) {
+		//fait très rapidement comme bonus, mais pourrait facilement être mieux fait
+		return searchFactory.giveMeStrategyForSortType(researchTerm, type, repository, repositoryOutfitting);
 	}
 }

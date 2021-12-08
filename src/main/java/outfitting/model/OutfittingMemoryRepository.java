@@ -9,7 +9,6 @@ import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Contact;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.RegionName;
-import outfitting.observer.Subject;
 
 public class OutfittingMemoryRepository implements GenericRepository<Outfitting> {
 

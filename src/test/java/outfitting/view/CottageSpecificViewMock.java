@@ -29,6 +29,4 @@ public class CottageSpecificViewMock implements View{
 		// TODO Auto-generated method stub
 		
 	}
-
-
 }

@@ -20,7 +20,7 @@ public class CottageMemoryRepository implements Subject, GenericRepository<Cotta
 	public CottageMemoryRepository()
 	{
 		cottages = new HashMap<>();
-		this.observers = new ArrayList();
+		this.observers = new ArrayList<Observer>();
 		dataSeed();
 	}
 	

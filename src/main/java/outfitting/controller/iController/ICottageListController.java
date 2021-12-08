@@ -1,16 +1,17 @@
 package outfitting.controller.iController;
 
 import java.util.Collection;
+
 import java.util.List;
 
+import outfitting.controller.search.CottageSearchType;
 import outfitting.dto.CottageDTOForList;
-import outfitting.model.entity.Cottage;
-import outfitting.model.entity.Outfitting;
+import outfitting.dto.OutfittingDtoForGet;
 
 public interface ICottageListController {
 	List<CottageDTOForList> getCottageList();
 	void requestCottageList();
-	List<Cottage> listAscendingByNbGuest(Collection<Cottage> cottageList);
 	void requestSpecificCottageView(int idCottage);
-	Outfitting getOutfittingObject(int id);
+	OutfittingDtoForGet getOutfittingObject(int id);
+	Collection<CottageDTOForList> searchInList(String researchTerm, CottageSearchType type);
 }

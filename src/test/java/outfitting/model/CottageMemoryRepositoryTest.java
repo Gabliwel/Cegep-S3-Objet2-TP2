@@ -1,6 +1,7 @@
 package outfitting.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +16,6 @@ import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
 import outfitting.observer.ObserverMock;
-import outfitting.observer.SubjectMock;
 
 public class CottageMemoryRepositoryTest {
 	//The seeded value:
@@ -57,7 +57,7 @@ public class CottageMemoryRepositoryTest {
 
 		assertThrows(IdDoesNotExistException.class, () ->
 		{
-			Cottage result = aRepository.searchById(9999);
+			aRepository.searchById(9999);
 		});
 	}
 	

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import outfitting.dto.OutfittingDtoForAdd;
 import outfitting.dto.OutfittingDtoForGet;
-import outfitting.convertor.OutfittingConverter;
 import outfitting.model.entity.Contact;
 import outfitting.model.entity.Outfitting;
 

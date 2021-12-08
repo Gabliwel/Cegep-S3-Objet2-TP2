@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import outfitting.model.entity.CottageMock;
-import outfitting.sort.CompareByAmountOfGuest;
 
 public class CompareByAmountOfGuestTest {
 	

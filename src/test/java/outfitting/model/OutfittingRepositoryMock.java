@@ -7,7 +7,6 @@ import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.OutfittingMock;
-import outfitting.observer.Subject;
 
 public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 
@@ -16,6 +15,8 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 	public static final String EXPECTED_NAME_FOR_SEARCH = "EXPECTED_NAME";
 	public static final String UNEXPECTED_NAME_FOR_SEARCH = "UNEXPECTED_NAME";
 	public static final String THROW_ID_ALREADY_EXIST_EXCEPTION_NAME = "EXPECTED_NAME";
+	
+	public String region = "";
 	
 	@Override
 	public void add(Outfitting o) {
@@ -43,8 +44,7 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 		if(id == 10) {
 			throw new IdDoesNotExistException("");
 		}
-		return new OutfittingMock(-1, "", "");
-		//return null;
+		return new OutfittingMock(-1, "", region);
 	}
 
 	@Override

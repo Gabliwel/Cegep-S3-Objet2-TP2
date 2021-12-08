@@ -1,12 +1,13 @@
 package outfitting.controller;
 
 import java.util.Collection;
+
 import java.util.List;
 
 import outfitting.controller.iController.ICottageListController;
+import outfitting.controller.search.CottageSearchType;
 import outfitting.dto.CottageDTOForList;
-import outfitting.model.entity.Cottage;
-import outfitting.model.entity.Outfitting;
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.observer.Observer;
 
 public class CottageListControllerMock implements ICottageListController, Observer{
@@ -27,18 +28,12 @@ public class CottageListControllerMock implements ICottageListController, Observ
 	}
 
 	@Override
-	public List<Cottage> listAscendingByNbGuest(Collection<Cottage> cottageList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void requestSpecificCottageView(int idCottage) {
 		requestSpecificCottageViewHasBeenCalled = true;
 	}
 
 	@Override
-	public Outfitting getOutfittingObject(int id) {
+	public OutfittingDtoForGet getOutfittingObject(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -46,5 +41,11 @@ public class CottageListControllerMock implements ICottageListController, Observ
 	@Override
 	public void react() {
 		reactHasBeenCalled = true;		
+	}
+
+	@Override
+	public Collection<CottageDTOForList> searchInList(String researchTerm, CottageSearchType type) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

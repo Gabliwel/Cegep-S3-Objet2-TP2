@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import outfitting.model.entity.Outfitting;
-import outfitting.observer.Subject;
 
 public class OutfittingRepositoryMockWithAdd implements GenericRepository<Outfitting>{
 
@@ -35,8 +34,7 @@ public class OutfittingRepositoryMockWithAdd implements GenericRepository<Outfit
 
 	@Override
 	public Outfitting searchById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return outfittings.get(id);
 	}
 
 	@Override

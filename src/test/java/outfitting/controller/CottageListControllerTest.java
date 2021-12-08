@@ -1,5 +1,6 @@
 package outfitting.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -12,6 +13,7 @@ import outfitting.dto.CottageDTOForList;
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
 import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.CottageMock;
+import outfitting.model.entity.OutfittingMock;
 import outfitting.view.ViewMock;
 
 public class CottageListControllerTest {
@@ -55,7 +57,7 @@ public class CottageListControllerTest {
 	@Test
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
-		assertNull(controller.getOutfittingObject(ANY_ID));
+		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingMock);
 		assertTrue(repo2.searchByIdBeenCalled);
 	}
 	

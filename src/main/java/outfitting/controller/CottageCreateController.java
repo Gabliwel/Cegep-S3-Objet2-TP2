@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import outfitting.convertor.CottageCreateDTOToCottageConvertor;
 import outfitting.dto.CottageDtoForCreate;
+import outfitting.dto.OutfittingConverter;
+import outfitting.dto.OutfittingDtoForAdd;
 import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
@@ -18,6 +20,7 @@ public class CottageCreateController implements ICottageCreateController {
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageCreateDTOToCottageConvertor cottageConvertor;
+	private OutfittingConverter outifittingConvertor;
 
 	public CottageCreateController(IControllerOrchestrator controllerOrchestrator, View view, 
 				GenericRepository<Cottage> repository, GenericRepository<Outfitting> repositoryOfOutfitting) {
@@ -26,6 +29,7 @@ public class CottageCreateController implements ICottageCreateController {
 		this.repository = repository;
 		this.repositoryOfOutfitting = repositoryOfOutfitting;
 		this.cottageConvertor = new CottageCreateDTOToCottageConvertor();
+		this.outifittingConvertor = new OutfittingConverter();
 	}
 
 	@Override
@@ -38,6 +42,7 @@ public class CottageCreateController implements ICottageCreateController {
 		try 
 		{
 			this.repository.add(cottageConvertor.DTOToCottage(cottageDTO));
+			this.view.displaySuccess(cottageDTO.getName() + " à bien été ajouté");
 		}
 		catch(IdAlreadyExistException e)
 		{
@@ -50,6 +55,14 @@ public class CottageCreateController implements ICottageCreateController {
 	{
 		return this.repositoryOfOutfitting.getList().stream()
 				.collect(Collectors.toList());
+	}
+	
+	@Override 
+	public List<OutfittingDtoForAdd> getOutfittingDtoForCreateCollection()
+	{
+		return this.repositoryOfOutfitting.getList().stream()
+			.map(o -> new OutfittingDtoForAdd(o.getName(),o.getRegion(),o.getPhoneNumber(),o.getEmail(),o.getContact()))
+			.collect(Collectors.toList());
 	}
 	
 }

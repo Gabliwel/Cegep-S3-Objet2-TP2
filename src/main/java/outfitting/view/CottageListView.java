@@ -2,6 +2,7 @@ package outfitting.view;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import outfitting.controller.iController.ICottageListController;
@@ -25,12 +27,13 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	private static final String NB_OF_CHAMBER_TXT = "NB. CHAMBRES";
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
 	private static final String CONSULT_BUTTON = "Consulter le chalet";
+	private static final String OUTFITTING_NAME = "Nom de la pourvoirie";
 	
 	private ICottageListController controller;
 	
 	public CottageListView() {
 		super();
-		this.initialize();
+		this.initialize(); 
 	}
 	
 	private void initialize() {
@@ -67,13 +70,14 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	{
 		JPanel inputDataPanel = new JPanel();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 6));
+		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 7));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
 		inputDataPanel.add(new JLabel(NB_PERSON_TXT));
 		inputDataPanel.add(new JLabel(NB_OF_CHAMBER_TXT));
 		inputDataPanel.add(new JLabel(PRICE_PER_NIGHT_TXT));
+		inputDataPanel.add(new JLabel(OUTFITTING_NAME));
 		inputDataPanel.add(new JLabel(""));
 		
 		for(CottageDTOForList cottage : this.controller.getCottageList()) {
@@ -92,6 +96,10 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			JLabel pricePerNight = new JLabel(Integer.toString(cottage.getPricePerNight()));
 			inputDataPanel.add(pricePerNight);
 			
+			JLabel outfittingName = new JLabel(controller.getOutfittingObject(cottage.getIdOfOutfitting()).getName());
+			inputDataPanel.add(outfittingName);
+			
+
 			IdButton idButton = new IdButton(CONSULT_BUTTON, cottage.getID());
 			idButton.setActionCommand(CONSULT_BUTTON);
 			idButton.addActionListener(this);
@@ -125,7 +133,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	}
 
 	@Override
-	public void displayError(String message) { }
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
+	}
+
 
 	@Override
 	public void displaySuccess(String message) { }

@@ -2,6 +2,7 @@ package outfitting.model;
 
 import java.util.Collection;
 
+import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.entity.Cottage;
 
 public class CottageRepositoryMock implements GenericRepository<Cottage> {
@@ -9,9 +10,14 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;
 	public boolean removeHasBeenCalled = false;
+	public boolean searchByIdHasBeenCalled = false; 
 	
 	@Override
 	public void add(Cottage cottage) {
+		if(addHasBeenCalled) 
+		{
+			throw new IdAlreadyExistException("it either work or it didnt");
+		}
 		addHasBeenCalled = true;
 		Cottage.lastId = 0;
 	}
@@ -29,6 +35,7 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 
 	@Override
 	public Cottage searchById(int id) {
+		searchByIdHasBeenCalled = true;
 		return null;
 	}
 

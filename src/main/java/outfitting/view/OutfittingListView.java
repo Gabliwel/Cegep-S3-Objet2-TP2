@@ -1,9 +1,6 @@
 package outfitting.view;
 
 import java.awt.BorderLayout;
-
-
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import outfitting.controller.iController.IOutfittingListController;
 import outfitting.dto.OutfittingDtoForGet;
@@ -32,10 +30,12 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 	private static final String REGION_TXT = "RÉGION";
 	private static final String PHONE_NUMBER_TXT = "NUMÉRO DE TÉLÉPHONE";
 	private static final String EMAIL_TXT = "ADRESSE COURRIEL";
+	private static final String SEARCH_BTN = "CHERCHER UNE POURVOIRIE";
 	
 	private IOutfittingListController controller;
 	private JPanel inputDataPanel = new JPanel();
 	private JPanel actionPanel = new JPanel(); 
+	private JTextField searchInput = new JTextField(30);
 	
 	public OutfittingListView() {
 		super();
@@ -65,7 +65,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		this.setUpButtons();
 		this.setUpOtherPanels();
 	}
-	
+
 	private void setUpOtherPanels() {
 		this.add(new JPanel(), BorderLayout.NORTH);
 		this.add(new JPanel(), BorderLayout.WEST);
@@ -132,6 +132,13 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 		sortByRegion.setActionCommand(SORT_BY_REGION_BTN);
 		sortByRegion.addActionListener(this);
 		actionPanel.add(sortByRegion);
+		
+		actionPanel.add(searchInput);
+		
+		JButton searchBtn = new JButton(SEARCH_BTN);
+		searchBtn.setActionCommand(SEARCH_BTN);
+		searchBtn.addActionListener(this);
+		actionPanel.add(searchBtn);
 	}
 	
 	@Override
@@ -142,7 +149,28 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 			case SORT_BY_ID_BTN -> displayOnType(SortOutfittingType.NON_SORTED);
 			case SORT_BY_NAME_BTN -> displayOnType(SortOutfittingType.BY_NAME);
 			case SORT_BY_REGION_BTN -> displayOnType(SortOutfittingType.BY_REGION);
+			case SEARCH_BTN -> searchAction();
 			case DETAIL_BTN -> detailBtnAction((IdButton) e.getSource());
+		}
+	}
+
+	private void searchAction() {
+		if(searchInput != null && !searchInput.getText().isBlank()) {
+			Collection<OutfittingDtoForGet> outfittings = controller.searchInList(searchInput.getText());
+			String globalMessage = "";
+			if(!outfittings.isEmpty()) {
+				for(OutfittingDtoForGet o : outfittings) {
+					String message = "\nId: " + o.getId() + "\nNom: " + o.getName() + "\nRégion: "+ o.getRegion() +"\nTéléphone: " + o.getPhoneNumber() + "\nEmail: " + o.getEmail() + "\n";
+					globalMessage = globalMessage + message;
+				}
+			}
+			else {
+				globalMessage = "Auncun résultat de recherche trouvé";
+			}
+			JOptionPane.showInternalMessageDialog(null, globalMessage, "Resultat de recherche pour: "+searchInput.getText(), JOptionPane.INFORMATION_MESSAGE);
+		}
+		else {
+			displayError("Cant search with empty search info");
 		}
 	}
 

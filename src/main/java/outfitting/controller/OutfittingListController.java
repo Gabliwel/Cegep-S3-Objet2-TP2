@@ -57,4 +57,10 @@ public class OutfittingListController implements IOutfittingListController{
 			return converter.getConvertTo(list.stream().sorted(new OutfittingSortFactory().giveMeStrategyForSortType(type)).collect(Collectors.toList()));
 		}
 	}
+
+	@Override
+	public Collection<OutfittingDtoForGet> searchInList(String researchTerm) {
+		Collection<Outfitting> list = repository.getList();
+		return converter.getConvertTo(list.stream().filter(c -> c.getName().contains(researchTerm)).collect(Collectors.toList()));
+	}
 }

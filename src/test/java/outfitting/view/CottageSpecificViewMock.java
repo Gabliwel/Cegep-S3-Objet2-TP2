@@ -24,5 +24,11 @@ public class CottageSpecificViewMock implements View{
 		
 	}
 
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

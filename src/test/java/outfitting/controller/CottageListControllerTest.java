@@ -1,7 +1,5 @@
 package outfitting.controller;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
@@ -68,5 +66,15 @@ public class CottageListControllerTest {
 		controllerMock.requestSpecificCottageView(ANY_ID);
 		
 		assertTrue(controllerMock.requestSpecificCottageViewHasBeenCalled);
+	}
+	
+	@Test
+	public void WHEN_reactHasBeenCalled_THEN_reactHasBeenCalledIsTrue() 
+	{
+		CottageListControllerMock controllerMock = new CottageListControllerMock();		
+		
+		controllerMock.react();
+		
+		assertTrue(controllerMock.reactHasBeenCalled);
 	}
 }

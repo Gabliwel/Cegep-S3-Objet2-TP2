@@ -7,10 +7,12 @@ import outfitting.controller.iController.ICottageListController;
 import outfitting.dto.CottageDTOForList;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;
+import outfitting.observer.Observer;
 
-public class CottageListControllerMock implements ICottageListController{
+public class CottageListControllerMock implements ICottageListController, Observer{
 
 	public boolean requestSpecificCottageViewHasBeenCalled = false;
+	public boolean reactHasBeenCalled = false;
 	
 	@Override
 	public List<CottageDTOForList> getCottageList() {
@@ -41,4 +43,8 @@ public class CottageListControllerMock implements ICottageListController{
 		return null;
 	}
 
+	@Override
+	public void react() {
+		reactHasBeenCalled = true;		
+	}
 }

@@ -1,20 +1,26 @@
 package outfitting.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
+import outfitting.observer.Observer;
+import outfitting.observer.Subject;
 
-public class CottageMemoryRepository implements GenericRepository<Cottage> {
+public class CottageMemoryRepository implements Subject, GenericRepository<Cottage>{
 
 	private Map<Integer, Cottage> cottages;
+	private List<Observer> observers;
 	
 	public CottageMemoryRepository()
 	{
 		cottages = new HashMap<>();
+		this.observers = new ArrayList();
 		dataSeed();
 	}
 	
@@ -28,6 +34,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		{
 			throw new IdAlreadyExistException("Le ID" + cottage.getId()+ " existe deja");
 		}
+		this.notifyAllObserver();
 	}
 
 	@Override
@@ -64,6 +71,7 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		{
 			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
 		}
+		this.notifyAllObserver();
 	}
 
 	private void dataSeed() {
@@ -76,5 +84,20 @@ public class CottageMemoryRepository implements GenericRepository<Cottage> {
 		cottages.put(cottage2.getId(), cottage2);
 		cottages.put(cottage3.getId(), cottage3);
 		cottages.put(cottage4.getId(), cottage4);
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		this.observers.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		this.observers.remove(o);
+	}
+
+	@Override
+	public void notifyAllObserver() {
+		this.observers.forEach(o->o.react());
 	}
 }

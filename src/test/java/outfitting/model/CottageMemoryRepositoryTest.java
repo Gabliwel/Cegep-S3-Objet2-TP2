@@ -1,7 +1,9 @@
 package outfitting.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -12,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
+import outfitting.observer.ObserverMock;
+import outfitting.observer.SubjectMock;
 
 public class CottageMemoryRepositoryTest {
 	//The seeded value:
@@ -50,11 +54,10 @@ public class CottageMemoryRepositoryTest {
 	
 	@Test
 	public void when_gettingCottageByNonExistentId_then_execptionIsThrown() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
 
 		assertThrows(IdDoesNotExistException.class, () ->
 		{
-			Cottage result = repo.searchById(9999);
+			Cottage result = aRepository.searchById(9999);
 		});
 	}
 	
@@ -95,5 +98,40 @@ public class CottageMemoryRepositoryTest {
 		{
 			aRepository.searchById(cottage3.getId()+1);
 		});
+	}
+	
+	@Test
+	public void WHEN_addObserverIsCalled_THEN_anObserverIsAdded() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		ObserverMock observer = new ObserverMock();
+		
+		aRepo.addObserver(observer);
+		
+		assertTrue(aRepo.addObserverHasBeenCalled);	
+		assertTrue(aRepo.observers.contains(observer));
+	}
+	
+	@Test
+	public void WHEN_removeObserverIsCalled_THEN_anObserverIsRemoved() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		ObserverMock observer = new ObserverMock();
+		
+		aRepo.addObserver(observer);
+		aRepo.removeObserver(observer);
+		
+		assertTrue(aRepo.removeObserverHasBeenCalled);	
+		assertFalse(aRepo.observers.contains(observer));
+	}
+	
+	@Test
+	public void WHEN_notifyIsCalled_THEN_anObserverIsAdded() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		
+		aRepo.notifyAllObserver();
+		
+		assertTrue(aRepo.notifyHasBeenCalled);		
 	}
 }

@@ -5,6 +5,7 @@ public class CottageListMock implements View {
 	private static final long serialVersionUID = 1L;
 	public boolean displayHasBeenCalled = false;
 	public boolean displayErrorHasBeenCalled = false;
+	public boolean refreshHasBeenCalled = false;
 
 	@Override
 	public void display() 
@@ -20,7 +21,11 @@ public class CottageListMock implements View {
 
 	@Override
 	public void displaySuccess(String message) {
-		// TODO Auto-generated method stub
-		
+		//unimplemented 
+	}
+
+	@Override
+	public void refresh() {
+		refreshHasBeenCalled = true;
 	}
 }

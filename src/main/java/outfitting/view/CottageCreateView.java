@@ -167,4 +167,7 @@ public class CottageCreateView extends JDialog implements View, ActionListener {
 	{
 		JOptionPane.showInternalMessageDialog(null, message, "Succès", JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	@Override
+	public void refresh() {	}
 }

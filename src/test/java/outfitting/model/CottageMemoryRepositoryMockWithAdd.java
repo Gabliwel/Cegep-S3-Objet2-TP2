@@ -6,8 +6,10 @@ import java.util.Map;
 
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
+import outfitting.observer.Subject;
+import outfitting.observer.Observer;
 
-public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage> {
+public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cottage>, Subject {
 	
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false; 
@@ -55,5 +57,23 @@ public class CottageMemoryRepositoryMockWithAdd implements GenericRepository<Cot
 		{
 			throw new IdDoesNotExistException("Le ID" + id+ " n'existe pas");
 		}
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyAllObserver() {
+		// TODO Auto-generated method stub
+		
 	}
 }

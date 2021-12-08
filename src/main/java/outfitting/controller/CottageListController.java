@@ -15,23 +15,29 @@ import outfitting.dto.CottageDTOForList;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.Outfitting;
+import outfitting.observer.Observer;
+import outfitting.observer.Subject;
 import outfitting.view.View;
 
-public class CottageListController implements ICottageListController {
+public class CottageListController implements ICottageListController, Observer{
 
 	private GenericRepository<Cottage> repository;
 	private GenericRepository<Outfitting> repositoryOutfitting;
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageListDTOToCottageConvertor cottageConvertor;
+	private Subject subject;
 	
 
 	public CottageListController(IControllerOrchestrator controllerOrchestrator, View view, GenericRepository<Cottage> repository, GenericRepository<Outfitting> repositoryOutfitting) {
 		this.orchestrator = controllerOrchestrator;
+		this.subject = (Subject) repository;
 		this.repository = repository;
 		this.repositoryOutfitting = repositoryOutfitting;
 		this.view = view;
 		this.cottageConvertor = new CottageListDTOToCottageConvertor();
+		
+		subject.addObserver(this);
 	}
 
 	@Override
@@ -66,5 +72,11 @@ public class CottageListController implements ICottageListController {
 	public void requestSpecificCottageView(int id) 
 	{
 		this.orchestrator.goToCottageSpecificView(id);
+	}
+	
+	@Override
+	public void react() {
+		this.view.refresh();
+		
 	}
 }

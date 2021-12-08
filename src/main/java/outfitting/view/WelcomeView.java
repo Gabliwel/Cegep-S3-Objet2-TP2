@@ -141,4 +141,7 @@ public class WelcomeView extends JFrame implements View, ActionListener {
 
 	@Override
 	public void displaySuccess(String message) { }
+
+	@Override
+	public void refresh() {	}
 }

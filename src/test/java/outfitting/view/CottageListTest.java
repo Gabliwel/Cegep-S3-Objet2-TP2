@@ -28,4 +28,14 @@ public class CottageListTest {
 		
 		assertTrue(mock.displayErrorHasBeenCalled);
 	}
+	
+	@Test
+	public void WHEN_refreshIsCalled_THEN_refreshHasBeenCalledIsTrue() 
+	{
+		CottageListMock mock = new CottageListMock();
+		
+		mock.refresh();
+		
+		assertTrue(mock.refreshHasBeenCalled);
+	}
 }

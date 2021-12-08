@@ -182,7 +182,7 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			JOptionPane.showInternalMessageDialog(null, globalMessage, "Resultat de recherche pour: "+searchInput.getText(), JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
-			displayError("Cant search with empty search info");
+			displayError("Peut pas executer la recheche, car le champ est vide");
 		}
 	}
 		

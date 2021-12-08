@@ -1,5 +1,12 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.ICottageCreateController;
+import outfitting.controller.iController.ICottageListController;
+import outfitting.controller.iController.ICottageSpecificController;
+import outfitting.controller.iController.IOutfittingAddController;
+import outfitting.controller.iController.IOutfittingListController;
+import outfitting.controller.iController.IWelcomeController;
 import outfitting.model.CottageMemoryRepository;
 import outfitting.model.GenericRepository;
 import outfitting.model.OutfittingMemoryRepository;
@@ -59,7 +66,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	
 	private void initCreateCottage() {
 		this.cottageCreateView = new CottageCreateView();
-		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository);
+		this.createCottageController = new CottageCreateController(this, this.cottageCreateView, this.cottageRepository, this.outfittingRepository);
 		this.cottageCreateView.setController(createCottageController);
 	}
 	
@@ -70,7 +77,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 
 	private void initCottageList() {
 		this.cottageListView = new CottageListView();
-		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository);
+		this.cottageListController = new CottageListController(this, cottageListView, this.cottageRepository, this.outfittingRepository);
 		this.cottageListView.setController(cottageListController);
 	}
 
@@ -83,7 +90,7 @@ public class ControllerOrchestrator implements IControllerOrchestrator {
 	private void initCottageSpecific(int id) 
 	{
 		this.cottageSpecificView = new CottageSpecificView();
-		this.cottageSpecificController = new CottageSpecificController(id, cottageRepository, this, cottageSpecificView);
+		this.cottageSpecificController = new CottageSpecificController(id, cottageRepository,outfittingRepository, this, cottageSpecificView);
 		this.cottageSpecificView.setController(cottageSpecificController);
 	}
 	

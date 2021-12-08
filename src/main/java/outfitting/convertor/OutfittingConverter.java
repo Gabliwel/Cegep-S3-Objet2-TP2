@@ -1,8 +1,10 @@
-package outfitting.dto;
+package outfitting.convertor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import outfitting.dto.OutfittingDtoForAdd;
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.model.entity.Outfitting;
 
 public class OutfittingConverter {

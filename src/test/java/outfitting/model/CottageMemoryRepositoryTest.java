@@ -1,7 +1,9 @@
 package outfitting.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -9,24 +11,26 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
+import outfitting.observer.ObserverMock;
+import outfitting.observer.SubjectMock;
 
 public class CottageMemoryRepositoryTest {
 	//The seeded value:
 	public static final int ND_SEEDED_COTTAGE = 4;
 	
-	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70);
-	CottageMock cottage2 = new CottageMock("Teepee", 3, 16, 50);
-	CottageMock cottage3 = new CottageMock("The Max Int Cottage", 4, 16, 60);
-	CottageMock cottage4 = new CottageMock("Japan", 2, 7, 100);
+	CottageMock cottage1 = new CottageMock("Nar Shaddaa's Cottage", 5, 20, 70,0);
+	CottageMock cottage2 = new CottageMock("Teepee", 3, 16, 50,0);
+	CottageMock cottage3 = new CottageMock("The Max Int Cottage", 4, 16, 60,0);
+	CottageMock cottage4 = new CottageMock("Japan", 2, 7, 100,0); 
 	
 	CottageMemoryRepository aRepository = null;
 	
 	@BeforeEach
 	public void init()
 	{
-		Cottage.lastId = 0;
 		aRepository = new CottageMemoryRepository();
 		
 		aRepository.add(cottage1);
@@ -49,21 +53,22 @@ public class CottageMemoryRepositoryTest {
 	}
 	
 	@Test
-	public void when_gettingCottageByNonExistentId_then_returnNull() {
-		CottageMemoryRepository repo = new CottageMemoryRepository();
-		
-		Cottage result = repo.searchById(9999);
+	public void when_gettingCottageByNonExistentId_then_execptionIsThrown() {
 
-		assertNull(result);
+		assertThrows(IdDoesNotExistException.class, () ->
+		{
+			Cottage result = aRepository.searchById(9999);
+		});
 	}
-
+	
 	@Test
-	public void when_addCottageToRepo_then_cottageIsInRepo() {
-		CottageMock cottage = new CottageMock("AAAAAAAAAAAAA", 12345, 3, 34);
+	public void WHEN_addIsCalledWithCorrectValue_THEN_cottageIsCorrectlyAddedInRepo() 
+	{
+		CottageMock cottageMock = new CottageMock("Te Disleexic Cotaggess",2,3,4,0);
 		
-		aRepository.add(cottage);
-
-		assertEquals(aRepository.searchById(cottage.getId()), cottage);
+		aRepository.add(cottageMock);
+		
+		assertEquals(cottageMock,aRepository.searchById(cottageMock.getId()));
 	}
 	
 	@Test
@@ -89,6 +94,44 @@ public class CottageMemoryRepositoryTest {
 	{
 		aRepository.remove(cottage4.getId());
 		
-		assertNull(aRepository.searchById(cottage3.getId()+1));
+		assertThrows(IdDoesNotExistException.class, () ->
+		{
+			aRepository.searchById(cottage3.getId()+1);
+		});
+	}
+	
+	@Test
+	public void WHEN_addObserverIsCalled_THEN_anObserverIsAdded() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		ObserverMock observer = new ObserverMock();
+		
+		aRepo.addObserver(observer);
+		
+		assertTrue(aRepo.addObserverHasBeenCalled);	
+		assertTrue(aRepo.observers.contains(observer));
+	}
+	
+	@Test
+	public void WHEN_removeObserverIsCalled_THEN_anObserverIsRemoved() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		ObserverMock observer = new ObserverMock();
+		
+		aRepo.addObserver(observer);
+		aRepo.removeObserver(observer);
+		
+		assertTrue(aRepo.removeObserverHasBeenCalled);	
+		assertFalse(aRepo.observers.contains(observer));
+	}
+	
+	@Test
+	public void WHEN_notifyIsCalled_THEN_anObserverIsAdded() 
+	{
+		CottageRepositoryMock aRepo = new CottageRepositoryMock();
+		
+		aRepo.notifyAllObserver();
+		
+		assertTrue(aRepo.notifyHasBeenCalled);		
 	}
 }

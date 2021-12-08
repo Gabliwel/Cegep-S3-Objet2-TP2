@@ -7,25 +7,29 @@ import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.OutfittingMock;
+import outfitting.observer.Subject;
 
 public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 
 	public boolean getListBeenCalled = false;
 	public boolean searchByIdBeenCalled = false;
+	public static final String EXPECTED_NAME_FOR_SEARCH = "EXPECTED_NAME";
+	public static final String UNEXPECTED_NAME_FOR_SEARCH = "UNEXPECTED_NAME";
+	public static final String THROW_ID_ALREADY_EXIST_EXCEPTION_NAME = "EXPECTED_NAME";
 	
 	@Override
 	public void add(Outfitting o) {
 		Outfitting.lastId = 0;
-		if(o.getName()=="id already exist exception name")
+		if(o.getName()==THROW_ID_ALREADY_EXIST_EXCEPTION_NAME)
 		{
 			throw new IdAlreadyExistException("");
 		}
 	}
 
-	@Override
+	@Override 
 	public Collection<Outfitting> getList() {
 		getListBeenCalled = true;
-		return Arrays.asList(new OutfittingMock(-1, null, null));
+		return Arrays.asList(new OutfittingMock(-1, EXPECTED_NAME_FOR_SEARCH, null));
 	}
 
 	@Override
@@ -40,10 +44,12 @@ public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 			throw new IdDoesNotExistException("");
 		}
 		return new OutfittingMock(-1, "", "");
+		//return null;
 	}
 
 	@Override
 	public void remove(int id) {
-
+		// TODO Auto-generated method stub
+		
 	}
 }

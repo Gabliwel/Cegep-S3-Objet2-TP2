@@ -9,6 +9,7 @@ import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Contact;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.RegionName;
+import outfitting.observer.Subject;
 
 public class OutfittingMemoryRepository implements GenericRepository<Outfitting> {
 
@@ -17,7 +18,7 @@ public class OutfittingMemoryRepository implements GenericRepository<Outfitting>
 	public OutfittingMemoryRepository() {
 		outfittings = new HashMap<>();
 		dataSeed();
-	}
+	} 
 	
 	@Override
 	public void add(Outfitting o) {

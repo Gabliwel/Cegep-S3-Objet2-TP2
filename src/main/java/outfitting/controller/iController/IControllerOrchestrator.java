@@ -1,4 +1,4 @@
-package outfitting.controller;
+package outfitting.controller.iController;
 
 public interface IControllerOrchestrator {
 

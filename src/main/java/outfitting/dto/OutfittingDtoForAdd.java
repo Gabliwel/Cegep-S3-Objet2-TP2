@@ -1,6 +1,7 @@
 package outfitting.dto;
 
 import outfitting.model.entity.Contact;
+import outfitting.model.entity.Outfitting;
 
 public class OutfittingDtoForAdd {
 	
@@ -36,5 +37,15 @@ public class OutfittingDtoForAdd {
 
 	public Contact getContact() {
 		return contact;
+	}
+
+	public int getId() {
+		return Outfitting.lastId;
+	}
+	
+	@Override
+	public String toString() 
+	{
+		return this.name;
 	}
 }

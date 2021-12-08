@@ -5,7 +5,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import outfitting.dto.OutfittingConverter;
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.IOutfittingListController;
+import outfitting.convertor.OutfittingConverter;
 import outfitting.dto.OutfittingDtoForGet;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.GenericRepository;
@@ -54,5 +56,11 @@ public class OutfittingListController implements IOutfittingListController{
 			Collection<Outfitting> list = repository.getList();
 			return converter.getConvertTo(list.stream().sorted(new OutfittingSortFactory().giveMeStrategyForSortType(type)).collect(Collectors.toList()));
 		}
+	}
+
+	@Override
+	public Collection<OutfittingDtoForGet> searchInList(String researchTerm) {
+		Collection<Outfitting> list = repository.getList();
+		return converter.getConvertTo(list.stream().filter(c -> c.getName().contains(researchTerm)).collect(Collectors.toList()));
 	}
 }

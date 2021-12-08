@@ -11,14 +11,16 @@ public class Cottage {
 	private int maxOfGuests;
 	private int nbOfChamber;
 	private int pricePerNight;
+	private int idOfOutfitting;
 
-	public Cottage(String name, int maxOfGuest, int nbOfChamber, int pricePerNight) {
+	public Cottage(String name, int maxOfGuest, int nbOfChamber, int pricePerNight, int idOfOutfitting) {
 		lastId += ID_ADDED_VALUE;
 		this.id = lastId;
 		this.name = name;
 		this.maxOfGuests = maxOfGuest;
 		this.nbOfChamber = nbOfChamber;
 		this.pricePerNight = pricePerNight;
+		this.idOfOutfitting = idOfOutfitting;
 	}
 
 	public int getId() {
@@ -42,10 +44,9 @@ public class Cottage {
 	{
 		return this.pricePerNight;
 	}
-
-	public void setId(int id) 
+	
+	public int getIdOfOutfitting() 
 	{
-		this.id = id;
-		
+		return this.idOfOutfitting;
 	}
 }

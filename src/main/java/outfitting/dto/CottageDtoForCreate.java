@@ -6,13 +6,15 @@ public class CottageDtoForCreate
 	private final int guest;
 	private final int nbOfChamber;
 	private final int pricePerNight;
+	private final int idOfOutfitting;
 	
-	public CottageDtoForCreate(String name, int guest, int nbOfChamber, int pricePerNight)
+	public CottageDtoForCreate(String name, int guest, int nbOfChamber, int pricePerNight, int idOfOutfitting)
 	{
 		this.name = name;
 		this.guest = guest;
 		this.nbOfChamber = nbOfChamber;
 		this.pricePerNight = pricePerNight;
+		this.idOfOutfitting = idOfOutfitting;
 	}
 	
 	public int getNbOfChamber() 
@@ -33,5 +35,10 @@ public class CottageDtoForCreate
 	public int getGuest()
 	{
 		return this.guest;
+	}
+	
+	public int getIdOfOutfitting() 
+	{
+		return this.idOfOutfitting;
 	}
 }

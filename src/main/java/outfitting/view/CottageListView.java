@@ -2,6 +2,7 @@ package outfitting.view;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +10,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-import outfitting.controller.ICottageListController;
+import outfitting.controller.iController.ICottageListController;
 import outfitting.dto.CottageDTOForList;
-import outifitting.button.IButtonID;
-import outifitting.button.IDButtonForListOfCottage;
 
 public class CottageListView extends JDialog implements View, ActionListener {
 
@@ -27,6 +28,8 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	private static final String NB_OF_CHAMBER_TXT = "NB. CHAMBRES";
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
 	private static final String CONSULT_BUTTON = "Consulter le chalet";
+	private static final String OUTFITTING_NAME = "Nom de la pourvoirie";
+	private JPanel inputDataPanel = new JPanel();
 	
 	private ICottageListController controller;
 	
@@ -67,15 +70,19 @@ public class CottageListView extends JDialog implements View, ActionListener {
 
 	private void setUpCottageListInfo() 
 	{
-		JPanel inputDataPanel = new JPanel();
+		inputDataPanel.removeAll();
+		inputDataPanel.revalidate();
+		inputDataPanel.repaint();
 		this.add(inputDataPanel);
-		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 6));
+		
+		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 7));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
 		inputDataPanel.add(new JLabel(NAME_TXT));
 		inputDataPanel.add(new JLabel(NB_PERSON_TXT));
 		inputDataPanel.add(new JLabel(NB_OF_CHAMBER_TXT));
 		inputDataPanel.add(new JLabel(PRICE_PER_NIGHT_TXT));
+		inputDataPanel.add(new JLabel(OUTFITTING_NAME));
 		inputDataPanel.add(new JLabel(""));
 		
 		for(CottageDTOForList cottage : this.controller.getCottageList()) {
@@ -94,7 +101,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			JLabel pricePerNight = new JLabel(Integer.toString(cottage.getPricePerNight()));
 			inputDataPanel.add(pricePerNight);
 			
-			IDButtonForListOfCottage idButton = new IDButtonForListOfCottage(CONSULT_BUTTON, cottage.getID());
+			JLabel outfittingName = new JLabel(controller.getOutfittingObject(cottage.getIdOfOutfitting()).getName());
+			inputDataPanel.add(outfittingName);
+			
+
+			IdButton idButton = new IdButton(CONSULT_BUTTON, cottage.getID());
 			idButton.setActionCommand(CONSULT_BUTTON);
 			idButton.addActionListener(this);
 			inputDataPanel.add(idButton);
@@ -119,17 +130,27 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			case OK_BTN : dispose();
 							break;
 			case CONSULT_BUTTON : 
-				IButtonID cottageButton = (IDButtonForListOfCottage) e.getSource();
-				int idCottage = cottageButton.getId();
+				IdButton cottageButton = (IdButton) e.getSource();
+				int idCottage = cottageButton.getIdEntity();
 				this.controller.requestSpecificCottageView(idCottage);
 				break;
 		}
 	}
 
 	@Override
-	public void displayError(String message) { }
+	public void displayError(String message) 
+	{
+		JOptionPane.showInternalMessageDialog(null, message);
+	}
+
 
 	@Override
 	public void displaySuccess(String message) { }
+	
+	@Override
+	public void refresh() 
+	{
+		setUpCottageListInfo();
+	}
 
 }

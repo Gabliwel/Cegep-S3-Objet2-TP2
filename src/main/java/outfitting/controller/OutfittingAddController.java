@@ -1,6 +1,8 @@
 package outfitting.controller;
 
-import outfitting.dto.OutfittingConverter;
+import outfitting.controller.iController.IControllerOrchestrator;
+import outfitting.controller.iController.IOutfittingAddController;
+import outfitting.convertor.OutfittingConverter;
 import outfitting.dto.OutfittingDtoForAdd;
 import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.GenericRepository;

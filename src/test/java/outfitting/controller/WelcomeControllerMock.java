@@ -1,5 +1,7 @@
 package outfitting.controller;
 
+import outfitting.controller.iController.IWelcomeController;
+
 public class WelcomeControllerMock implements IWelcomeController {
 
 	public boolean resquestCreateCottageHasBeenCalled = false;

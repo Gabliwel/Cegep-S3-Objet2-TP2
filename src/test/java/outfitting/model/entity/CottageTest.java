@@ -22,10 +22,10 @@ public class CottageTest {
 		Cottage.lastId = 0;
 
 	}
-
+ 
 	@Test
 	public void when_creatingNewCottage_then_firstNewCottageHasIdOf1() {
-		Cottage cottage1 = new Cottage("a", 1,3, 34);
+		Cottage cottage1 = new Cottage("a", 1,3, 34,0);
 		
 		int id = cottage1.getId();
 		
@@ -34,8 +34,8 @@ public class CottageTest {
 	
 	@Test
 	public void when_creatingSecondNewCottage_then_newCottageIdIsFirstIdValuePlus1() {
-		new Cottage("a", 1,3, 34);
-		Cottage cottage2 = new Cottage("a", 1,3, 34);
+		new Cottage("a", 1,3, 34,0);
+		Cottage cottage2 = new Cottage("a", 1,3, 34,0);
 		
 		int id = cottage2.getId();
 		

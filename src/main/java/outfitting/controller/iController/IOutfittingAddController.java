@@ -1,4 +1,4 @@
-package outfitting.controller;
+package outfitting.controller.iController;
 
 import outfitting.dto.OutfittingDtoForAdd;
 

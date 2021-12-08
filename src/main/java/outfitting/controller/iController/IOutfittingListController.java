@@ -1,4 +1,4 @@
-package outfitting.controller;
+package outfitting.controller.iController;
 
 import java.util.Collection;
 
@@ -9,4 +9,5 @@ public interface IOutfittingListController {
 	void requestOutfittingList(); 
 	OutfittingDtoForGet getOutfittingById(int id);
 	Collection<OutfittingDtoForGet> getSortedList(SortOutfittingType type);
+	Collection<OutfittingDtoForGet> searchInList(String researchTerm);
 }

@@ -2,6 +2,7 @@ package outfitting.view;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import outfitting.button.IButtonID;
-import outfitting.button.IDButtonForListOfCottage;
 import outfitting.controller.ICottageListController;
 import outfitting.dto.CottageDTOForList;
 
@@ -100,7 +99,7 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			JLabel outfittingName = new JLabel(controller.getOutfittingObject(cottage.getIdOfOutfitting()).getName());
 			inputDataPanel.add(outfittingName);
 			
-			IDButtonForListOfCottage idButton = new IDButtonForListOfCottage(CONSULT_BUTTON, cottage.getID());
+			IdButton idButton = new IdButton(CONSULT_BUTTON, cottage.getID());
 			idButton.setActionCommand(CONSULT_BUTTON);
 			idButton.addActionListener(this);
 			inputDataPanel.add(idButton);
@@ -125,8 +124,8 @@ public class CottageListView extends JDialog implements View, ActionListener {
 			case OK_BTN : dispose();
 							break;
 			case CONSULT_BUTTON : 
-				IButtonID cottageButton = (IDButtonForListOfCottage) e.getSource();
-				int idCottage = cottageButton.getId();
+				IdButton cottageButton = (IdButton) e.getSource();
+				int idCottage = cottageButton.getIdEntity();
 				this.controller.requestSpecificCottageView(idCottage);
 				break;
 		}

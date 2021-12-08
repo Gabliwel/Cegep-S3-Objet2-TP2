@@ -10,7 +10,7 @@ import outfitting.model.entity.Contact;
 import outfitting.view.ViewMock;
 
 public class OutfittingAddControllerTest {
-	public final String THROW_ID_ALREADY_EXIST_EXCEPTION_NAME = "id already exist exception name";
+
 	@Test
 	public void when_requestOutfittingAdd_then_shouldAskOutfittingAddViewToDisplay() {
 		ControllerOrchestratorMock orchestrator = new ControllerOrchestratorMock();
@@ -42,7 +42,7 @@ public class OutfittingAddControllerTest {
 		OutfittingRepositoryMock repo = new OutfittingRepositoryMock();
 		OutfittingAddController controller = new OutfittingAddController(orchestrator, view, repo);
 		
-		controller.addDtoOutfitting(new OutfittingDtoForAdd(THROW_ID_ALREADY_EXIST_EXCEPTION_NAME, "a", "a", "a", new Contact("a", "a", "a")));
+		controller.addDtoOutfitting(new OutfittingDtoForAdd(OutfittingRepositoryMock.THROW_ID_ALREADY_EXIST_EXCEPTION_NAME, "a", "a", "a", new Contact("a", "a", "a")));
 		
 		assertTrue(view.displayErrorMethodHasBeenCalled);
 	}

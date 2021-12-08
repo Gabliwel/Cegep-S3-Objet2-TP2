@@ -1,6 +1,8 @@
 package outfitting.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.entity.Cottage;
@@ -13,6 +15,11 @@ public class CottageRepositoryMock implements GenericRepository<Cottage>, Subjec
 	public boolean getListBeenCalled = false;
 	public boolean removeHasBeenCalled = false;
 	public boolean searchByIdHasBeenCalled = false; 
+	public boolean addObserverHasBeenCalled = false;
+	public boolean removeObserverHasBeenCalled = false;
+	public boolean notifyHasBeenCalled = false;
+	
+	public List<Observer> observers = new ArrayList();
 	
 	@Override
 	public void add(Cottage cottage) {
@@ -48,19 +55,19 @@ public class CottageRepositoryMock implements GenericRepository<Cottage>, Subjec
 
 	@Override
 	public void addObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
+		addObserverHasBeenCalled = true;
+		observers.add(o);
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
+		removeObserverHasBeenCalled = true;
+		observers.remove(o);
 		
 	}
 
 	@Override
 	public void notifyAllObserver() {
-		// TODO Auto-generated method stub
-		
+		notifyHasBeenCalled = true;
 	}
 }

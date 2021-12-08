@@ -20,6 +20,7 @@ import outfitting.dto.OutfittingDtoForGet;
 import outfitting.sort.SortOutfittingType;
 
 public class OutfittingListView extends JDialog implements View, ActionListener{
+	
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW_TITLE = "Liste des pouvoiries";
 	private static final String OK_BTN = "OK";
@@ -177,4 +178,7 @@ public class OutfittingListView extends JDialog implements View, ActionListener{
 
 	@Override
 	public void displaySuccess(String message) { }
+
+	@Override
+	public void refresh() {	}
 }

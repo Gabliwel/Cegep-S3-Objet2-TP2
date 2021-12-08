@@ -4,8 +4,10 @@ import java.util.Collection;
 
 import outfitting.exception.IdAlreadyExistException;
 import outfitting.model.entity.Cottage;
+import outfitting.observer.Subject;
+import outfitting.observer.Observer;
 
-public class CottageRepositoryMock implements GenericRepository<Cottage> {
+public class CottageRepositoryMock implements GenericRepository<Cottage>, Subject {
 
 	public boolean addHasBeenCalled = false;
 	public boolean getListBeenCalled = false;
@@ -42,5 +44,23 @@ public class CottageRepositoryMock implements GenericRepository<Cottage> {
 	@Override
 	public void remove(int id) {
 		removeHasBeenCalled = true;
+	}
+
+	@Override
+	public void addObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notifyAllObserver() {
+		// TODO Auto-generated method stub
+		
 	}
 }

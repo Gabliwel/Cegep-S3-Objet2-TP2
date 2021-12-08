@@ -179,4 +179,7 @@ public class CottageSpecificView extends JDialog implements View, ActionListener
 
 	@Override
 	public void displaySuccess(String message) { }
+
+	@Override
+	public void refresh() {	}
 }

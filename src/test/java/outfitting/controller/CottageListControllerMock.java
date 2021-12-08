@@ -39,5 +39,4 @@ public class CottageListControllerMock implements ICottageListController{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

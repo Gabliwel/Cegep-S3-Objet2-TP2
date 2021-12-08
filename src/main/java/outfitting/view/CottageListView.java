@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import outfitting.button.IButtonID;
 import outfitting.button.IDButtonForListOfCottage;
@@ -29,12 +30,13 @@ public class CottageListView extends JDialog implements View, ActionListener {
 	private static final String PRICE_PER_NIGHT_TXT = "Prix/Nuit";
 	private static final String CONSULT_BUTTON = "Consulter le chalet";
 	private static final String OUTFITTING_NAME = "Nom de la pourvoirie";
+	private JPanel inputDataPanel = new JPanel();
 	
 	private ICottageListController controller;
 	
 	public CottageListView() {
 		super();
-		this.initialize(); 
+		this.initialize();
 	}
 	
 	private void initialize() {
@@ -69,8 +71,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 
 	private void setUpCottageListInfo() 
 	{
-		JPanel inputDataPanel = new JPanel();
+		inputDataPanel.removeAll();
+		inputDataPanel.revalidate();
+		inputDataPanel.repaint();
 		this.add(inputDataPanel);
+		
 		inputDataPanel.setLayout(new GridLayout(this.controller.getCottageList().size()+1, 7));
 		
 		inputDataPanel.add(new JLabel(ID_TXT));
@@ -141,5 +146,11 @@ public class CottageListView extends JDialog implements View, ActionListener {
 
 	@Override
 	public void displaySuccess(String message) { }
+	
+	@Override
+	public void refresh() 
+	{
+		setUpCottageListInfo();
+	}
 
 }

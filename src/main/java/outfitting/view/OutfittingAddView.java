@@ -162,4 +162,7 @@ public class OutfittingAddView extends JDialog implements View, ActionListener {
 	public void displaySuccess(String message) {
 		JOptionPane.showInternalMessageDialog(null, message, "Succès", JOptionPane.INFORMATION_MESSAGE);
 	}
+
+	@Override
+	public void refresh() {	}
 }

@@ -20,5 +20,11 @@ public class ViewMock implements View {  //ViewSpy
 	public void displaySuccess(String message) {
 		displaySuccessMethodHasBeenCalled = true;
 	}
+
+	@Override
+	public void refresh() {
+		// TODO Auto-generated method stub
+		
+	}
 }
 

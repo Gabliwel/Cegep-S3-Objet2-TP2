@@ -7,6 +7,7 @@ import outfitting.exception.IdAlreadyExistException;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.entity.Outfitting;
 import outfitting.model.entity.OutfittingMock;
+import outfitting.observer.Subject;
 
 public class OutfittingRepositoryMock implements GenericRepository<Outfitting> {
 

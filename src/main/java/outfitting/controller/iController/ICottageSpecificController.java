@@ -1,12 +1,12 @@
 package outfitting.controller.iController;
 
 import outfitting.dto.CottageDTOForList;
-import outfitting.model.entity.Outfitting;
+import outfitting.dto.OutfittingDtoForGet;
 
 public interface ICottageSpecificController 
 {
 	void requestSpecificCottageList();
 	CottageDTOForList getCottageDTOForList();
 	void deleteCottage(int id);
-	Outfitting getOutfittingObject(int id);
+	OutfittingDtoForGet getOutfittingObject(int id);
 }

@@ -3,7 +3,10 @@ package outfitting.controller;
 import outfitting.controller.iController.IControllerOrchestrator;
 import outfitting.controller.iController.ICottageSpecificController;
 import outfitting.convertor.CottageListDTOToCottageConvertor;
+import outfitting.convertor.OutfittingConverter;
 import outfitting.dto.CottageDTOForList;
+import outfitting.dto.OutfittingDtoForAdd;
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.exception.IdDoesNotExistException;
 import outfitting.model.GenericRepository;
 import outfitting.model.entity.Cottage;
@@ -18,6 +21,7 @@ public class CottageSpecificController implements ICottageSpecificController
 	private IControllerOrchestrator orchestrator;
 	private View view;
 	private CottageListDTOToCottageConvertor cottageConvertor;
+	private OutfittingConverter outfittingConvertor;
 	
 	public CottageSpecificController(int id, GenericRepository<Cottage> repository, GenericRepository<Outfitting> repositoryOfOutfitting, IControllerOrchestrator orchestrator, View view) 
 	{
@@ -27,6 +31,7 @@ public class CottageSpecificController implements ICottageSpecificController
 		this.repositoryOfOutfitting = repositoryOfOutfitting;
 		this.view = view;
 		this.cottageConvertor = new CottageListDTOToCottageConvertor();
+		this.outfittingConvertor = new OutfittingConverter();
 	}
 	
 	@Override
@@ -40,9 +45,9 @@ public class CottageSpecificController implements ICottageSpecificController
 	}
 	
 	@Override
-	public Outfitting getOutfittingObject(int id) 
+	public OutfittingDtoForGet getOutfittingObject(int id) 
 	{
-		return this.repositoryOfOutfitting.searchById(id);
+		return outfittingConvertor.getConvertTo(this.repositoryOfOutfitting.searchById(id));
 	}
 
 	@Override

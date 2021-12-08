@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import outfitting.dto.OutfittingDtoForGet;
 import outfitting.model.CottageMemoryRepositoryMockWithAdd;
 import outfitting.model.OutfittingRepositoryMock;
 import outfitting.model.entity.Cottage;
 import outfitting.model.entity.CottageMock;
-import outfitting.model.entity.OutfittingMock;
 import outfitting.view.ViewMock;
 
 public class CottageSpecificControllerTest {
@@ -78,7 +78,7 @@ public class CottageSpecificControllerTest {
 	@Test
 	public void WHEN_getOutfittingFromID_THEN_nullIsReturnedAndSearchHasBeenCalledIsTrue() 
 	{
-		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingMock);
+		assertTrue(controller.getOutfittingObject(ANY_ID) instanceof OutfittingDtoForGet);
 		assertTrue(repo2.searchByIdBeenCalled);
 	}
 }

@@ -43,7 +43,7 @@ public class CottageListController implements ICottageListController, Observer{
 		this.cottageConvertor = new CottageListDTOToCottageConvertor();
 		this.outftittingConverter = new OutfittingConverter();
 		this.searchFactory = new CottageSearchFactory();
-		
+		//FIXME: (Observateur) La meilleure place pour faire ce lien est dans le 'contexte', c'est à dire là où les composants sont initialisés (aka dans l'orchestrateur).
 		subject.addObserver(this);
 	}
 

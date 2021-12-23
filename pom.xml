@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ca.csfoy.pooII</groupId>
-	<artifactId>Ex2-Outfitting-GabrielBertrand</artifactId>
+	<artifactId>2bertrandbertrand</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>outfitting</name>
+	<name>2bertrandbertrand</name>
 
 	<properties>
 		<maven.compiler.target>1.15</maven.compiler.target>

@@ -1,6 +1,8 @@
 # Outfitting
 
-Ce projet est le projet de départ de l'exercice 2 (et du travail pratique 2).
+Note: 99%
+
+Objectif: Application Swing comme outil fictif de gestion de chalet dans un pourvoirie, incluant de nombreux pattern et tests avec un coverage maximun
 
 ## Installation
 
